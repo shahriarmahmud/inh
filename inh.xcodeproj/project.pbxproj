@@ -42,6 +42,7 @@
 		E35108301F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351082F1F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift */; };
 		E35108321F67F0980041B0B8 /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108311F67F0980041B0B8 /* DrawerController.swift */; };
 		E35108341F67F2910041B0B8 /* HeadLinesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108331F67F2910041B0B8 /* HeadLinesTableViewCell.swift */; };
+		E39FFCC31F69511400ACD73D /* LatestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39FFCC21F69511400ACD73D /* LatestTableViewCell.swift */; };
 		E50B235D3D06B96BE3C2F0D0 /* Pods_inhTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B65AC485AF59F426BF90F9D /* Pods_inhTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +112,7 @@
 		E351082F1F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChhattisgarhDrawerViewController.swift; path = MainClass/Drawer/ChhattisgarhDrawer/ChhattisgarhDrawerViewController.swift; sourceTree = "<group>"; };
 		E35108311F67F0980041B0B8 /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrawerController.swift; path = MainClass/Base/DrawerController.swift; sourceTree = "<group>"; };
 		E35108331F67F2910041B0B8 /* HeadLinesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeadLinesTableViewCell.swift; path = MainClass/HeadLines/HeadLinesTableViewCell.swift; sourceTree = "<group>"; };
+		E39FFCC21F69511400ACD73D /* LatestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LatestTableViewCell.swift; path = MainClass/TopStories/LatestTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -775,6 +777,7 @@
 			isa = PBXGroup;
 			children = (
 				E35108051F67E44E0041B0B8 /* TopStoriesViewController.swift */,
+				E39FFCC21F69511400ACD73D /* LatestTableViewCell.swift */,
 			);
 			name = TopStories;
 			sourceTree = "<group>";
@@ -1248,6 +1251,7 @@
 				E35107FF1F67D7B10041B0B8 /* BackgroundGradient.swift in Sources */,
 				E3365E8E1F67C02200324368 /* NavigationController.swift in Sources */,
 				E35107B51F67CA970041B0B8 /* DashBoardViewController.swift in Sources */,
+				E39FFCC31F69511400ACD73D /* LatestTableViewCell.swift in Sources */,
 				E35108291F67E6D60041B0B8 /* LifeStyleViewController.swift in Sources */,
 				E35108061F67E44E0041B0B8 /* TopStoriesViewController.swift in Sources */,
 				E3365E8A1F67BFD800324368 /* MenuViewController.swift in Sources */,
