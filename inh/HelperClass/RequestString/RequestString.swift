@@ -32,7 +32,7 @@ class RequestString
     public static var latest : String = BaseURL + "latest"
     public static var videoSlider : String = BaseURL + "VideoSlider"
     public static var photoSlider : String = BaseURL + "PhotoSlider"
-    public static var sports : String = BaseURL + "topSection=13"
+    public static var topSection : String = BaseURL + "topSection="
     public static var topnews : String = BaseURL + "topnews"
     
     

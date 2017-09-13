@@ -21,21 +21,33 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var topBanner: ImageSlideshow!
-    @IBOutlet weak var talestNewsTable: UITableView!
     
     var petitions = [[String: String]]()
     var imageUrlList = [[String: String]]()
     var downloadImageUrlList = [AlamofireSource]()
     
     //latest news
+    @IBOutlet weak var talestNewsTable: UITableView!
+    
     var latestNewsList = [[String: String]]()
     
     //photostories
     @IBOutlet weak var photoStoriesTitleLabel: UILabel!
     @IBOutlet weak var photoStoriesBanner: ImageSlideshow!
+    
     var photoStories = [[String: String]]()
     var photoStoriesImageUrlList = [[String: String]]()
     var photoStoriesDownloadImageUrlList = [AlamofireSource]()
+    
+    //sectionData
+    var sectionList = [[String: String]]()
+    
+    //sectionNewsData
+    @IBOutlet weak var sectionNewsTable: UITableView!
+    
+    var sectionNewsList = [[String: String]]()
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,45 +145,151 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return latestNewsList.count
+        if(tableView == talestNewsTable){
+            return latestNewsList.count
+        }else{
+            return sectionList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:LatestTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LatestTableViewCell
-        
-        let latestNews = latestNewsList[indexPath.row]
-        print(indexPath.row)
-        print(latestNews)
-        
-        if(latestNews["art_title"]?.isEmpty)!{
-            cell.titleLabel.text = ""
-        }else{
-            cell.titleLabel.text = latestNews["art_title"]!
-        }
-        
-        
-        if(latestNews["X_hours_ago"]?.isEmpty)!{
-            cell.timeLabel.text = ""
-        }else{
-            cell.timeLabel.text = latestNews["X_hours_ago"]!
-        }
-        
-        
-        if(latestNews["ap_thumb_image"]?.isEmpty)!{
-            cell.headerImage.image = nil
-        }else{
-            Alamofire.request(latestNews["ap_thumb_image"]!).responseImage { response in
-                debugPrint(response)
-                debugPrint(response.result)
-                
-                if let image = response.result.value {
-                    print("image downloaded: \(image)")
-                    cell.headerImage.image = image
+        if(tableView == talestNewsTable){
+            let cell:LatestTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LatestTableViewCell
+            
+            let latestNews = latestNewsList[indexPath.row]
+            print(indexPath.row)
+            print(latestNews)
+            
+            if(latestNews["art_title"]?.isEmpty)!{
+                cell.titleLabel.text = ""
+            }else{
+                cell.titleLabel.text = latestNews["art_title"]!
+            }
+            
+            
+            if(latestNews["X_hours_ago"]?.isEmpty)!{
+                cell.timeLabel.text = ""
+            }else{
+                cell.timeLabel.text = latestNews["X_hours_ago"]!
+            }
+            
+            
+            if(latestNews["ap_thumb_image"]?.isEmpty)!{
+                cell.headerImage.image = nil
+            }else{
+                Alamofire.request(latestNews["ap_thumb_image"]!).responseImage { response in
+                    debugPrint(response)
+                    debugPrint(response.result)
+                    
+                    if let image = response.result.value {
+                        print("image downloaded: \(image)")
+                        cell.headerImage.image = image
+                    }
                 }
             }
+            return cell
+        }else{
+            let cell:SectionNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SectionNewsTableViewCell
+            
+            let sectionData = sectionList[indexPath.row]
+            print(sectionData)
+
+            func GetSectionNewsData(){
+                SVProgressHUD.show()
+                
+                Alamofire.request(RequestString.topSection+sectionData[""]!, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
+                    switch responce.result{
+                    case.success(let data):
+                        SVProgressHUD.dismiss()
+                        
+                        let Response = JSON(data)
+                        print(Response)
+                        print(RequestString.topSection+sectionData[""]!)
+                        
+                        
+                        for result in Response.arrayValue {
+                            let share_url = result["share_url"].stringValue
+                            let mobile_news_url = result["mobile_news_url"].stringValue
+                            let art_id = result["art_id"].stringValue
+                            
+                            let art_title = result["art_title"].stringValue
+                            let category_name = result["category_name"].stringValue
+                            let art_has_video = result["art_has_video"].stringValue
+                            let ap_image = result["ap_image"].stringValue
+                            
+                            let ap_thumb_image = result["ap_thumb_image"].stringValue
+                            let art_created_on = result["art_created_on"].stringValue
+                            let X_hours_ago = result["X_hours_ago"].stringValue
+                            
+                            let obj = ["share_url": share_url, "mobile_news_url": mobile_news_url, "art_id": art_id, "art_title": art_title, "category_name": category_name, "art_has_video": art_has_video, "ap_image": ap_image, "ap_thumb_image": ap_thumb_image, "art_created_on": art_created_on, "X_hours_ago": X_hours_ago]
+                            self.sectionNewsList.append(obj)
+                        }
+                        
+                        self.sectionNewsTable.reloadData()
+                        
+                        let sectionNewsData = self.sectionList[indexPath.row]
+                        
+                        if(sectionNewsData["art_title"]?.isEmpty)!{
+                            cell.titleLabel.text = ""
+                        }else{
+                            cell.titleLabel.text = sectionNewsData["art_title"]!
+                        }
+                        
+                        if(sectionNewsData["ap_thumb_image"]?.isEmpty)!{
+                            cell.titleImage.image = nil
+                        }else{
+                            Alamofire.request(sectionNewsData["ap_thumb_image"]!).responseImage { response in
+                                debugPrint(response)
+                                debugPrint(response.result)
+                                
+                                if let image = response.result.value {
+                                    print("image downloaded: \(image)")
+                                    cell.titleImage.image = image
+                                }
+                            }
+                        }
+                        
+                        if(sectionNewsData["X_hours_ago"]?.isEmpty)!{
+                            cell.postingTimeLabel.text = ""
+                        }else{
+                            cell.postingTimeLabel.text = sectionNewsData["X_hours_ago"]!
+                        }
+                        
+                        if(sectionNewsData["X_hours_ago"]?.isEmpty)!{
+                            cell.thumbnailLabel.text = ""
+                        }else{
+                            cell.thumbnailLabel.text = sectionNewsData["X_hours_ago"]!
+                        }
+                        
+                        if(sectionNewsData["ap_thumb_image"]?.isEmpty)!{
+                            cell.thumbnailImage.image = nil
+                        }else{
+                            Alamofire.request(sectionNewsData["ap_thumb_image"]!).responseImage { response in
+                                debugPrint(response)
+                                debugPrint(response.result)
+                                
+                                if let image = response.result.value {
+                                    print("image downloaded: \(image)")
+                                    cell.thumbnailImage.image = image
+                                }
+                            }
+                        }
+                        
+                        if(sectionData["X_hours_ago"]?.isEmpty)!{
+                            cell.SectionTitleLabel.text = ""
+                        }else{
+                            cell.SectionTitleLabel.text = sectionData["X_hours_ago"]!
+                        }
+
+                    case.failure(let error):
+                        print("failed\(error)")
+                    }
+                }
+            }
+            
+            return cell
         }
-        return cell
     }
     
     func GetLatestNewsData(){
@@ -244,15 +362,15 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
                 self.photoStoriesTitleLabel.text=photoStoriesTitle["palbum_title"]
                 
                 self.photoStoriesBanner.backgroundColor = UIColor.white
-                self.photoStoriesBanner.slideshowInterval = 5.0
+                self.photoStoriesBanner.slideshowInterval = 9999999999999999.0
                 self.photoStoriesBanner.pageControlPosition = PageControlPosition.underScrollView
                 self.photoStoriesBanner.pageControl.currentPageIndicatorTintColor = UIColor.lightGray
                 self.photoStoriesBanner.pageControl.pageIndicatorTintColor = UIColor.black
-                self.photoStoriesBanner.contentScaleMode = UIViewContentMode.scaleAspectFill
+                self.photoStoriesBanner.contentScaleMode = UIViewContentMode.scaleAspectFit
                 
                 self.photoStoriesBanner.activityIndicator = DefaultActivityIndicator()
                 self.photoStoriesBanner.currentPageChanged = { page in
-                    let photoStoriesTitle = self.petitions[0]
+                    let photoStoriesTitle = self.photoStories[0]
                     self.photoStoriesTitleLabel.text=photoStoriesTitle["palbum_title"]
                 }
                 for imageUrl in self.photoStoriesImageUrlList {
@@ -272,6 +390,36 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
                 // set the activity indicator for full screen controller (skipping the line will show no activity indicator)
                 fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
 
+    }
+    
+    //////////////////////////////////   Section News /////////////////////////////
+    
+    func GetSectionData(){
+        SVProgressHUD.show()
+        
+        Alamofire.request(RequestString.section, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
+            switch responce.result{
+            case.success(let data):
+                SVProgressHUD.dismiss()
+                
+                let Response = JSON(data)
+                print(Response)
+                print(RequestString.section)
+                
+                
+                for result in Response.arrayValue {
+                    let share_url = result["share_url"].stringValue
+                    let mobile_news_url = result["mobile_news_url"].stringValue
+                    let art_id = result["art_id"].stringValue
+                    
+                    let obj = ["share_url": share_url, "mobile_news_url": mobile_news_url, "art_id": art_id]
+                    self.sectionList.append(obj)
+                }
+                
+            case.failure(let error):
+                print("failed\(error)")
+            }
+        }
     }
     
 }
