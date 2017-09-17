@@ -77,19 +77,19 @@ extension SectionNewsTableViewCell : UICollectionViewDataSource {
         
         //            print(meetingArray[row] as! String)
         
-        let sb: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        let frontVC = sb.instantiateViewController(withIdentifier: "VideoViewController")
-        let frontNav = UINavigationController(rootViewController: frontVC)
-        let rearVC = sb.instantiateViewController(withIdentifier: "TopStoriesViewController")
-        
-        self.window?.rootViewController = frontVC
+//        let sb: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        
+//        let frontVC = sb.instantiateViewController(withIdentifier: "VideoViewController")
+//        let frontNav = UINavigationController(rootViewController: frontVC)
+//        let rearVC = sb.instantiateViewController(withIdentifier: "TopStoriesViewController")
+//        
+//        self.window?.rootViewController = frontVC
         
 //        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
 //        let photoStory = photoStories[row]
 //        navigationViewController.albumId = photoStory["palbum_id"]!
         
-        self.parent?.navigationController?.pushViewController(navigationViewController, animated: true)
+//        self.parent?.navigationController?.pushViewController(navigationViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
