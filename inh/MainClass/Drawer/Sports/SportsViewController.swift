@@ -75,14 +75,14 @@ class SportsViewController: BaseViewController , UITableViewDelegate, UITableVie
     func GEtServerDate(){
         SVProgressHUD.show()
 
-        Alamofire.request(RequestString.sports, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
+        Alamofire.request(RequestString.topSection, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
             switch responce.result{
             case.success(let data):
                 SVProgressHUD.dismiss()
                 
                 let Response = JSON(data)
                 print(Response)
-                print(RequestString.sports)
+                print(RequestString.topSection)
                 
                 
                 for result in Response.arrayValue {
