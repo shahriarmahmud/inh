@@ -35,11 +35,18 @@ class RequestString
     public static var topSection : String = BaseURL + "topSection="
     public static var topnews : String = BaseURL + "topnews"
     
+    public static var headLines : String = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLxLTMLvUmOy5UJbfCAkp2q72Cs1KxbxaF&fields=items(snippet(resourceId%2FvideoId%2Cthumbnails%2Fmedium%2Furl%2Ctitle))%2CnextPageToken%2CpageInfo%2CnextPageToken&key=AIzaSyDwCTUVQj8DlNc3LW1tbSNblyqbqZCr2-I"
     
+    public static var fastNews : String = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLxLTMLvUmOy60-taisPSqhv6bo9iE9qKl&fields=items(snippet(resourceId%2FvideoId%2Cthumbnails%2Fmedium%2Furl%2Ctitle))%2CnextPageToken%2CpageInfo%2CnextPageToken&key=AIzaSyDwCTUVQj8DlNc3LW1tbSNblyqbqZCr2-I"
     
+    public static var reporters : String = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLxLTMLvUmOy6012F8JAg9SHI2ZS6Tgy4s&fields=items(snippet(resourceId%2FvideoId%2Cthumbnails%2Fmedium%2Furl%2Ctitle))%2CnextPageToken%2CpageInfo%2CnextPageToken&key=AIzaSyDwCTUVQj8DlNc3LW1tbSNblyqbqZCr2-I"
     
-    public static var CashDeposit : String = BaseURL + "CashDeposit"
-    public static var CashDepositVASubmission : String = BaseURL + "CashDepositVASubmission"
+    public static var inhSpecial : String = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLxLTMLvUmOy7-Scp4U027xZnfH6WYjeNx&fields=items(snippet(resourceId%2FvideoId%2Cthumbnails%2Fmedium%2Furl%2Ctitle))%2CnextPageToken%2CpageInfo%2CnextPageToken&key=AIzaSyDwCTUVQj8DlNc3LW1tbSNblyqbqZCr2-I"
+    
+    public static var bollywoodExpress : String = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLxLTMLvUmOy6a29KiTc5oY-9OKm-92nAW&fields=items(snippet(resourceId%2FvideoId%2Cthumbnails%2Fmedium%2Furl%2Ctitle))%2CnextPageToken%2CpageInfo%2CnextPageToken&key=AIzaSyDwCTUVQj8DlNc3LW1tbSNblyqbqZCr2-I"
+    
+    public static var chatisgariNews : String = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLxLTMLvUmOy6wsx7o0bmmNS9Xq67Ccxoj&fields=items(snippet(resourceId%2FvideoId%2Cthumbnails%2Fmedium%2Furl%2Ctitle))%2CnextPageToken%2CpageInfo%2CnextPageToken&key=AIzaSyDwCTUVQj8DlNc3LW1tbSNblyqbqZCr2-I"
+    
     public static var CashOut : String = BaseURL + "CashOut"
     public static var CashOutVASubmission : String = BaseURL + "CashOutVASubmission"
     public static var CashOutOTPSubmission : String = BaseURL + "CashOutOTPSubmission"

@@ -235,7 +235,7 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
                     case.success(let data):
                         
                         let Response = JSON(data)
-                        print(Response)
+                        print("TopStories",Response)
                         print(RequestString.videoSlider)
                         
                         self.sectionNewsList.removeAll()

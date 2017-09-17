@@ -13,11 +13,12 @@ import SVProgressHUD
 
 class HeadLinesViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
 
+    @IBOutlet weak var HeadLineTitle: UILabel!
     @IBOutlet weak var newsTable: UITableView!
     @IBOutlet weak var headLineImage: UIImageView!
     
     var petitions = [[String: String]]()
-    
+
     var utilityViewController = UtilityViewController()
     var alertDialogViewController = AlertDialogViewController()
     
@@ -29,37 +30,44 @@ class HeadLinesViewController: UIViewController , UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petitions.count
+        return petitions.count-1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:HeadLinesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HeadLinesTableViewCell
         
-        let petition = petitions[indexPath.row]
-        print(petition)
+        let headLine = petitions[indexPath.row+1]
         
-//        if(petition["id"]?.isEmpty)!{
-//            cell.transactionId.text = "Transaction Id : "
-//        }else{
-//            cell.transactionId.text = "Transaction Id : "+petition["id"]!
-//        }
-//        
-//        
-//        if(petition["date"]?.isEmpty)!{
+        if(headLine["title"]?.isEmpty)!{
+            cell.titleLabel.text = ""
+        }else{
+            cell.titleLabel.text = headLine["title"]!
+        }
+        
+        
+//        if(headLine["date"]?.isEmpty)!{
 //            cell.transectionDate.text = "Transaction Date : "
 //        }else{
-//            cell.transectionDate.text = "Transaction Date : "+petition["date"]!
+//            cell.transectionDate.text = "Transaction Date : "+headLine["date"]!
 //        }
-//        
-//        
-//        if(petition["amount"]?.isEmpty)!{
-//            cell.transectionAmount.text = "Transaction Amount : "
-//        }else{
-//            cell.transectionAmount.text = "Transaction Amount : "+petition["amount"]!
-//        }
-//        
-//        
+        
+        
+        if(headLine["url"]?.isEmpty)!{
+            cell.headImage.image = nil
+        }else{
+            Alamofire.request(headLine["url"]!).responseImage { response in
+                debugPrint(response)
+                debugPrint(response.result)
+                
+                if let image = response.result.value {
+                    print("image downloaded: \(image)")
+                    cell.headImage.image = image
+                }
+            }
+        }
+
+//
 //        if(petition["name"]?.isEmpty)!{
 //            cell.customerName.text = "Customer Name : "
 //        }else{
@@ -96,44 +104,44 @@ class HeadLinesViewController: UIViewController , UITableViewDelegate, UITableVi
     func GEtReportDate(){
         SVProgressHUD.show()
         
-        let merchantSecurityKey = UserDefaultsManager.merchantSecurityKey
-        let UTCTimeId = UserDefaultsManager.UTCTimeId
-        let CountryShortCode = UserDefaultsManager.CountryShortCode
-        
-        let parameters  = [
-            "MerchantSecurityKey": merchantSecurityKey,
-            "UTCTimeId": UTCTimeId,
-            "CountryShortCode" : CountryShortCode
-            ] as [String : Any]
-        
-        
-        
-        Alamofire.request(RequestString.TransactionReport, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { responce in
+        Alamofire.request(RequestString.headLines, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
             switch responce.result{
             case.success(let data):
                 SVProgressHUD.dismiss()
+                let json = JSON(data)
+                print(json["items"][0]["snippet"]["thumbnails"]["medium"]["url"].stringValue)
+                print(json["items"])
+                print("Head Lines",json)
+                 print("Head Lines",RequestString.headLines)
                 
-                let Response = JSON(data)
-                print(Response)
                 
+                
+                
+                for result in json["items"].arrayValue {
+                    let title = result["snippet"]["title"].stringValue
+                    let url = result["snippet"]["thumbnails"]["medium"]["url"].stringValue
+                    let videoId = result["snippet"]["resourceId"]["videoId"].stringValue
 
-                for result in Response.arrayValue {
-                    let id = result["TransactionId"].stringValue
-                    let date = result["StrTransactionDate"].stringValue
-                    let amount = result["TransactionAmount"].stringValue
-                    
-                    let name = result["CustomerName"].stringValue
-                    let phone = result["CustomerMobileNumber"].stringValue
-                    let type = result["TransactionType"].stringValue
-                    let status = result["TransactionStatus"].stringValue
-                    
-                    let obj = ["id": id, "date": date, "amount": amount, "name": name, "phone": phone, "type": type, "status": status]
+                    let obj = ["title": title, "url": url, "videoId": videoId]
                     self.petitions.append(obj)
                 }
                 
-                self.newsTable.reloadData()
+                print("petitions : ", self.petitions)
+
+                Alamofire.request(self.petitions[0]["url"]!).responseImage { response in
+                    debugPrint(response)
+                    debugPrint(response.result)
+                    
+                    if let image = response.result.value {
+                        print("image downloaded: \(image)")
+                        self.headLineImage.image = image
+                    }
+                }
                 
-                
+                self.HeadLineTitle.text = self.petitions[0]["title"]!
+
+                 self.newsTable.reloadData()
+
             case.failure(let error):
                 print("failed\(error)")
             }
@@ -142,6 +150,17 @@ class HeadLinesViewController: UIViewController , UITableViewDelegate, UITableVi
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func convertStringToDictionary(text: String) -> [String:AnyObject]? {
+        if let data = text.data(using: String.Encoding.utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject]
+            } catch let error as NSError {
+                print(error)
+            }
+        }
+        return nil
     }
 
 }
