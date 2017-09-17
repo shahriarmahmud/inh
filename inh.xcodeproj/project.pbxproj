@@ -9,14 +9,24 @@
 /* Begin PBXBuildFile section */
 		49A69E84D8560A7F20F0D922 /* Pods_inh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAE6253A5EBF272866E1038 /* Pods_inh.framework */; };
 		885BFCF1D5E679766FAF7D97 /* Pods_inhUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080F65EDAF6668E306E773D6 /* Pods_inhUITests.framework */; };
+		CA5582851F6ECDC000A58519 /* FastNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582841F6ECDC000A58519 /* FastNewsTableViewCell.swift */; };
+		CA5582871F6ECE8B00A58519 /* ReportersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582861F6ECE8B00A58519 /* ReportersTableViewCell.swift */; };
+		CA5582891F6ECF7700A58519 /* InhSpecialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582881F6ECF7700A58519 /* InhSpecialTableViewCell.swift */; };
+		CA55828B1F6ED00200A58519 /* BollywoodExpressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA55828A1F6ED00200A58519 /* BollywoodExpressTableViewCell.swift */; };
+		CA55828D1F6ED04F00A58519 /* ChhattisgarhiNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA55828C1F6ED04F00A58519 /* ChhattisgarhiNewsTableViewCell.swift */; };
+		CA55828F1F6ED54C00A58519 /* LifeStyleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA55828E1F6ED54C00A58519 /* LifeStyleTableViewCell.swift */; };
+		CA5582911F6ED56A00A58519 /* EntertainmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582901F6ED56A00A58519 /* EntertainmentTableViewCell.swift */; };
+		CA5582931F6ED58400A58519 /* IndiaNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582921F6ED58400A58519 /* IndiaNewsTableViewCell.swift */; };
+		CA5582951F6ED5A400A58519 /* ChhattisgarhDrawerNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582941F6ED5A400A58519 /* ChhattisgarhDrawerNewsTableViewCell.swift */; };
+		CA5582971F6ED5E400A58519 /* InhNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582961F6ED5E400A58519 /* InhNewsTableViewCell.swift */; };
+		CA5582991F6ED61500A58519 /* InhNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582981F6ED61500A58519 /* InhNewsViewController.swift */; };
+		CA55829C1F6EF6E300A58519 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA55829B1F6EF6E300A58519 /* VideoViewController.swift */; };
 		CA783EFE1F697F8B00520FE2 /* SectionNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA783EFD1F697F8B00520FE2 /* SectionNewsTableViewCell.swift */; };
-		CA7E3E181F6AF57B00CE6040 /* SectionNewsInsideTableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E3E171F6AF57B00CE6040 /* SectionNewsInsideTableTableViewCell.swift */; };
 		CA9014DD1F6C20C80027C87F /* VideoSliderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9014DC1F6C20C80027C87F /* VideoSliderCollectionViewCell.swift */; };
 		CABFBBA81F6D47CD009C5F31 /* OnClickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABFBBA71F6D47CD009C5F31 /* OnClickViewController.swift */; };
 		CABFBBAB1F6D56FC009C5F31 /* PhotoGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABFBBAA1F6D56FC009C5F31 /* PhotoGalleryViewController.swift */; };
 		CACCA86A1F6829ED008EA5A0 /* SportsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACCA8691F6829ED008EA5A0 /* SportsTableViewCell.swift */; };
 		E300C2F91F66B3930002C04A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E300C2F81F66B3930002C04A /* AppDelegate.swift */; };
-		E300C2FB1F66B3930002C04A /* InhNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E300C2FA1F66B3930002C04A /* InhNewsViewController.swift */; };
 		E300C2FE1F66B3930002C04A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E300C2FC1F66B3930002C04A /* Main.storyboard */; };
 		E300C3001F66B3930002C04A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E300C2FF1F66B3930002C04A /* Assets.xcassets */; };
 		E300C3031F66B3930002C04A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E300C3011F66B3930002C04A /* LaunchScreen.storyboard */; };
@@ -79,15 +89,25 @@
 		A1BF3548E12B3EB443A6DDAA /* Pods-inhUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inhUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-inhUITests/Pods-inhUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AAAE6253A5EBF272866E1038 /* Pods_inh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_inh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B07D2629AF681C36CAF14E50 /* Pods-inhTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inhTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-inhTests/Pods-inhTests.release.xcconfig"; sourceTree = "<group>"; };
+		CA5582841F6ECDC000A58519 /* FastNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FastNewsTableViewCell.swift; path = MainClass/FastNews/FastNewsTableViewCell.swift; sourceTree = "<group>"; };
+		CA5582861F6ECE8B00A58519 /* ReportersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReportersTableViewCell.swift; path = MainClass/Reporters/ReportersTableViewCell.swift; sourceTree = "<group>"; };
+		CA5582881F6ECF7700A58519 /* InhSpecialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InhSpecialTableViewCell.swift; path = MainClass/InhSpecial/InhSpecialTableViewCell.swift; sourceTree = "<group>"; };
+		CA55828A1F6ED00200A58519 /* BollywoodExpressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BollywoodExpressTableViewCell.swift; path = MainClass/BollywoodExpress/BollywoodExpressTableViewCell.swift; sourceTree = "<group>"; };
+		CA55828C1F6ED04F00A58519 /* ChhattisgarhiNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChhattisgarhiNewsTableViewCell.swift; path = MainClass/ChhattisgarhiNews/ChhattisgarhiNewsTableViewCell.swift; sourceTree = "<group>"; };
+		CA55828E1F6ED54C00A58519 /* LifeStyleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LifeStyleTableViewCell.swift; path = MainClass/Drawer/LifeStyle/LifeStyleTableViewCell.swift; sourceTree = "<group>"; };
+		CA5582901F6ED56A00A58519 /* EntertainmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntertainmentTableViewCell.swift; path = MainClass/Drawer/Entertainment/EntertainmentTableViewCell.swift; sourceTree = "<group>"; };
+		CA5582921F6ED58400A58519 /* IndiaNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IndiaNewsTableViewCell.swift; path = MainClass/Drawer/IndiaNews/IndiaNewsTableViewCell.swift; sourceTree = "<group>"; };
+		CA5582941F6ED5A400A58519 /* ChhattisgarhDrawerNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChhattisgarhDrawerNewsTableViewCell.swift; path = MainClass/Drawer/ChhattisgarhDrawer/ChhattisgarhDrawerNewsTableViewCell.swift; sourceTree = "<group>"; };
+		CA5582961F6ED5E400A58519 /* InhNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InhNewsTableViewCell.swift; path = MainClass/Drawer/InhNews/InhNewsTableViewCell.swift; sourceTree = "<group>"; };
+		CA5582981F6ED61500A58519 /* InhNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InhNewsViewController.swift; path = MainClass/Drawer/InhNews/InhNewsViewController.swift; sourceTree = "<group>"; };
+		CA55829B1F6EF6E300A58519 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoViewController.swift; path = MainClass/Video/VideoViewController.swift; sourceTree = "<group>"; };
 		CA783EFD1F697F8B00520FE2 /* SectionNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionNewsTableViewCell.swift; path = MainClass/TopStories/SectionNewsTableViewCell.swift; sourceTree = "<group>"; };
-		CA7E3E171F6AF57B00CE6040 /* SectionNewsInsideTableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionNewsInsideTableTableViewCell.swift; path = MainClass/TopStories/SectionNewsInsideTableTableViewCell.swift; sourceTree = "<group>"; };
 		CA9014DC1F6C20C80027C87F /* VideoSliderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoSliderCollectionViewCell.swift; path = MainClass/TopStories/VideoSliderCollectionViewCell.swift; sourceTree = "<group>"; };
 		CABFBBA71F6D47CD009C5F31 /* OnClickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnClickViewController.swift; path = MainClass/OnClickView/OnClickViewController.swift; sourceTree = "<group>"; };
 		CABFBBAA1F6D56FC009C5F31 /* PhotoGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoGalleryViewController.swift; path = MainClass/PhotoGallery/PhotoGalleryViewController.swift; sourceTree = "<group>"; };
 		CACCA8691F6829ED008EA5A0 /* SportsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SportsTableViewCell.swift; path = MainClass/Drawer/Sports/SportsTableViewCell.swift; sourceTree = "<group>"; };
 		E300C2F51F66B3930002C04A /* inh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E300C2F81F66B3930002C04A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E300C2FA1F66B3930002C04A /* InhNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InhNewsViewController.swift; sourceTree = "<group>"; };
 		E300C2FD1F66B3930002C04A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E300C2FF1F66B3930002C04A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E300C3021F66B3930002C04A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -178,6 +198,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CA55829A1F6EF6C000A58519 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				CA55829B1F6EF6E300A58519 /* VideoViewController.swift */,
+			);
+			name = Video;
+			sourceTree = "<group>";
+		};
 		CABFBBA61F6D478B009C5F31 /* OnClickView */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +279,7 @@
 		E3365E861F67BF7500324368 /* MainClass */ = {
 			isa = PBXGroup;
 			children = (
+				CA55829A1F6EF6C000A58519 /* Video */,
 				CABFBBA91F6D56DE009C5F31 /* PhotoGallery */,
 				CABFBBA61F6D478B009C5F31 /* OnClickView */,
 				E351081B1F67E5ED0041B0B8 /* ViewPager */,
@@ -810,7 +839,6 @@
 				E35108051F67E44E0041B0B8 /* TopStoriesViewController.swift */,
 				E39FFCC21F69511400ACD73D /* LatestTableViewCell.swift */,
 				CA783EFD1F697F8B00520FE2 /* SectionNewsTableViewCell.swift */,
-				CA7E3E171F6AF57B00CE6040 /* SectionNewsInsideTableTableViewCell.swift */,
 				CA9014DC1F6C20C80027C87F /* VideoSliderCollectionViewCell.swift */,
 			);
 			name = TopStories;
@@ -839,6 +867,7 @@
 			isa = PBXGroup;
 			children = (
 				E351080C1F67E4D90041B0B8 /* FastNewsViewController.swift */,
+				CA5582841F6ECDC000A58519 /* FastNewsTableViewCell.swift */,
 			);
 			name = FastNews;
 			sourceTree = "<group>";
@@ -847,6 +876,7 @@
 			isa = PBXGroup;
 			children = (
 				E351080F1F67E5030041B0B8 /* ReportersViewController.swift */,
+				CA5582861F6ECE8B00A58519 /* ReportersTableViewCell.swift */,
 			);
 			name = Reporters;
 			sourceTree = "<group>";
@@ -855,6 +885,7 @@
 			isa = PBXGroup;
 			children = (
 				E35108121F67E5400041B0B8 /* InhSpecialViewController.swift */,
+				CA5582881F6ECF7700A58519 /* InhSpecialTableViewCell.swift */,
 			);
 			name = InhSpecial;
 			sourceTree = "<group>";
@@ -863,6 +894,7 @@
 			isa = PBXGroup;
 			children = (
 				E35108151F67E56F0041B0B8 /* BollywoodExpressViewController.swift */,
+				CA55828A1F6ED00200A58519 /* BollywoodExpressTableViewCell.swift */,
 			);
 			name = BollywoodExpress;
 			sourceTree = "<group>";
@@ -871,6 +903,7 @@
 			isa = PBXGroup;
 			children = (
 				E35108181F67E59F0041B0B8 /* ChhattisgarhiNewsViewController.swift */,
+				CA55828C1F6ED04F00A58519 /* ChhattisgarhiNewsTableViewCell.swift */,
 			);
 			name = ChhattisgarhiNews;
 			sourceTree = "<group>";
@@ -905,7 +938,8 @@
 		E351081C1F67E6080041B0B8 /* InhNews */ = {
 			isa = PBXGroup;
 			children = (
-				E300C2FA1F66B3930002C04A /* InhNewsViewController.swift */,
+				CA5582981F6ED61500A58519 /* InhNewsViewController.swift */,
+				CA5582961F6ED5E400A58519 /* InhNewsTableViewCell.swift */,
 			);
 			name = InhNews;
 			sourceTree = "<group>";
@@ -914,6 +948,7 @@
 			isa = PBXGroup;
 			children = (
 				E351082F1F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift */,
+				CA5582941F6ED5A400A58519 /* ChhattisgarhDrawerNewsTableViewCell.swift */,
 			);
 			name = ChhattisgarhNews;
 			sourceTree = "<group>";
@@ -922,6 +957,7 @@
 			isa = PBXGroup;
 			children = (
 				E35108221F67E69E0041B0B8 /* IndiaNewsViewController.swift */,
+				CA5582921F6ED58400A58519 /* IndiaNewsTableViewCell.swift */,
 			);
 			name = IndiaNews;
 			sourceTree = "<group>";
@@ -930,6 +966,7 @@
 			isa = PBXGroup;
 			children = (
 				E35108251F67E6B90041B0B8 /* EntertainmentViewController.swift */,
+				CA5582901F6ED56A00A58519 /* EntertainmentTableViewCell.swift */,
 			);
 			name = Entertainment;
 			sourceTree = "<group>";
@@ -938,6 +975,7 @@
 			isa = PBXGroup;
 			children = (
 				E35108281F67E6D60041B0B8 /* LifeStyleViewController.swift */,
+				CA55828E1F6ED54C00A58519 /* LifeStyleTableViewCell.swift */,
 			);
 			name = LifeStyle;
 			sourceTree = "<group>";
@@ -1265,34 +1303,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E300C2FB1F66B3930002C04A /* InhNewsViewController.swift in Sources */,
+				CA5582971F6ED5E400A58519 /* InhNewsTableViewCell.swift in Sources */,
 				E35108231F67E69E0041B0B8 /* IndiaNewsViewController.swift in Sources */,
 				E35108301F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift in Sources */,
 				E351082C1F67E6F50041B0B8 /* SportsViewController.swift in Sources */,
+				CA55828B1F6ED00200A58519 /* BollywoodExpressTableViewCell.swift in Sources */,
 				E35108161F67E56F0041B0B8 /* BollywoodExpressViewController.swift in Sources */,
 				E351080D1F67E4D90041B0B8 /* FastNewsViewController.swift in Sources */,
+				CA5582871F6ECE8B00A58519 /* ReportersTableViewCell.swift in Sources */,
 				E3365E8C1F67BFFD00324368 /* BaseViewController.swift in Sources */,
+				CA5582931F6ED58400A58519 /* IndiaNewsTableViewCell.swift in Sources */,
 				E35108341F67F2910041B0B8 /* HeadLinesTableViewCell.swift in Sources */,
+				CA5582851F6ECDC000A58519 /* FastNewsTableViewCell.swift in Sources */,
 				E35108031F67D7B10041B0B8 /* UtilityViewController.swift in Sources */,
 				E35108101F67E5030041B0B8 /* ReportersViewController.swift in Sources */,
 				CACCA86A1F6829ED008EA5A0 /* SportsTableViewCell.swift in Sources */,
 				E35108261F67E6B90041B0B8 /* EntertainmentViewController.swift in Sources */,
 				E351080A1F67E4AD0041B0B8 /* HeadLinesViewController.swift in Sources */,
 				E35108021F67D7B10041B0B8 /* UserDefaultsManager.swift in Sources */,
+				CA55829C1F6EF6E300A58519 /* VideoViewController.swift in Sources */,
 				CA783EFE1F697F8B00520FE2 /* SectionNewsTableViewCell.swift in Sources */,
-				CA7E3E181F6AF57B00CE6040 /* SectionNewsInsideTableTableViewCell.swift in Sources */,
+				CA5582891F6ECF7700A58519 /* InhSpecialTableViewCell.swift in Sources */,
+				CA5582991F6ED61500A58519 /* InhNewsViewController.swift in Sources */,
 				E35108011F67D7B10041B0B8 /* RequestString.swift in Sources */,
 				E35108131F67E5400041B0B8 /* InhSpecialViewController.swift in Sources */,
+				CA55828F1F6ED54C00A58519 /* LifeStyleTableViewCell.swift in Sources */,
 				CABFBBAB1F6D56FC009C5F31 /* PhotoGalleryViewController.swift in Sources */,
+				CA5582911F6ED56A00A58519 /* EntertainmentTableViewCell.swift in Sources */,
 				E3061ECA1F6E733A001984FD /* PhotoStoriesCollectionViewCell.swift in Sources */,
 				E35108321F67F0980041B0B8 /* DrawerController.swift in Sources */,
 				CABFBBA81F6D47CD009C5F31 /* OnClickViewController.swift in Sources */,
+				CA55828D1F6ED04F00A58519 /* ChhattisgarhiNewsTableViewCell.swift in Sources */,
 				E35107FF1F67D7B10041B0B8 /* BackgroundGradient.swift in Sources */,
 				E3365E8E1F67C02200324368 /* NavigationController.swift in Sources */,
 				E35107B51F67CA970041B0B8 /* DashBoardViewController.swift in Sources */,
 				E39FFCC31F69511400ACD73D /* LatestTableViewCell.swift in Sources */,
 				CA9014DD1F6C20C80027C87F /* VideoSliderCollectionViewCell.swift in Sources */,
 				E35108291F67E6D60041B0B8 /* LifeStyleViewController.swift in Sources */,
+				CA5582951F6ED5A400A58519 /* ChhattisgarhDrawerNewsTableViewCell.swift in Sources */,
 				E35108061F67E44E0041B0B8 /* TopStoriesViewController.swift in Sources */,
 				E3365E8A1F67BFD800324368 /* MenuViewController.swift in Sources */,
 				E35108191F67E59F0041B0B8 /* ChhattisgarhiNewsViewController.swift in Sources */,

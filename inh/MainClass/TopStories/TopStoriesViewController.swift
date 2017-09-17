@@ -73,7 +73,12 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
 //        // set the activity indicator for full screen controller (skipping the line will show no activity indicator)
 //        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
         
-        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SportsViewController") as! SportsViewController
+        let petition = petitions[topBanner.currentPage]
+        
+        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+        navigationViewController.ap_image = petition["ap_image"]!
+        navigationViewController.mobile_news_url = petition["mobile_news_url"]!
+        navigationViewController.share_url = petition["share_url"]!
         self.navigationController?.pushViewController(navigationViewController, animated: true)
     }
 
@@ -159,18 +164,22 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
         if(tableView == talestNewsTable){
             let row = indexPath.row
             print("Row: \(row)")
-            
-//            print(meetingArray[row] as! String)
+            let petition = latestNewsList[indexPath.row]
             
             let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+            navigationViewController.ap_image = petition["ap_image"]!
+            navigationViewController.mobile_news_url = petition["mobile_news_url"]!
+            navigationViewController.share_url = petition["share_url"]!
             self.navigationController?.pushViewController(navigationViewController, animated: true)
         }else{
             let row = indexPath.row
             print("Row: \(row)")
-            
-//            print(meetingArray[row] as! String)
+            let petition = sectionList[indexPath.row]
             
             let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+            navigationViewController.ap_image = petition["ap_image"]!
+            navigationViewController.mobile_news_url = petition["mobile_news_url"]!
+            navigationViewController.share_url = petition["share_url"]!
             self.navigationController?.pushViewController(navigationViewController, animated: true)
         }
     }
@@ -505,6 +514,8 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoStories.count
     }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = indexPath.row

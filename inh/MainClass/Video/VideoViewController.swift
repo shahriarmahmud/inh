@@ -1,25 +1,24 @@
 //
-//  ViewController.swift
+//  VideoViewController.swift
 //  inh
 //
-//  Created by Shahriar Mahmud on 9/11/17.
+//  Created by Priom on 9/18/17.
 //  Copyright © 2017 BizTech. All rights reserved.
 //
 
 import UIKit
 
-class InhNewsViewController: BaseViewController {
+class VideoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSlideMenuButton()
 
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
+        // Dispose of any resources that can be recreated.
     }
 
 }
-

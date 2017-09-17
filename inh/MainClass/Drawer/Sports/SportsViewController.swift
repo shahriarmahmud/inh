@@ -31,14 +31,29 @@ class SportsViewController: BaseViewController , UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petitions.count
+        return petitions.count-1
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+            let row = indexPath.row
+            print("Row: \(row)")
+            let petition = petitions[indexPath.row]
+            
+            let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+            navigationViewController.ap_image = petition["ap_image"]!
+            navigationViewController.mobile_news_url = petition["mobile_news_url"]!
+            navigationViewController.share_url = petition["share_url"]!
+            self.navigationController?.pushViewController(navigationViewController, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:SportsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SportsTableViewCell
         
-        let petition = petitions[indexPath.row]
+        let petition = petitions[indexPath.row+1]
         print(indexPath.row)
         print(petition)
         
@@ -75,7 +90,7 @@ class SportsViewController: BaseViewController , UITableViewDelegate, UITableVie
     func GEtServerDate(){
         SVProgressHUD.show()
 
-        Alamofire.request(RequestString.topSection, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
+        Alamofire.request(RequestString.drawerSports, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
             switch responce.result{
             case.success(let data):
                 SVProgressHUD.dismiss()

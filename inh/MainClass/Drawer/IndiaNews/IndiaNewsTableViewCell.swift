@@ -1,14 +1,18 @@
 //
-//  SectionNewsInsideTableTableViewCell.swift
+//  IndiaNewsTableViewCell.swift
 //  inh
 //
-//  Created by Priom on 9/14/17.
+//  Created by Priom on 9/17/17.
 //  Copyright © 2017 BizTech. All rights reserved.
 //
 
 import UIKit
 
-class SectionNewsInsideTableTableViewCell: UITableViewCell {
+class IndiaNewsTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var headImage: UIImageView!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

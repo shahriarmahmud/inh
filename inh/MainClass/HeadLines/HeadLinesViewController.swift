@@ -66,38 +66,7 @@ class HeadLinesViewController: UIViewController , UITableViewDelegate, UITableVi
                 }
             }
         }
-
-//
-//        if(petition["name"]?.isEmpty)!{
-//            cell.customerName.text = "Customer Name : "
-//        }else{
-//            cell.customerName.text = "Customer Name : "+petition["name"]!
-//        }
-//        
-//        
-//        if(petition["phone"]?.isEmpty)!{
-//            cell.customerMobileNumber.text = "Customer Mobile Number : "
-//        }else{
-//            cell.customerMobileNumber.text = "Customer Mobile Number : "+petition["phone"]!
-//        }
-//        
-//        
-//        if(petition["type"]?.isEmpty)!{
-//            cell.transectionType.text = "Transaction Type : "
-//        }else{
-//            cell.transectionType.text = "Transaction Type : "+petition["type"]!
-//        }
-//        
-//        
-//        if(petition["status"]?.isEmpty)!{
-//            cell.transectionStatus.text = "Transaction Status : "
-//        }else{
-//            cell.transectionStatus.text = "Transaction Status : "+petition["status"]!
-//        }
-//        
-//        cell.serialNumber.text = "Serial Number: "+String(indexPath.row+1)
-        
-        
+  
         return cell
     }
     

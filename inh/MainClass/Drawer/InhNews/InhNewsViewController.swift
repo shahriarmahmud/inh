@@ -1,8 +1,8 @@
 //
-//  LifeStyleViewController.swift
+//  ViewController.swift
 //  inh
 //
-//  Created by Shahriar Mahmud on 9/12/17.
+//  Created by Shahriar Mahmud on 9/11/17.
 //  Copyright © 2017 BizTech. All rights reserved.
 //
 
@@ -12,7 +12,7 @@ import SwiftyJSON
 import SVProgressHUD
 import AlamofireImage
 
-class LifeStyleViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
+class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var newsTable: UITableView!
@@ -51,7 +51,7 @@ class LifeStyleViewController: BaseViewController , UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:LifeStyleTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LifeStyleTableViewCell
+        let cell:InhNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InhNewsTableViewCell
         
         let petition = petitions[indexPath.row+1]
         print(indexPath.row)
@@ -90,7 +90,7 @@ class LifeStyleViewController: BaseViewController , UITableViewDelegate, UITable
     func GEtServerDate(){
         SVProgressHUD.show()
         
-        Alamofire.request(RequestString.drawerLifeStyle, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
+        Alamofire.request(RequestString.drawerInhNews, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
             switch responce.result{
             case.success(let data):
                 SVProgressHUD.dismiss()
