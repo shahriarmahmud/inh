@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.5.0)
+  - Alamofire (4.5.1)
   - AlamofireImage (3.3.0):
     - Alamofire (~> 4.5)
   - DropDown (2)
@@ -16,7 +16,7 @@ PODS:
     - HMSegmentedControl (= 1.5.3)
     - MXPagerView (= 0.2.1)
     - MXParallaxHeader (= 0.6.1)
-  - SVProgressHUD (2.1.2)
+  - SVProgressHUD (2.2.1)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
@@ -30,7 +30,7 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
   DropDown: 744784d9c9aa505100e942c16acd05430cbb2f0a
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
@@ -38,7 +38,7 @@ SPEC CHECKSUMS:
   MXPagerView: ede184b5191b2ed689ccf05a750a9978cce42414
   MXParallaxHeader: 858c403532ed933b381556a81ce333d7065ad182
   MXSegmentedPager: a35ebaf939e1629f24db3bb26653c1c557362f59
-  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
 PODFILE CHECKSUM: d29ef1cdb0d53205f64c5df1291c67c91b0c0688
