@@ -18,6 +18,7 @@ class SectionNewsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var wholeView: UIView!
     @IBOutlet weak var SectionTitleLabel: UILabel!
+    @IBOutlet var authorLabelHeight: NSLayoutConstraint!
     
     //1st
     @IBOutlet weak var postingTimeLabel: UILabel!

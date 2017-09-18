@@ -50,6 +50,7 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
         talestNewsTable.dataSource = self
         talestNewsTable.delegate = self
         scrollview.contentSize = CGSize(width: 400, height: 2000)
@@ -174,7 +175,8 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
         }else{
             let row = indexPath.row
             print("Row: \(row)")
-            let petition = sectionList[indexPath.row]
+            let petition = sectionNewsList[indexPath.row]
+            print(petition)
             
             let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
             navigationViewController.ap_image = petition["ap_image"]!
@@ -229,12 +231,15 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
             
             cell.videoSection.isHidden=true
             cell.collectionView.isHidden=true
+            cell.authorLabelHeight.constant = -180; //Hide
 //            sectionNewsTable.rowHeight = 400
 //            cell.wholeView.frame = CGRect(origin: CGPoint(x: 8, y :8), size: CGSize(width: cell.wholeView.frame.size.width, height: 460))
             
             if(indexPath.row==1){
                 cell.videoSection.isHidden=false
                 cell.collectionView.isHidden=false
+                
+                cell.authorLabelHeight.constant = 0; //Show
 //                sectionNewsTable.rowHeight = 570
                 
 //                cell.wholeView.frame = CGRect(origin: CGPoint(x: 8, y :8), size: CGSize(width: cell.wholeView.frame.size.width, height: cell.wholeView.frame.size.height))

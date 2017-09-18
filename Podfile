@@ -14,6 +14,7 @@ target 'inh' do
   pod 'AlamofireImage', '~> 3.3'
   pod 'ImageSlideshow', '~> 1.3'
   pod "ImageSlideshow/Alamofire"
+  pod 'YouTubePlayer'
 
   # Pods for inh
 

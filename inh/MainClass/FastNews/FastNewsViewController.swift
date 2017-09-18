@@ -33,6 +33,19 @@ class FastNewsViewController: UIViewController , UITableViewDelegate, UITableVie
         return petitions.count-1
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let row = indexPath.row
+        print("Row: \(row)")
+        let petition = petitions[indexPath.row]
+        
+        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
+        navigationViewController.videoId = petition["videoId"]!
+        self.navigationController?.pushViewController(navigationViewController, animated: true)
+        
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:FastNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FastNewsTableViewCell

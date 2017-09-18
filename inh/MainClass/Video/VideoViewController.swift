@@ -7,18 +7,28 @@
 //
 
 import UIKit
+import YouTubePlayer
 
-class VideoViewController: UIViewController {
+class VideoViewController: UIViewController,YouTubePlayerDelegate{
+    @IBOutlet weak var videoPlayer: YouTubePlayerView!
+    var videoId = ""
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        AppUtility.lockOrientation(.landscapeRight)
+        videoPlayer.loadVideoID(videoId)
         // Do any additional setup after loading the view.
+    }
+    
+    func playerReady(_ videoPlayer: YouTubePlayerView) {
+        videoPlayer.play()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
 
 }
