@@ -27,7 +27,7 @@ class DashBoardViewController: DrawerController {
         
         // Segmented Control customization
         segmentedPager.segmentedControl.selectionIndicatorLocation = .down
-        segmentedPager.segmentedControl.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
+        segmentedPager.segmentedControl.backgroundColor = UIColor(red: (33/255.0), green: (45/255.0), blue: (77/255.0), alpha: 1)
         segmentedPager.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.gray,NSFontAttributeName : UIFont.systemFont(ofSize: 13)]
         segmentedPager.segmentedControl.selectedTitleTextAttributes = [NSForegroundColorAttributeName : UIColor.white,NSFontAttributeName : UIFont.systemFont(ofSize: 13) ]
         segmentedPager.segmentedControl.selectionStyle = .fullWidthStripe
