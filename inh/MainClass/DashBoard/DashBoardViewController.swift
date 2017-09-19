@@ -23,7 +23,7 @@ class DashBoardViewController: DrawerController {
         segmentedPager.parallaxHeader.view = headView
         segmentedPager.parallaxHeader.mode = .fill
         segmentedPager.parallaxHeader.height = 60
-        segmentedPager.parallaxHeader.minimumHeight = 20
+        segmentedPager.parallaxHeader.minimumHeight = 0
         
         // Segmented Control customization
         segmentedPager.segmentedControl.selectionIndicatorLocation = .down

@@ -13,6 +13,8 @@ import SVProgressHUD
 
 class InhSpecialViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
     
+        @IBOutlet weak var scrollview: UIScrollView!
+    
     @IBOutlet weak var HeadLineTitle: UILabel!
     @IBOutlet weak var newsTable: UITableView!
     @IBOutlet weak var headLineImage: UIImageView!
@@ -24,9 +26,16 @@ class InhSpecialViewController: BaseViewController , UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
+        scrollview.contentSize = CGSize(width: 400, height: 1200)
         newsTable.dataSource = self
         newsTable.delegate = self
         GEtReportDate()
+    }
+    @IBAction func videoClick(_ sender: Any) {
+        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
+        navigationViewController.videoId = petitions[0]["videoId"]!
+        self.navigationController?.pushViewController(navigationViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

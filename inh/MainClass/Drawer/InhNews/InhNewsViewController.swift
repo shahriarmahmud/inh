@@ -33,6 +33,13 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
         scrollview.contentSize = CGSize(width: 400, height: 1200)
         GEtServerDate()
     }
+    @IBAction func fristTitemClcik(_ sender: Any) {
+        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+        navigationViewController.ap_image = self.petitions[0]["ap_image"]!
+        navigationViewController.mobile_news_url = self.petitions[0]["mobile_news_url"]!
+        navigationViewController.share_url = self.petitions[0]["share_url"]!
+        self.navigationController?.pushViewController(navigationViewController, animated: true)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return petitions.count-1
@@ -52,6 +59,7 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
         self.navigationController?.pushViewController(navigationViewController, animated: true)
         
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -133,6 +141,7 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
                 }
                 
                 self.titleLabel.text = self.petitions[0]["art_title"]!
+                
                 
                 self.newsTable.reloadData()
                 

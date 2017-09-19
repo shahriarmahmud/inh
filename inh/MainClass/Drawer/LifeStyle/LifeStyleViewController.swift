@@ -34,6 +34,13 @@ class LifeStyleViewController: BaseViewController , UITableViewDelegate, UITable
         GEtServerDate()
     }
     
+    @IBAction func fristTitemClcik(_ sender: Any) {
+        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+        navigationViewController.ap_image = self.petitions[0]["ap_image"]!
+        navigationViewController.mobile_news_url = self.petitions[0]["mobile_news_url"]!
+        navigationViewController.share_url = self.petitions[0]["share_url"]!
+        self.navigationController?.pushViewController(navigationViewController, animated: true)
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return petitions.count-1
     }
