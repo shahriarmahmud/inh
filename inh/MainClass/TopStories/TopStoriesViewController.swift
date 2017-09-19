@@ -231,7 +231,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             
             cell.videoSection.isHidden=true
             cell.collectionView.isHidden=true
-            cell.authorLabelHeight.constant = -180; //Hide
+            cell.authorLabelHeight.constant = -275 //Hide
             
             if(indexPath.row==1){
                 cell.videoSection.isHidden=false

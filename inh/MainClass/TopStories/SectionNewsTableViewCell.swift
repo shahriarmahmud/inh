@@ -125,14 +125,14 @@ extension SectionNewsTableViewCell : UICollectionViewDataSource {
     
 }
 
-extension SectionNewsTableViewCell : UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemsPerRow:CGFloat = 4
-        let hardCodedPadding:CGFloat = 5
-        let itemWidth = (collectionView.bounds.width / itemsPerRow) - hardCodedPadding
-        let itemHeight = collectionView.bounds.height - (2 * hardCodedPadding)
-        return CGSize(width: itemWidth, height: itemHeight)
-    }
-    
-}
+//extension SectionNewsTableViewCell : UICollectionViewDelegateFlowLayout {
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let itemsPerRow:CGFloat = 1
+//        let hardCodedPadding:CGFloat = 0
+//        let itemWidth = (collectionView.bounds.width / itemsPerRow) - hardCodedPadding
+//        let itemHeight = collectionView.bounds.height - (2 * hardCodedPadding)
+//        return CGSize(width: itemWidth, height: itemHeight)
+//    }
+//    
+//}
