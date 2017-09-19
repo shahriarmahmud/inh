@@ -17,6 +17,8 @@ class VideoViewController: UIViewController,YouTubePlayerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         AppUtility.lockOrientation(.landscapeRight)
+        print(videoId)
+//        videoPlayer.loadVideoID("pUFiDOQr_j0")
         videoPlayer.loadVideoID(videoId)
         // Do any additional setup after loading the view.
     }

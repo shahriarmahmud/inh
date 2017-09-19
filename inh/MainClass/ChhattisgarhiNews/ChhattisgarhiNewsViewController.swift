@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import SVProgressHUD
 
-class ChhattisgarhiNewsViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
+class ChhattisgarhiNewsViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var HeadLineTitle: UILabel!
     @IBOutlet weak var newsTable: UITableView!

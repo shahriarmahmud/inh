@@ -41,7 +41,7 @@ class DashBoardViewController: DrawerController {
     }
     
     override func segmentedPager(_ segmentedPager: MXSegmentedPager, titleForSectionAt index: Int) -> String {
-        return ["TOP STORIES", "HEADLINES", "FAST NEWS", "REPORTERS", "INH SPECIAL", "BOLLYWOOD EXPRESS", "CHHATTISGARHI NEWS"][index]
+        return ["TOP STORIES", "INH NEWS", "CHHATTISGARH NEWS", "INDIA NEWS", "ENTERTAINMENT", "LIFE STYLE", "SPORTS","PHOTOS","VIDEOS"][index]
     }
     
     override func segmentedPager(_ segmentedPager: MXSegmentedPager, didScrollWith parallaxHeader: MXParallaxHeader) {

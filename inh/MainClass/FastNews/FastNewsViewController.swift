@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import SVProgressHUD
 
-class FastNewsViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
+class FastNewsViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var HeadLineTitle: UILabel!
     @IBOutlet weak var newsTable: UITableView!

@@ -13,7 +13,7 @@ import AlamofireImage
 import SwiftyJSON
 import SVProgressHUD
 
-class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource{
+class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource{
     
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
@@ -232,17 +232,13 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
             cell.videoSection.isHidden=true
             cell.collectionView.isHidden=true
             cell.authorLabelHeight.constant = -180; //Hide
-//            sectionNewsTable.rowHeight = 400
-//            cell.wholeView.frame = CGRect(origin: CGPoint(x: 8, y :8), size: CGSize(width: cell.wholeView.frame.size.width, height: 460))
             
             if(indexPath.row==1){
                 cell.videoSection.isHidden=false
                 cell.collectionView.isHidden=false
                 
                 cell.authorLabelHeight.constant = 0; //Show
-//                sectionNewsTable.rowHeight = 570
                 
-//                cell.wholeView.frame = CGRect(origin: CGPoint(x: 8, y :8), size: CGSize(width: cell.wholeView.frame.size.width, height: cell.wholeView.frame.size.height))
 
                 Alamofire.request(RequestString.videoSlider, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
                     switch responce.result{
@@ -265,11 +261,14 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
                             self.videoSliderList.append(obj)
                             
                             cell.passValue(VideoSliderList: self.videoSliderList)
+                            cell.initializeView(ui: self)
                             cell.collectionView.reloadData()
                         }
                     case.failure(let error):
                         print("failed\(error)")
                     }
+                    
+                    
                 }
             }
             
@@ -299,9 +298,7 @@ class TopStoriesViewController: UIViewController , UITableViewDelegate, UITableV
                         let obj = ["share_url": share_url, "mobile_news_url": mobile_news_url, "art_id": art_id, "art_title": art_title, "category_name": category_name, "art_has_video": art_has_video, "ap_image": ap_image, "ap_thumb_image": ap_thumb_image, "art_created_on": art_created_on, "X_hours_ago": X_hours_ago]
                         self.sectionNewsList.append(obj)
                     }
-
-//                    let sectionNewsData = self.sectionNewsList[indexPath.row]
-//                    
+                   
                     print(self.sectionNewsList)
                     
                     if(self.sectionNewsList[0]["art_title"]?.isEmpty)!{

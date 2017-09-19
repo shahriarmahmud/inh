@@ -33,6 +33,9 @@
 		E300C30E1F66B3930002C04A /* inhTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E300C30D1F66B3930002C04A /* inhTests.swift */; };
 		E300C3191F66B3930002C04A /* inhUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E300C3181F66B3930002C04A /* inhUITests.swift */; };
 		E3061ECA1F6E733A001984FD /* PhotoStoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3061EC91F6E733A001984FD /* PhotoStoriesCollectionViewCell.swift */; };
+		E33382441F70DE5B007C3A1D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33382431F70DE5B007C3A1D /* SearchViewController.swift */; };
+		E333824B1F70DED8007C3A1D /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E333824A1F70DED8007C3A1D /* PhotosViewController.swift */; };
+		E333824D1F70DEE8007C3A1D /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E333824C1F70DEE8007C3A1D /* VideosViewController.swift */; };
 		E3365E8A1F67BFD800324368 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3365E891F67BFD800324368 /* MenuViewController.swift */; };
 		E3365E8C1F67BFFD00324368 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3365E8B1F67BFFD00324368 /* BaseViewController.swift */; };
 		E3365E8E1F67C02200324368 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3365E8D1F67C02200324368 /* NavigationController.swift */; };
@@ -119,6 +122,9 @@
 		E300C3181F66B3930002C04A /* inhUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inhUITests.swift; sourceTree = "<group>"; };
 		E300C31A1F66B3930002C04A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3061EC91F6E733A001984FD /* PhotoStoriesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoStoriesCollectionViewCell.swift; path = MainClass/TopStories/PhotoStoriesCollectionViewCell.swift; sourceTree = "<group>"; };
+		E33382431F70DE5B007C3A1D /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = MainClass/Drawer/Search/SearchViewController.swift; sourceTree = "<group>"; };
+		E333824A1F70DED8007C3A1D /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotosViewController.swift; path = MainClass/Drawer/Photos/PhotosViewController.swift; sourceTree = "<group>"; };
+		E333824C1F70DEE8007C3A1D /* VideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideosViewController.swift; path = MainClass/Drawer/Videos/VideosViewController.swift; sourceTree = "<group>"; };
 		E3365E891F67BFD800324368 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		E3365E8B1F67BFFD00324368 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		E3365E8D1F67C02200324368 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -274,6 +280,30 @@
 				E300C31A1F66B3930002C04A /* Info.plist */,
 			);
 			path = inhUITests;
+			sourceTree = "<group>";
+		};
+		E33382421F70DE2B007C3A1D /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E33382431F70DE5B007C3A1D /* SearchViewController.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		E33382461F70DE84007C3A1D /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				E333824C1F70DEE8007C3A1D /* VideosViewController.swift */,
+			);
+			name = Videos;
+			sourceTree = "<group>";
+		};
+		E33382471F70DE8B007C3A1D /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				E333824A1F70DED8007C3A1D /* PhotosViewController.swift */,
+			);
+			name = Photos;
 			sourceTree = "<group>";
 		};
 		E3365E861F67BF7500324368 /* MainClass */ = {
@@ -911,6 +941,9 @@
 		E351081A1F67E5DD0041B0B8 /* Drawer */ = {
 			isa = PBXGroup;
 			children = (
+				E33382471F70DE8B007C3A1D /* Photos */,
+				E33382461F70DE84007C3A1D /* Videos */,
+				E33382421F70DE2B007C3A1D /* Search */,
 				E351082A1F67E6DA0041B0B8 /* Sports */,
 				E35108271F67E6BE0041B0B8 /* LifeStyle */,
 				E35108241F67E6A20041B0B8 /* Entertainment */,
@@ -1335,12 +1368,15 @@
 				E3061ECA1F6E733A001984FD /* PhotoStoriesCollectionViewCell.swift in Sources */,
 				E35108321F67F0980041B0B8 /* DrawerController.swift in Sources */,
 				CABFBBA81F6D47CD009C5F31 /* OnClickViewController.swift in Sources */,
+				E333824D1F70DEE8007C3A1D /* VideosViewController.swift in Sources */,
 				CA55828D1F6ED04F00A58519 /* ChhattisgarhiNewsTableViewCell.swift in Sources */,
 				E35107FF1F67D7B10041B0B8 /* BackgroundGradient.swift in Sources */,
 				E3365E8E1F67C02200324368 /* NavigationController.swift in Sources */,
+				E333824B1F70DED8007C3A1D /* PhotosViewController.swift in Sources */,
 				E35107B51F67CA970041B0B8 /* DashBoardViewController.swift in Sources */,
 				E39FFCC31F69511400ACD73D /* LatestTableViewCell.swift in Sources */,
 				CA9014DD1F6C20C80027C87F /* VideoSliderCollectionViewCell.swift in Sources */,
+				E33382441F70DE5B007C3A1D /* SearchViewController.swift in Sources */,
 				E35108291F67E6D60041B0B8 /* LifeStyleViewController.swift in Sources */,
 				CA5582951F6ED5A400A58519 /* ChhattisgarhDrawerNewsTableViewCell.swift in Sources */,
 				E35108061F67E44E0041B0B8 /* TopStoriesViewController.swift in Sources */,

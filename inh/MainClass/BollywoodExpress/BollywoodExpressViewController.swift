@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import SVProgressHUD
 
-class BollywoodExpressViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
+class BollywoodExpressViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var HeadLineTitle: UILabel!
     @IBOutlet weak var newsTable: UITableView!

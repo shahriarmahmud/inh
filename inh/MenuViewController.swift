@@ -57,12 +57,23 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func updateArrayMenuOptions(){
         arrayMenuOptions.append(["title":"Home", "icon":"HomeIcon"])
+        arrayMenuOptions.append(["title":"Search", "icon":"HomeIcon"])
+        
+        arrayMenuOptions.append(["title":"Headlines", "icon":"PlayIcon"])
+        arrayMenuOptions.append(["title":"Fast News", "icon":"HomeIcon"])
+        arrayMenuOptions.append(["title":"Reporters", "icon":"PlayIcon"])
+        arrayMenuOptions.append(["title":"INH Special", "icon":"HomeIcon"])
+        arrayMenuOptions.append(["title":"Bollywood Express", "icon":"PlayIcon"])
+        arrayMenuOptions.append(["title":"Chhattisgarhi News", "icon":"HomeIcon"])
+        
         arrayMenuOptions.append(["title":"INH News", "icon":"PlayIcon"])
         arrayMenuOptions.append(["title":"Chhattisgarh News", "icon":"HomeIcon"])
         arrayMenuOptions.append(["title":"India News", "icon":"PlayIcon"])
         arrayMenuOptions.append(["title":"Entertainment", "icon":"HomeIcon"])
         arrayMenuOptions.append(["title":"Life Style", "icon":"PlayIcon"])
         arrayMenuOptions.append(["title":"Sports", "icon":"HomeIcon"])
+        arrayMenuOptions.append(["title":"Photos", "icon":"PlayIcon"])
+        arrayMenuOptions.append(["title":"Videos", "icon":"HomeIcon"])
         
         tblMenuOptions.reloadData()
     }

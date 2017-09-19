@@ -14,6 +14,8 @@ import AlamofireImage
 
 class LifeStyleViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
     
+    @IBOutlet weak var scrollview: UIScrollView!
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var newsTable: UITableView!
     @IBOutlet weak var headLineImage: UIImageView!
@@ -25,6 +27,8 @@ class LifeStyleViewController: BaseViewController , UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
+        scrollview.contentSize = CGSize(width: 400, height: 1200)
         newsTable.dataSource = self
         newsTable.delegate = self
         GEtServerDate()

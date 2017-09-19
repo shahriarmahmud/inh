@@ -14,6 +14,8 @@ import AlamofireImage
 
 class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
     
+    @IBOutlet weak var scrollview: UIScrollView!
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var newsTable: UITableView!
     @IBOutlet weak var headLineImage: UIImageView!
@@ -25,8 +27,10 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
         newsTable.dataSource = self
         newsTable.delegate = self
+        scrollview.contentSize = CGSize(width: 400, height: 1200)
         GEtServerDate()
     }
     
@@ -97,7 +101,7 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
                 
                 let Response = JSON(data)
                 print(Response)
-                print(RequestString.topSection)
+                print(RequestString.drawerInhNews)
                 
                 
                 for result in Response.arrayValue {

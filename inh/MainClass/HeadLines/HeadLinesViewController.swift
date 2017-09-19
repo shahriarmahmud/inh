@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import SVProgressHUD
 
-class HeadLinesViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
+class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet weak var HeadLineTitle: UILabel!
     @IBOutlet weak var newsTable: UITableView!

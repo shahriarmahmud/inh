@@ -14,6 +14,8 @@ import AlamofireImage
 
 class ChhattisgarhDrawerViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
     
+    @IBOutlet weak var scrollview: UIScrollView!
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var newsTable: UITableView!
     @IBOutlet weak var headLineImage: UIImageView!
@@ -25,8 +27,10 @@ class ChhattisgarhDrawerViewController: BaseViewController , UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
         newsTable.dataSource = self
         newsTable.delegate = self
+        scrollview.contentSize = CGSize(width: 400, height: 1200)
         GEtServerDate()
     }
     

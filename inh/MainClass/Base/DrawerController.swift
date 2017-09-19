@@ -32,34 +32,82 @@ class DrawerController: MXSegmentedPagerController, SlideMenuDelegate{
             
             break
         case 1:
+            print("SearchViewController\n", terminator: "")
+            
+            self.openViewControllerBasedOnIdentifier("SearchViewController")
+            
+        case 2:
+            print("HeadLinesViewController\n", terminator: "")
+            
+            self.openViewControllerBasedOnIdentifier("HeadLinesViewController")
+            
+        case 3:
+            print("FastNewsViewController\n", terminator: "")
+            
+            self.openViewControllerBasedOnIdentifier("FastNewsViewController")
+            
+        case 4:
+            print("ReportersViewController\n", terminator: "")
+            
+            self.openViewControllerBasedOnIdentifier("ReportersViewController")
+            
+        case 5:
+            print("InhSpecialViewController\n", terminator: "")
+            
+            self.openViewControllerBasedOnIdentifier("InhSpecialViewController")
+            
+        case 6:
+            print("BollywoodExpressViewController\n", terminator: "")
+            
+            self.openViewControllerBasedOnIdentifier("BollywoodExpressViewController")
+            
+        case 7:
+            print("ChhattisgarhiNewsViewController\n", terminator: "")
+            
+            self.openViewControllerBasedOnIdentifier("ChhattisgarhiNewsViewController")
+            
+            
+            
+            break
+        case 8:
             print("InhNewsViewController\n", terminator: "")
             
             self.openViewControllerBasedOnIdentifier("InhNewsViewController")
             
-        case 2:
+        case 9:
             print("ChhattisgarhDrawerViewController\n", terminator: "")
             
             self.openViewControllerBasedOnIdentifier("ChhattisgarhDrawerViewController")
             
-        case 3:
+        case 10:
             print("IndiaNewsViewController\n", terminator: "")
             
             self.openViewControllerBasedOnIdentifier("IndiaNewsViewController")
             
-        case 4:
+        case 11:
             print("EntertainmentViewController\n", terminator: "")
             
             self.openViewControllerBasedOnIdentifier("EntertainmentViewController")
             
-        case 5:
+        case 12:
             print("LifeStyleViewController\n", terminator: "")
             
             self.openViewControllerBasedOnIdentifier("LifeStyleViewController")
             
-        case 6:
+        case 13:
             print("SportsViewController\n", terminator: "")
             
             self.openViewControllerBasedOnIdentifier("SportsViewController")
+            
+        case 14:
+            print("PhotosViewController\n", terminator: "")
+            
+            self.openViewControllerBasedOnIdentifier("PhotosViewController")
+            
+        case 15:
+            print("VideosViewController\n", terminator: "")
+            
+            self.openViewControllerBasedOnIdentifier("VideosViewController")
             
             break
         default:

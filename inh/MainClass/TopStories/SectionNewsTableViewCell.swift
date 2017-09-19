@@ -20,6 +20,8 @@ class SectionNewsTableViewCell: UITableViewCell {
     @IBOutlet weak var SectionTitleLabel: UILabel!
     @IBOutlet var authorLabelHeight: NSLayoutConstraint!
     
+    var SELF:UIViewController? = nil
+    
     //1st
     @IBOutlet weak var postingTimeLabel: UILabel!
     @IBOutlet weak var thumbnailLabel: UILabel!
@@ -62,7 +64,9 @@ class SectionNewsTableViewCell: UITableViewCell {
         videoSliderList = VideoSliderList
     }
     
-    
+    func initializeView(ui:UIViewController){
+        SELF = ui
+    }
 
 }
 
@@ -75,23 +79,23 @@ extension SectionNewsTableViewCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = indexPath.row
         print("Row: \(row)")
+        let videoSlider = videoSliderList[row]
+//                    print(meetingArray[row] as! String)
         
-        //            print(meetingArray[row] as! String)
         
-//        let sb: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        
-//        let frontVC = sb.instantiateViewController(withIdentifier: "VideoViewController")
-//        let frontNav = UINavigationController(rootViewController: frontVC)
-//        let rearVC = sb.instantiateViewController(withIdentifier: "TopStoriesViewController")
-//        
-//        self.window?.rootViewController = frontVC
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let destination = storyboard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
+        destination.videoId = videoSlider["vblog_youtube"]!
+        SELF?.navigationController?.pushViewController(destination, animated: true)
+        //self.pushViewController(destination, animated: true)
         
-//        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
-//        let photoStory = photoStories[row]
+//        let navigationViewController = self.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
+//        let photoStory = videoSliderList[row]
 //        navigationViewController.albumId = photoStory["palbum_id"]!
-        
+//        
 //        self.parent?.navigationController?.pushViewController(navigationViewController, animated: true)
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "videoCell", for: indexPath) as! VideoSliderCollectionViewCell
