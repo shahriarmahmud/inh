@@ -19,7 +19,11 @@ class InhSpecialViewController: BaseViewController , UITableViewDelegate, UITabl
     @IBOutlet weak var newsTable: UITableView!
     @IBOutlet weak var headLineImage: UIImageView!
     
+    @IBOutlet weak var headerView: UIView!
+    var refreshControl: UIRefreshControl!
+    
     var petitions = [[String: String]]()
+    var count = 1
     
     var utilityViewController = UtilityViewController()
     var alertDialogViewController = AlertDialogViewController()
@@ -30,8 +34,21 @@ class InhSpecialViewController: BaseViewController , UITableViewDelegate, UITabl
         scrollview.contentSize = CGSize(width: 400, height: 1200)
         newsTable.dataSource = self
         newsTable.delegate = self
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: Selector(("refresh:")), for: UIControlEvents.valueChanged)
+                newsTable.addSubview(refreshControl) // not required when using UITableViewController
+//        headerView.addSubview(refreshControl)
         GEtReportDate()
     }
+    
+    func refresh(sender:AnyObject) {
+        // Code to refresh table view
+        GEtReportDate()
+        self.refreshControl.endRefreshing()
+    }
+    
     @IBAction func videoClick(_ sender: Any) {
         let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
         navigationViewController.videoId = petitions[0]["videoId"]!
@@ -89,7 +106,66 @@ class InhSpecialViewController: BaseViewController , UITableViewDelegate, UITabl
             }
         }
         
+        let lastElement = petitions.count - 1
+        if indexPath.row == lastElement {
+            // handle your logic here to get more items, add it to dataSource and reload tableview
+            var count = 1
+            self.loadMoreData(count: String(count))
+            count += 1
+        }
+        
         return cell
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        // UITableView only moves in one direction, y axis
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+        
+        // Change 10.0 to adjust the distance from bottom
+        if maximumOffset - currentOffset <= 10.0 {
+            
+            self.loadMoreData(count: String(count))
+            count += 1
+        }
+    }
+    
+    func loadMoreData(count:String){
+        SVProgressHUD.show()
+        
+        Alamofire.request(RequestString.inhSpecialLoadMore+count, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
+            switch responce.result{
+            case.success(let data):
+                SVProgressHUD.dismiss()
+                self.refreshControl.endRefreshing()
+                
+                let json = JSON(data)
+                print(json["items"][0]["snippet"]["thumbnails"]["medium"]["url"].stringValue)
+                print(json["items"])
+                print("Head Lines",json)
+                print("Head Lines",RequestString.headLines)
+                
+                
+                
+                
+                for result in json["items"].arrayValue {
+                    let title = result["snippet"]["title"].stringValue
+                    let url = result["snippet"]["thumbnails"]["medium"]["url"].stringValue
+                    let videoId = result["snippet"]["resourceId"]["videoId"].stringValue
+                    
+                    let obj = ["title": title, "url": url, "videoId": videoId]
+                    self.petitions.append(obj)
+                }
+                print(self.petitions)
+                print(self.petitions.count)
+                
+                self.newsTable.reloadData()
+                
+                
+            case.failure(let error):
+                print("failed\(error)")
+            }
+        }
     }
     
     func GEtReportDate(){

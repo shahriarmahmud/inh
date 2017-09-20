@@ -61,6 +61,9 @@
 		E35108301F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351082F1F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift */; };
 		E35108321F67F0980041B0B8 /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108311F67F0980041B0B8 /* DrawerController.swift */; };
 		E35108341F67F2910041B0B8 /* HeadLinesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108331F67F2910041B0B8 /* HeadLinesTableViewCell.swift */; };
+		E369A2EA1F726FDA004C892C /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E369A2E91F726FDA004C892C /* SearchTableViewCell.swift */; };
+		E369A2EC1F727675004C892C /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E369A2EB1F727675004C892C /* PhotosTableViewCell.swift */; };
+		E369A2F01F727EE1004C892C /* VideosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E369A2EF1F727EE1004C892C /* VideosTableViewCell.swift */; };
 		E39FFCC31F69511400ACD73D /* LatestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39FFCC21F69511400ACD73D /* LatestTableViewCell.swift */; };
 		E50B235D3D06B96BE3C2F0D0 /* Pods_inhTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B65AC485AF59F426BF90F9D /* Pods_inhTests.framework */; };
 /* End PBXBuildFile section */
@@ -150,6 +153,9 @@
 		E351082F1F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChhattisgarhDrawerViewController.swift; path = MainClass/Drawer/ChhattisgarhDrawer/ChhattisgarhDrawerViewController.swift; sourceTree = "<group>"; };
 		E35108311F67F0980041B0B8 /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrawerController.swift; path = MainClass/Base/DrawerController.swift; sourceTree = "<group>"; };
 		E35108331F67F2910041B0B8 /* HeadLinesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeadLinesTableViewCell.swift; path = MainClass/HeadLines/HeadLinesTableViewCell.swift; sourceTree = "<group>"; };
+		E369A2E91F726FDA004C892C /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTableViewCell.swift; path = MainClass/Drawer/Search/SearchTableViewCell.swift; sourceTree = "<group>"; };
+		E369A2EB1F727675004C892C /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotosTableViewCell.swift; path = MainClass/Drawer/Photos/PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		E369A2EF1F727EE1004C892C /* VideosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideosTableViewCell.swift; path = MainClass/Drawer/Videos/VideosTableViewCell.swift; sourceTree = "<group>"; };
 		E39FFCC21F69511400ACD73D /* LatestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LatestTableViewCell.swift; path = MainClass/TopStories/LatestTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -286,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				E33382431F70DE5B007C3A1D /* SearchViewController.swift */,
+				E369A2E91F726FDA004C892C /* SearchTableViewCell.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -294,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				E333824C1F70DEE8007C3A1D /* VideosViewController.swift */,
+				E369A2EF1F727EE1004C892C /* VideosTableViewCell.swift */,
 			);
 			name = Videos;
 			sourceTree = "<group>";
@@ -302,6 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				E333824A1F70DED8007C3A1D /* PhotosViewController.swift */,
+				E369A2EB1F727675004C892C /* PhotosTableViewCell.swift */,
 			);
 			name = Photos;
 			sourceTree = "<group>";
@@ -1357,6 +1366,7 @@
 				E351080A1F67E4AD0041B0B8 /* HeadLinesViewController.swift in Sources */,
 				E35108021F67D7B10041B0B8 /* UserDefaultsManager.swift in Sources */,
 				CA55829C1F6EF6E300A58519 /* VideoViewController.swift in Sources */,
+				E369A2F01F727EE1004C892C /* VideosTableViewCell.swift in Sources */,
 				CA783EFE1F697F8B00520FE2 /* SectionNewsTableViewCell.swift in Sources */,
 				CA5582891F6ECF7700A58519 /* InhSpecialTableViewCell.swift in Sources */,
 				CA5582991F6ED61500A58519 /* InhNewsViewController.swift in Sources */,
@@ -1368,6 +1378,7 @@
 				E3061ECA1F6E733A001984FD /* PhotoStoriesCollectionViewCell.swift in Sources */,
 				E35108321F67F0980041B0B8 /* DrawerController.swift in Sources */,
 				CABFBBA81F6D47CD009C5F31 /* OnClickViewController.swift in Sources */,
+				E369A2EC1F727675004C892C /* PhotosTableViewCell.swift in Sources */,
 				E333824D1F70DEE8007C3A1D /* VideosViewController.swift in Sources */,
 				CA55828D1F6ED04F00A58519 /* ChhattisgarhiNewsTableViewCell.swift in Sources */,
 				E35107FF1F67D7B10041B0B8 /* BackgroundGradient.swift in Sources */,
@@ -1386,6 +1397,7 @@
 				E35107FD1F67D7B10041B0B8 /* AlertDialogViewController.swift in Sources */,
 				E35107FE1F67D7B10041B0B8 /* CustomAlert.swift in Sources */,
 				E35108001F67D7B10041B0B8 /* DatePickerDialog.swift in Sources */,
+				E369A2EA1F726FDA004C892C /* SearchTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

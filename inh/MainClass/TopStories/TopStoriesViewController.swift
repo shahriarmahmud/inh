@@ -23,6 +23,9 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var topBanner: ImageSlideshow!
     
+    @IBOutlet weak var headerView: UIView!
+    var refreshControl: UIRefreshControl!
+    
     var petitions = [[String: String]]()
     var imageUrlList = [[String: String]]()
     var downloadImageUrlList = [AlamofireSource]()
@@ -54,6 +57,13 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         talestNewsTable.dataSource = self
         talestNewsTable.delegate = self
         scrollview.contentSize = CGSize(width: 400, height: 2000)
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: Selector(("refresh:")), for: UIControlEvents.valueChanged)
+        talestNewsTable.addSubview(refreshControl) // not required when using UITableViewController
+//        headerView.addSubview(refreshControl)
+        
         GEtServerDate()
         //latestNews
         GetLatestNewsData()
@@ -67,6 +77,15 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(TopStoriesViewController.didTap))
         topBanner.addGestureRecognizer(recognizer)
 
+    }
+    
+    func refresh(sender:AnyObject) {
+        // Code to refresh table view
+        GEtServerDate()
+        GetLatestNewsData()
+        GetPhotoStoriesDate()
+        GetSectionData()
+        self.refreshControl.endRefreshing()
     }
     
     func didTap() {
@@ -96,6 +115,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             switch responce.result{
             case.success(let data):
                 SVProgressHUD.dismiss()
+                self.refreshControl.endRefreshing()
                 
                 let Response = JSON(data)
                 print(Response)
@@ -478,6 +498,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             switch responce.result{
             case.success(let data):
                 SVProgressHUD.dismiss()
+                self.refreshControl.endRefreshing()
                 
                 let Response = JSON(data)
                 print(Response)
@@ -565,6 +586,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             switch responce.result{
             case.success(let data):
                 SVProgressHUD.dismiss()
+                self.refreshControl.endRefreshing()
                 
                 let Response = JSON(data)
                 print(Response)
@@ -604,6 +626,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             switch responce.result{
             case.success(let data):
                 SVProgressHUD.dismiss()
+                self.refreshControl.endRefreshing()
                 
                 let Response = JSON(data)
                 print(Response)
