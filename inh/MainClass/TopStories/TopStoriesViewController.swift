@@ -143,13 +143,9 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                 self.titleLabel.text=titleText["art_title"]
                 
                 self.topBanner.backgroundColor = UIColor.white
-                self.topBanner.slideshowInterval = 5.0
-                self.topBanner.pageControlPosition = PageControlPosition.underScrollView
-                self.topBanner.pageControl.currentPageIndicatorTintColor = UIColor.lightGray
-                self.topBanner.pageControl.pageIndicatorTintColor = UIColor.black
+                self.topBanner.slideshowInterval = 999999999999999
                 self.topBanner.contentScaleMode = UIViewContentMode.scaleAspectFill
-
-                self.topBanner.activityIndicator = DefaultActivityIndicator()
+                
                 self.topBanner.currentPageChanged = { page in
                     let titleText = self.petitions[page]
                     self.titleLabel.text=titleText["art_title"]

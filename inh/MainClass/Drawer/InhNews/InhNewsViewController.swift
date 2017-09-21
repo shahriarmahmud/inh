@@ -14,12 +14,8 @@ import AlamofireImage
 
 class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
     
-    @IBOutlet weak var scrollview: UIScrollView!
-    
-    @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
+
     @IBOutlet weak var newsTable: UITableView!
-    @IBOutlet weak var headLineImage: UIImageView!
     
     var petitions = [[String: String]]()
     var refreshControl: UIRefreshControl!
@@ -33,22 +29,14 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
         self.automaticallyAdjustsScrollViewInsets = false
         newsTable.dataSource = self
         newsTable.delegate = self
-        scrollview.contentSize = CGSize(width: 400, height: 1200)
+        
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: Selector(("refresh:")), for: UIControlEvents.valueChanged)
-        newsTable.addSubview(refreshControl) // not required when using UITableViewController
-//        headerView.addSubview(refreshControl)
+        newsTable.addSubview(refreshControl)
         GEtServerDate()
     }
-    @IBAction func fristTitemClcik(_ sender: Any) {
-        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
-        navigationViewController.ap_image = self.petitions[0]["ap_image"]!
-        navigationViewController.mobile_news_url = self.petitions[0]["mobile_news_url"]!
-        navigationViewController.share_url = self.petitions[0]["share_url"]!
-        self.navigationController?.pushViewController(navigationViewController, animated: true)
-    }
-    
+ 
     func refresh(sender:AnyObject) {
         // Code to refresh table view
         GEtServerDate()
@@ -56,7 +44,7 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petitions.count-1
+        return petitions.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -132,19 +120,38 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         let cell:InhNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InhNewsTableViewCell
         
-        let petition = petitions[indexPath.row+1]
+        let petition = petitions[indexPath.row]
         print(indexPath.row)
         print(petition)
         
+        if(indexPath.row==0){
+            
+            let cellHeader:InhNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_header", for: indexPath) as! InhNewsTableViewCell
+
+            
+            Alamofire.request(petition["ap_image"]!).responseImage { response in
+                debugPrint(response)
+                debugPrint(response.result)
+                
+                if let image = response.result.value {
+                    print("image downloaded: \(image)")
+                    cellHeader.titleHeadImage.image = image
+                }
+            }
+            
+            cellHeader.headTitleLabel.text = petition["art_title"]!
+
+        }
+
         if(petition["art_title"]?.isEmpty)!{
             cell.titleLabel.text = ""
         }else{
             cell.titleLabel.text = petition["art_title"]!
         }
-        
-        
+
         if(petition["X_hours_ago"]?.isEmpty)!{
             cell.timeLabel.text = ""
         }else{
@@ -174,6 +181,18 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
             count += 1
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath:IndexPath) -> CGFloat {
+        var height:CGFloat = CGFloat()
+        if indexPath.row == 0 {
+            height = 294
+        }
+        else{
+            height = 92
+            print(height)
+        }
+        return height
     }
     
     func GEtServerDate(){
@@ -210,20 +229,6 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
                 print(self.petitions)
                 print(self.petitions.count)
 
-                
-                Alamofire.request(self.petitions[0]["ap_image"]!).responseImage { response in
-                    debugPrint(response)
-                    debugPrint(response.result)
-                    
-                    if let image = response.result.value {
-                        print("image downloaded: \(image)")
-                        self.headLineImage.image = image
-                    }
-                }
-                
-                self.titleLabel.text = self.petitions[0]["art_title"]!
-                
-                
                 self.newsTable.reloadData()
                 
                 

@@ -13,6 +13,9 @@ class HeadLinesTableViewCell: UITableViewCell {
     @IBOutlet weak var headImage: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var headLineImage: UIImageView!
+    @IBOutlet weak var HeadLineTitle: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

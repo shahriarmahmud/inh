@@ -14,12 +14,10 @@ import AlamofireImage
 
 class PhotosViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
     
-    @IBOutlet weak var scrollview: UIScrollView!
-    @IBOutlet weak var headerView: UIView!
     var refreshControl: UIRefreshControl!
-    @IBOutlet weak var titleLabel: UILabel!
+
     @IBOutlet weak var newsTable: UITableView!
-    @IBOutlet weak var headLineImage: UIImageView!
+
     
     var photoStories = [[String: String]]()
     var count = 1
@@ -31,14 +29,12 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         self.automaticallyAdjustsScrollViewInsets = false
-        scrollview.contentSize = CGSize(width: 400, height: 1200)
         newsTable.dataSource = self
         newsTable.delegate = self
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: Selector(("refresh:")), for: UIControlEvents.valueChanged)
-        newsTable.addSubview(refreshControl) // not required when using UITableViewController
-        //        headerView.addSubview(refreshControl)
+        newsTable.addSubview(refreshControl)
         GEtServerDate()
     }
     
@@ -48,15 +44,9 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
         self.refreshControl.endRefreshing()
     }
     
-    @IBAction func fristTitemClcik(_ sender: Any) {
-        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "PhotoGalleryViewController") as! PhotoGalleryViewController
-        let photoStory = photoStories[0]
-        navigationViewController.albumId = photoStory["palbum_id"]!
-        self.navigationController?.pushViewController(navigationViewController, animated: true)
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photoStories.count-1
+        return photoStories.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -76,9 +66,28 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
         
         let cell:PhotosTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PhotosTableViewCell
         
-        let photoStory = photoStories[indexPath.row+1]
+        let photoStory = photoStories[indexPath.row]
         print(indexPath.row)
         print(photoStory)
+        
+        if(indexPath.row==0){
+            
+            let cellHeader:PhotosTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_header", for: indexPath) as! PhotosTableViewCell
+            
+            
+            Alamofire.request(photoStory["pai_image"]!).responseImage { response in
+                debugPrint(response)
+                debugPrint(response.result)
+                
+                if let image = response.result.value {
+                    print("image downloaded: \(image)")
+                    cellHeader.titleHeadImage.image = image
+                }
+            }
+            
+            cellHeader.headTitleLabel.text = photoStory["palbum_title"]!
+            
+        }
         
         if(photoStory["palbum_title"]?.isEmpty)!{
             cell.titleLabel.text = ""
@@ -100,13 +109,6 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
             }
         }
         
-//        let lastElement = photoStory.count - 1
-//        if indexPath.row == lastElement {
-//            // handle your logic here to get more items, add it to dataSource and reload tableview
-//            var count = 1
-//            self.loadMoreData(count: String(count))
-//            count += 1
-//        }
         return cell
     }
     
@@ -177,20 +179,7 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
                     let obj = ["palbum_id": palbum_id, "palbum_title": palbum_title, "pai_image": pai_image]
                     self.photoStories.append(obj)
                 }
-                
-                
-                Alamofire.request(self.photoStories[0]["pai_image"]!).responseImage { response in
-                    debugPrint(response)
-                    debugPrint(response.result)
-                    
-                    if let image = response.result.value {
-                        print("image downloaded: \(image)")
-                        self.headLineImage.image = image
-                    }
-                }
-                
-                self.titleLabel.text = self.photoStories[0]["palbum_title"]!
-                
+
                 self.newsTable.reloadData()
                 
                 
@@ -198,6 +187,18 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
                 print("failed\(error)")
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath:IndexPath) -> CGFloat {
+        var height:CGFloat = CGFloat()
+        if indexPath.row == 0 {
+            height = 294
+        }
+        else{
+            height = 92
+            print(height)
+        }
+        return height
     }
 
     override func didReceiveMemoryWarning() {

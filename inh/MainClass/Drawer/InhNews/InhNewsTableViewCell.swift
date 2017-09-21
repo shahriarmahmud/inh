@@ -13,6 +13,10 @@ class InhNewsTableViewCell: UITableViewCell {
     @IBOutlet weak var headImage: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var titleHeadImage: UIImageView!
+    @IBOutlet weak var headTitleLabel: UILabel!
+
 
     override func awakeFromNib() {
         super.awakeFromNib()

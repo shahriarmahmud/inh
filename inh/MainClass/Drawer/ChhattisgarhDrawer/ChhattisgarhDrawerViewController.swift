@@ -14,11 +14,7 @@ import AlamofireImage
 
 class ChhattisgarhDrawerViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
     
-    @IBOutlet weak var scrollview: UIScrollView!
-    @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var newsTable: UITableView!
-    @IBOutlet weak var headLineImage: UIImageView!
         var refreshControl: UIRefreshControl!
     
     var petitions = [[String: String]]()
@@ -32,12 +28,10 @@ class ChhattisgarhDrawerViewController: BaseViewController , UITableViewDelegate
         self.automaticallyAdjustsScrollViewInsets = false
         newsTable.dataSource = self
         newsTable.delegate = self
-        scrollview.contentSize = CGSize(width: 400, height: 1200)
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: Selector(("refresh:")), for: UIControlEvents.valueChanged)
-                newsTable.addSubview(refreshControl) // not required when using UITableViewController
-//        headerView.addSubview(refreshControl)
+                newsTable.addSubview(refreshControl)
         GEtServerDate()
     }
     
@@ -47,16 +41,8 @@ class ChhattisgarhDrawerViewController: BaseViewController , UITableViewDelegate
         self.refreshControl.endRefreshing()
     }
     
-    @IBAction func fristTitemClcik(_ sender: Any) {
-        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
-        navigationViewController.ap_image = self.petitions[0]["ap_image"]!
-        navigationViewController.mobile_news_url = self.petitions[0]["mobile_news_url"]!
-        navigationViewController.share_url = self.petitions[0]["share_url"]!
-        self.navigationController?.pushViewController(navigationViewController, animated: true)
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petitions.count-1
+        return petitions.count
     }
     
     
@@ -75,13 +61,44 @@ class ChhattisgarhDrawerViewController: BaseViewController , UITableViewDelegate
         
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath:IndexPath) -> CGFloat {
+        var height:CGFloat = CGFloat()
+        if indexPath.row == 0 {
+            height = 294
+        }
+        else{
+            height = 92
+            print(height)
+        }
+        return height
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:ChhattisgarhDrawerNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ChhattisgarhDrawerNewsTableViewCell
         
-        let petition = petitions[indexPath.row+1]
+        let petition = petitions[indexPath.row]
         print(indexPath.row)
         print(petition)
+        
+        if(indexPath.row==0){
+            
+            let cellHeader:ChhattisgarhDrawerNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_header", for: indexPath) as! ChhattisgarhDrawerNewsTableViewCell
+            
+            
+            Alamofire.request(petition["ap_image"]!).responseImage { response in
+                debugPrint(response)
+                debugPrint(response.result)
+                
+                if let image = response.result.value {
+                    print("image downloaded: \(image)")
+                    cellHeader.titleHeadImage.image = image
+                }
+            }
+            
+            cellHeader.headTitleLabel.text = petition["art_title"]!
+            
+        }
         
         if(petition["art_title"]?.isEmpty)!{
             cell.titleLabel.text = ""
@@ -207,18 +224,6 @@ class ChhattisgarhDrawerViewController: BaseViewController , UITableViewDelegate
                     let obj = ["share_url": share_url, "mobile_news_url": mobile_news_url, "art_id": art_id, "art_title": art_title, "category_name": category_name, "art_has_video": art_has_video, "ap_image": ap_image, "ap_thumb_image": ap_thumb_image, "art_created_on": art_created_on, "X_hours_ago": X_hours_ago]
                     self.petitions.append(obj)
                 }
-                
-                Alamofire.request(self.petitions[0]["ap_image"]!).responseImage { response in
-                    debugPrint(response)
-                    debugPrint(response.result)
-                    
-                    if let image = response.result.value {
-                        print("image downloaded: \(image)")
-                        self.headLineImage.image = image
-                    }
-                }
-                
-                self.titleLabel.text = self.petitions[0]["art_title"]!
                 
                 self.newsTable.reloadData()
                 

@@ -12,14 +12,10 @@ import SwiftyJSON
 import SVProgressHUD
 
 class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
-    
-        @IBOutlet weak var scrollview: UIScrollView!
 
-    @IBOutlet weak var HeadLineTitle: UILabel!
     @IBOutlet weak var newsTable: UITableView!
-    @IBOutlet weak var headLineImage: UIImageView!
+
     
-    @IBOutlet weak var headerView: UIView!
     var refreshControl: UIRefreshControl!
     
     var petitions = [[String: String]]()
@@ -31,15 +27,13 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-        scrollview.contentSize = CGSize(width: 400, height: 1200)
         newsTable.dataSource = self
         newsTable.delegate = self
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: Selector(("refresh:")), for: UIControlEvents.valueChanged)
-                newsTable.addSubview(refreshControl) // not required when using UITableViewController
-//        headerView.addSubview(refreshControl)
+                newsTable.addSubview(refreshControl)
         GEtReportDate()
     }
     
@@ -49,15 +43,9 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
         self.refreshControl.endRefreshing()
     }
     
-
-    @IBAction func videoClick(_ sender: Any) {
-        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
-        navigationViewController.videoId = petitions[0]["videoId"]!
-        self.navigationController?.pushViewController(navigationViewController, animated: true)
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petitions.count-1
+        return petitions.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -77,22 +65,33 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
         
         let cell:HeadLinesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HeadLinesTableViewCell
         
-        let headLine = petitions[indexPath.row+1]
+        let headLine = petitions[indexPath.row]
+        
+        if(indexPath.row==0){
+            
+            let cellHeader:HeadLinesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_header", for: indexPath) as! HeadLinesTableViewCell
+            
+            
+            Alamofire.request(headLine["url"]!).responseImage { response in
+                debugPrint(response)
+                debugPrint(response.result)
+                
+                if let image = response.result.value {
+                    print("image downloaded: \(image)")
+                    cellHeader.headLineImage.image = image
+                }
+            }
+            
+            cellHeader.HeadLineTitle.text = headLine["title"]!
+            
+        }
         
         if(headLine["title"]?.isEmpty)!{
             cell.titleLabel.text = ""
         }else{
             cell.titleLabel.text = headLine["title"]!
         }
-        
-        
-//        if(headLine["date"]?.isEmpty)!{
-//            cell.transectionDate.text = "Transaction Date : "
-//        }else{
-//            cell.transectionDate.text = "Transaction Date : "+headLine["date"]!
-//        }
-        
-        
+
         if(headLine["url"]?.isEmpty)!{
             cell.headImage.image = nil
         }else{
@@ -129,6 +128,18 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
             self.loadMoreData(count: String(count))
             count += 1
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath:IndexPath) -> CGFloat {
+        var height:CGFloat = CGFloat()
+        if indexPath.row == 0 {
+            height = 294
+        }
+        else{
+            height = 92
+            print(height)
+        }
+        return height
     }
     
     func loadMoreData(count:String){
@@ -195,18 +206,6 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
                 }
                 
                 print("petitions : ", self.petitions)
-
-                Alamofire.request(self.petitions[0]["url"]!).responseImage { response in
-                    debugPrint(response)
-                    debugPrint(response.result)
-                    
-                    if let image = response.result.value {
-                        print("image downloaded: \(image)")
-                        self.headLineImage.image = image
-                    }
-                }
-                
-                self.HeadLineTitle.text = self.petitions[0]["title"]!
 
                  self.newsTable.reloadData()
 

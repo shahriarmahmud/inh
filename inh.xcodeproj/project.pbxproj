@@ -1173,7 +1173,7 @@
 				TargetAttributes = {
 					CA489FA71F72BE5200930A91 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = JYE4AD2QML;
+						DevelopmentTeam = K9U8JV3VLD;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.iCloud = {
@@ -1500,7 +1500,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DD6BE5DDDC3838839F75E28F /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = JYE4AD2QML;
+				DEVELOPMENT_TEAM = K9U8JV3VLD;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.biztech.inh.OneSignalNotificationServiceExtension;
@@ -1514,7 +1514,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8D14B68D77EA2B8D82286245 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = JYE4AD2QML;
+				DEVELOPMENT_TEAM = K9U8JV3VLD;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.biztech.inh.OneSignalNotificationServiceExtension;
@@ -1621,14 +1621,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6B5B13E5C0EE158F3332B41C /* Pods-inh.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = inh/inh.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = K9U8JV3VLD;
 				INFOPLIST_FILE = inh/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.biztech.inh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1637,14 +1639,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 64B7898ABD10BE231CA30FCE /* Pods-inh.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = inh/inh.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = K9U8JV3VLD;
 				INFOPLIST_FILE = inh/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.biztech.inh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

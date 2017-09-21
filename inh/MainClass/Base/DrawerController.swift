@@ -66,8 +66,6 @@ class DrawerController: MXSegmentedPagerController, SlideMenuDelegate{
             
             self.openViewControllerBasedOnIdentifier("ChhattisgarhiNewsViewController")
             
-            
-            
             break
         case 8:
             print("InhNewsViewController\n", terminator: "")

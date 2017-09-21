@@ -13,13 +13,9 @@ import SVProgressHUD
 
 class VideosViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource{
     
-    @IBOutlet weak var scrollview: UIScrollView!
     
-    @IBOutlet weak var HeadLineTitle: UILabel!
     @IBOutlet weak var newsTable: UITableView!
-    @IBOutlet weak var headLineImage: UIImageView!
-    
-    @IBOutlet weak var headerView: UIView!
+   
     var refreshControl: UIRefreshControl!
     
     var petitions = [[String: String]]()
@@ -31,15 +27,13 @@ class VideosViewController: BaseViewController , UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-        scrollview.contentSize = CGSize(width: 400, height: 1200)
         newsTable.dataSource = self
         newsTable.delegate = self
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: Selector(("refresh:")), for: UIControlEvents.valueChanged)
-        newsTable.addSubview(refreshControl) // not required when using UITableViewController
-        //        headerView.addSubview(refreshControl)
+        newsTable.addSubview(refreshControl)
         GEtReportDate()
     }
     
@@ -48,18 +42,9 @@ class VideosViewController: BaseViewController , UITableViewDelegate, UITableVie
         GEtReportDate()
         self.refreshControl.endRefreshing()
     }
-    
-    
-    @IBAction func videoClick(_ sender: Any) {
-        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
-        print(petitions.count)
-        print(petitions[0])
-        navigationViewController.videoId = petitions[0]["videoId"]!
-        self.navigationController?.pushViewController(navigationViewController, animated: true)
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petitions.count-1
+        return petitions.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -79,20 +64,32 @@ class VideosViewController: BaseViewController , UITableViewDelegate, UITableVie
         
         let cell:VideosTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! VideosTableViewCell
         
-        let headLine = petitions[indexPath.row+1]
+        let headLine = petitions[indexPath.row]
+        
+        if(indexPath.row==0){
+            
+            let cellHeader:VideosTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_header", for: indexPath) as! VideosTableViewCell
+            
+            
+            Alamofire.request(headLine["url"]!).responseImage { response in
+                debugPrint(response)
+                debugPrint(response.result)
+                
+                if let image = response.result.value {
+                    print("image downloaded: \(image)")
+                    cellHeader.headLineImage.image = image
+                }
+            }
+            
+            cellHeader.HeadLineTitle.text = headLine["title"]!
+            
+        }
         
         if(headLine["title"]?.isEmpty)!{
             cell.titleLabel.text = ""
         }else{
             cell.titleLabel.text = headLine["title"]!
         }
-        
-        
-        //        if(headLine["date"]?.isEmpty)!{
-        //            cell.transectionDate.text = "Transaction Date : "
-        //        }else{
-        //            cell.transectionDate.text = "Transaction Date : "+headLine["date"]!
-        //        }
         
         
         if(headLine["url"]?.isEmpty)!{
@@ -118,6 +115,18 @@ class VideosViewController: BaseViewController , UITableViewDelegate, UITableVie
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath:IndexPath) -> CGFloat {
+        var height:CGFloat = CGFloat()
+        if indexPath.row == 0 {
+            height = 294
+        }
+        else{
+            height = 92
+            print(height)
+        }
+        return height
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -194,21 +203,9 @@ class VideosViewController: BaseViewController , UITableViewDelegate, UITableVie
                     let obj = ["title": title, "url": url, "videoId": videoId]
                     self.petitions.append(obj)
                 }
-                
+
                 print("petitions : ", self.petitions)
-                
-                Alamofire.request(self.petitions[0]["url"]!).responseImage { response in
-                    debugPrint(response)
-                    debugPrint(response.result)
-                    
-                    if let image = response.result.value {
-                        print("image downloaded: \(image)")
-                        self.headLineImage.image = image
-                    }
-                }
-                
-                self.HeadLineTitle.text = self.petitions[0]["title"]!
-                
+
                 self.newsTable.reloadData()
                 
             case.failure(let error):
