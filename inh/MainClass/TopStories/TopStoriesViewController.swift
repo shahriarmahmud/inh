@@ -56,7 +56,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         self.automaticallyAdjustsScrollViewInsets = false
         talestNewsTable.dataSource = self
         talestNewsTable.delegate = self
-        scrollview.contentSize = CGSize(width: 400, height: 2000)
+        
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -188,18 +188,19 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             navigationViewController.mobile_news_url = petition["mobile_news_url"]!
             navigationViewController.share_url = petition["share_url"]!
             self.navigationController?.pushViewController(navigationViewController, animated: true)
-        }else{
-            let row = indexPath.row
-            print("Row: \(row)")
-            let petition = sectionNewsList[indexPath.row]
-            print(petition)
-            
-            let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
-            navigationViewController.ap_image = petition["ap_image"]!
-            navigationViewController.mobile_news_url = petition["mobile_news_url"]!
-            navigationViewController.share_url = petition["share_url"]!
-            self.navigationController?.pushViewController(navigationViewController, animated: true)
         }
+//        else{
+//            let row = indexPath.row
+//            print("Row: \(row)")
+//            let petition = sectionNewsList[indexPath.row]
+//            print(petition)
+//            
+//            let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+//            navigationViewController.ap_image = petition["ap_image"]!
+//            navigationViewController.mobile_news_url = petition["mobile_news_url"]!
+//            navigationViewController.share_url = petition["share_url"]!
+//            self.navigationController?.pushViewController(navigationViewController, animated: true)
+//        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -317,6 +318,10 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                    
                     print(self.sectionNewsList)
                     
+                    self.sectionNewsTable.frame = CGRect(x: self.sectionNewsTable.frame.origin.x, y: self.sectionNewsTable.frame.origin.y, width: self.sectionNewsTable.frame.size.width, height: (self.sectionNewsTable.rowHeight * CGFloat(self.sectionNewsList.count))+60)
+                    
+                    self.scrollview.contentSize = CGSize(width: self.scrollview.frame.size.width, height: self.sectionNewsTable.frame.origin.y + self.sectionNewsTable.frame.size.height)
+                    
                     if(self.sectionNewsList[0]["art_title"]?.isEmpty)!{
                         cell.titleLabel.text = ""
                     }else{
@@ -342,7 +347,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                     }else{
                         cell.SectionTitleLabel.text = sectionData["category_name"]!
                     }
-                    
+
                     //1st
                     if(self.sectionNewsList[1]["X_hours_ago"]?.isEmpty)!{
                         cell.postingTimeLabel.text = ""
@@ -521,6 +526,12 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
 
                 self.talestNewsTable.reloadData()
                 
+                self.talestNewsTable.frame = CGRect(x: self.talestNewsTable.frame.origin.x, y: self.talestNewsTable.frame.origin.y, width: self.talestNewsTable.frame.size.width, height: (self.talestNewsTable.rowHeight * CGFloat(self.latestNewsList.count))+60)
+                print(self.talestNewsTable.rowHeight)
+                print(self.talestNewsTable.rowHeight+60)
+                print((self.talestNewsTable.rowHeight * CGFloat(self.latestNewsList.count))+60)
+//                scrollView.contentSize = CGSize(width: view.frame.size.width, height: visaTransactionTable.frame.origin.y + visaTransactionTable.frame.size.height)
+                
                 
             case.failure(let error):
                 print("failed\(error)")
@@ -638,7 +649,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                 }
                 
                 self.sectionNewsTable.reloadData()
-                
+
             case.failure(let error):
                 print("failed\(error)")
             }

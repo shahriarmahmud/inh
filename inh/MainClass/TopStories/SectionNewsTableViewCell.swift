@@ -16,6 +16,8 @@ class SectionNewsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var headerButton: UIButton!
+
     @IBOutlet weak var wholeView: UIView!
     @IBOutlet weak var SectionTitleLabel: UILabel!
     @IBOutlet var authorLabelHeight: NSLayoutConstraint!
@@ -51,6 +53,12 @@ class SectionNewsTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var videoSliderList = [[String: String]]()
+    
+    
+    
+    @IBAction func headerButton(_ sender: Any) {
+        print("gfhgjfhgjfhjg")
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
