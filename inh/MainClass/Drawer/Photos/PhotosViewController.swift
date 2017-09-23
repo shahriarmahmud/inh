@@ -31,11 +31,36 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
         self.automaticallyAdjustsScrollViewInsets = false
         newsTable.dataSource = self
         newsTable.delegate = self
+        
+        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+        if(!currentThmeme.isEmpty){
+            if(currentThmeme == "light"){
+                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            }else{
+                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+            }
+        }else{
+            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+        }
+        
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: Selector(("refresh:")), for: UIControlEvents.valueChanged)
         newsTable.addSubview(refreshControl)
         GEtServerDate()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+        if(!currentThmeme.isEmpty){
+            if(currentThmeme == "light"){
+                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            }else{
+                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+            }
+        }else{
+            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+        }
     }
     
     func refresh(sender:AnyObject) {
@@ -63,16 +88,14 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell:PhotosTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PhotosTableViewCell
-        
-        let photoStory = photoStories[indexPath.row]
-        print(indexPath.row)
-        print(photoStory)
-        
+ 
         if(indexPath.row==0){
             
             let cellHeader:PhotosTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_header", for: indexPath) as! PhotosTableViewCell
+            
+            let photoStory = photoStories[indexPath.row]
+            print(indexPath.row)
+            print(photoStory)
             
             
             Alamofire.request(photoStory["pai_image"]!).responseImage { response in
@@ -87,29 +110,39 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
             
             cellHeader.headTitleLabel.text = photoStory["palbum_title"]!
             
-        }
-        
-        if(photoStory["palbum_title"]?.isEmpty)!{
-            cell.titleLabel.text = ""
+            return cellHeader
+            
         }else{
-            cell.titleLabel.text = photoStory["palbum_title"]!
-        }
-        
-        if(photoStory["pai_image"]?.isEmpty)!{
-            cell.headImage.image = nil
-        }else{
-            Alamofire.request(photoStory["pai_image"]!).responseImage { response in
-                debugPrint(response)
-                debugPrint(response.result)
-                
-                if let image = response.result.value {
-                    print("image downloaded: \(image)")
-                    cell.headImage.image = image
+            let cell:PhotosTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PhotosTableViewCell
+            
+            let photoStory = photoStories[indexPath.row]
+            print(indexPath.row)
+            print(photoStory)
+            
+            if(photoStory["palbum_title"]?.isEmpty)!{
+                cell.titleLabel.text = ""
+            }else{
+                cell.titleLabel.text = photoStory["palbum_title"]!
+            }
+            
+            if(photoStory["pai_image"]?.isEmpty)!{
+                cell.headImage.image = nil
+            }else{
+                Alamofire.request(photoStory["pai_image"]!).responseImage { response in
+                    debugPrint(response)
+                    debugPrint(response.result)
+                    
+                    if let image = response.result.value {
+                        print("image downloaded: \(image)")
+                        cell.headImage.image = image
+                    }
                 }
             }
+            
+            return cell
         }
         
-        return cell
+        
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

@@ -17,15 +17,18 @@ class VideoViewController: UIViewController,YouTubePlayerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         AppUtility.lockOrientation(.landscapeRight)
+        videoPlayer.delegate = self
         print(videoId)
 //        videoPlayer.loadVideoID("pUFiDOQr_j0")
         videoPlayer.loadVideoID(videoId)
+
         // Do any additional setup after loading the view.
     }
     
     func playerReady(_ videoPlayer: YouTubePlayerView) {
         videoPlayer.play()
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

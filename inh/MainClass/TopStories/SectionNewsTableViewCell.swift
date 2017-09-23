@@ -56,9 +56,9 @@ class SectionNewsTableViewCell: UITableViewCell {
     
     
     
-    @IBAction func headerButton(_ sender: Any) {
-        print("gfhgjfhgjfhjg")
-    }
+//    @IBAction func headerButton(_ sender: Any) {
+//        print("gfhgjfhgjfhjg")
+//    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

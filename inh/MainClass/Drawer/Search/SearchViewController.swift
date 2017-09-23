@@ -17,6 +17,7 @@ class SearchViewController: BaseViewController , UITableViewDelegate, UITableVie
     var petitions = [[String: String]]()
     
     
+    @IBOutlet var parentView: UIView!
     @IBOutlet weak var searchFeild: UITextField!
     
     @IBOutlet weak var newsTable: UITableView!
@@ -28,7 +29,35 @@ class SearchViewController: BaseViewController , UITableViewDelegate, UITableVie
         super.viewDidLoad()
         newsTable.dataSource = self
         newsTable.delegate = self
-
+        
+        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+        print(currentThmeme)
+        if(!currentThmeme.isEmpty){
+            if(currentThmeme == "light"){
+                parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            }else{
+                parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+            }
+        }else{
+            self.parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+        }
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SearchViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+        print(currentThmeme)
+        if(!currentThmeme.isEmpty){
+            if(currentThmeme == "light"){
+                parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            }else{
+                parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+            }
+        }else{
+            self.parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -148,6 +177,10 @@ class SearchViewController: BaseViewController , UITableViewDelegate, UITableVie
                 print("failed\(error)")
             }
         }
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
     
 }

@@ -28,11 +28,37 @@ class IndiaNewsViewController: BaseViewController , UITableViewDelegate, UITable
         self.automaticallyAdjustsScrollViewInsets = false
         newsTable.dataSource = self
         newsTable.delegate = self
+        
+        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+        if(!currentThmeme.isEmpty){
+            if(currentThmeme == "light"){
+                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            }else{
+                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+            }
+        }else{
+            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+        }
+        
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: Selector(("refresh:")), for: UIControlEvents.valueChanged)
                 newsTable.addSubview(refreshControl)
         GEtServerDate()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+        print(currentThmeme)
+        if(!currentThmeme.isEmpty){
+            if(currentThmeme == "light"){
+                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            }else{
+                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+            }
+        }else{
+            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,16 +88,14 @@ class IndiaNewsViewController: BaseViewController , UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:IndiaNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IndiaNewsTableViewCell
-        
-        let petition = petitions[indexPath.row]
-        print(indexPath.row)
-        print(petition)
-        
         if(indexPath.row==0){
             
-            let cellHeader:IndiaNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_header", for: indexPath) as! IndiaNewsTableViewCell
+            let cellIdentifier = "cell_header"
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! IndiaNewsTableViewCell
             
+            let petition = petitions[indexPath.row]
+            print(indexPath.row)
+            print(petition)
             
             Alamofire.request(petition["ap_image"]!).responseImage { response in
                 debugPrint(response)
@@ -79,51 +103,59 @@ class IndiaNewsViewController: BaseViewController , UITableViewDelegate, UITable
                 
                 if let image = response.result.value {
                     print("image downloaded: \(image)")
-                    cellHeader.titleHeadImage.image = image
+                    cell.titleHeadImage.image = image
                 }
             }
             
-            cellHeader.headTitleLabel.text = petition["art_title"]!
+            cell.headTitleLabel.text = petition["art_title"]!
+            return cell
+        }
+        else
+        {
+            let cellIdentifier = "cell"
+            let cell:IndiaNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! IndiaNewsTableViewCell
             
-        }
-        
-        if(petition["art_title"]?.isEmpty)!{
-            cell.titleLabel.text = ""
-        }else{
-            cell.titleLabel.text = petition["art_title"]!
-        }
-        
-        
-        if(petition["X_hours_ago"]?.isEmpty)!{
-            cell.timeLabel.text = ""
-        }else{
-            cell.timeLabel.text = petition["X_hours_ago"]!
-        }
-        
-        
-        if(petition["ap_thumb_image"]?.isEmpty)!{
-            cell.headImage.image = nil
-        }else{
-            Alamofire.request(petition["ap_thumb_image"]!).responseImage { response in
-                debugPrint(response)
-                debugPrint(response.result)
-                
-                if let image = response.result.value {
-                    print("image downloaded: \(image)")
-                    cell.headImage.image = image
+            let petition = petitions[indexPath.row]
+            print(indexPath.row)
+            print(petition)
+            
+            if(petition["art_title"]?.isEmpty)!{
+                cell.titleLabel.text = ""
+            }else{
+                cell.titleLabel.text = petition["art_title"]!
+            }
+            
+            if(petition["X_hours_ago"]?.isEmpty)!{
+                cell.timeLabel.text = ""
+            }else{
+                cell.timeLabel.text = petition["X_hours_ago"]!
+            }
+            
+            
+            if(petition["ap_thumb_image"]?.isEmpty)!{
+                cell.headImage.image = nil
+            }else{
+                Alamofire.request(petition["ap_thumb_image"]!).responseImage { response in
+                    debugPrint(response)
+                    debugPrint(response.result)
+                    
+                    if let image = response.result.value {
+                        print("image downloaded: \(image)")
+                        cell.headImage.image = image
+                    }
                 }
             }
+            
+            let lastElement = petitions.count - 1
+            if indexPath.row == lastElement {
+                // handle your logic here to get more items, add it to dataSource and reload tableview
+                var count = 1
+                self.loadMoreData(count: String(count))
+                count += 1
+            }
+            
+            return cell
         }
-        
-        let lastElement = petitions.count - 1
-        if indexPath.row == lastElement {
-            // handle your logic here to get more items, add it to dataSource and reload tableview
-            var count = 1
-            self.loadMoreData(count: String(count))
-            count += 1
-        }
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath:IndexPath) -> CGFloat {

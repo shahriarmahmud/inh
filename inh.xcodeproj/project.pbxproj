@@ -28,6 +28,7 @@
 		CABFBBA81F6D47CD009C5F31 /* OnClickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABFBBA71F6D47CD009C5F31 /* OnClickViewController.swift */; };
 		CABFBBAB1F6D56FC009C5F31 /* PhotoGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABFBBAA1F6D56FC009C5F31 /* PhotoGalleryViewController.swift */; };
 		CACCA86A1F6829ED008EA5A0 /* SportsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACCA8691F6829ED008EA5A0 /* SportsTableViewCell.swift */; };
+		CAF0403E1F7563A000EEB456 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF0403D1F7563A000EEB456 /* SettingViewController.swift */; };
 		E300C2F91F66B3930002C04A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E300C2F81F66B3930002C04A /* AppDelegate.swift */; };
 		E300C2FE1F66B3930002C04A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E300C2FC1F66B3930002C04A /* Main.storyboard */; };
 		E300C3001F66B3930002C04A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E300C2FF1F66B3930002C04A /* Assets.xcassets */; };
@@ -138,6 +139,7 @@
 		CABFBBA71F6D47CD009C5F31 /* OnClickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnClickViewController.swift; path = MainClass/OnClickView/OnClickViewController.swift; sourceTree = "<group>"; };
 		CABFBBAA1F6D56FC009C5F31 /* PhotoGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoGalleryViewController.swift; path = MainClass/PhotoGallery/PhotoGalleryViewController.swift; sourceTree = "<group>"; };
 		CACCA8691F6829ED008EA5A0 /* SportsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SportsTableViewCell.swift; path = MainClass/Drawer/Sports/SportsTableViewCell.swift; sourceTree = "<group>"; };
+		CAF0403D1F7563A000EEB456 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = MainClass/Setting/SettingViewController.swift; sourceTree = "<group>"; };
 		CE8923AEA2483F4D8BC8EA90 /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6BE5DDDC3838839F75E28F /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		E300C2F51F66B3930002C04A /* inh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inh.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -281,6 +283,14 @@
 			name = PhotoGallery;
 			sourceTree = "<group>";
 		};
+		CAF0403C1F75637700EEB456 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				CAF0403D1F7563A000EEB456 /* SettingViewController.swift */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		E300C2EC1F66B3930002C04A = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +378,7 @@
 		E3365E861F67BF7500324368 /* MainClass */ = {
 			isa = PBXGroup;
 			children = (
+				CAF0403C1F75637700EEB456 /* Setting */,
 				CA55829A1F6EF6C000A58519 /* Video */,
 				CABFBBA91F6D56DE009C5F31 /* PhotoGallery */,
 				CABFBBA61F6D478B009C5F31 /* OnClickView */,
@@ -1389,6 +1400,7 @@
 				CA5582971F6ED5E400A58519 /* InhNewsTableViewCell.swift in Sources */,
 				E35108231F67E69E0041B0B8 /* IndiaNewsViewController.swift in Sources */,
 				E35108301F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift in Sources */,
+				CAF0403E1F7563A000EEB456 /* SettingViewController.swift in Sources */,
 				E351082C1F67E6F50041B0B8 /* SportsViewController.swift in Sources */,
 				CA55828B1F6ED00200A58519 /* BollywoodExpressTableViewCell.swift in Sources */,
 				E35108161F67E56F0041B0B8 /* BollywoodExpressViewController.swift in Sources */,

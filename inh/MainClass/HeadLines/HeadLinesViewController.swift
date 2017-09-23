@@ -27,6 +27,18 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
+        
+        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+        if(!currentThmeme.isEmpty){
+            if(currentThmeme == "light"){
+                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            }else{
+                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+            }
+        }else{
+            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+        }
+        
         newsTable.dataSource = self
         newsTable.delegate = self
         
@@ -35,6 +47,19 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
         refreshControl.addTarget(self, action: Selector(("refresh:")), for: UIControlEvents.valueChanged)
                 newsTable.addSubview(refreshControl)
         GEtReportDate()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+        if(!currentThmeme.isEmpty){
+            if(currentThmeme == "light"){
+                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            }else{
+                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+            }
+        }else{
+            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+        }
     }
     
     func refresh(sender:AnyObject) {
@@ -63,14 +88,13 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:HeadLinesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HeadLinesTableViewCell
         
-        let headLine = petitions[indexPath.row]
         
         if(indexPath.row==0){
             
             let cellHeader:HeadLinesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_header", for: indexPath) as! HeadLinesTableViewCell
             
+            let headLine = petitions[indexPath.row]
             
             Alamofire.request(headLine["url"]!).responseImage { response in
                 debugPrint(response)
@@ -84,37 +108,45 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
             
             cellHeader.HeadLineTitle.text = headLine["title"]!
             
-        }
-        
-        if(headLine["title"]?.isEmpty)!{
-            cell.titleLabel.text = ""
+            return cellHeader
+            
         }else{
-            cell.titleLabel.text = headLine["title"]!
-        }
-
-        if(headLine["url"]?.isEmpty)!{
-            cell.headImage.image = nil
-        }else{
-            Alamofire.request(headLine["url"]!).responseImage { response in
-                debugPrint(response)
-                debugPrint(response.result)
-                
-                if let image = response.result.value {
-                    print("image downloaded: \(image)")
-                    cell.headImage.image = image
+            let cell:HeadLinesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HeadLinesTableViewCell
+            
+            let headLine = petitions[indexPath.row]
+            
+            if(headLine["title"]?.isEmpty)!{
+                cell.titleLabel.text = ""
+            }else{
+                cell.titleLabel.text = headLine["title"]!
+            }
+            
+            if(headLine["url"]?.isEmpty)!{
+                cell.headImage.image = nil
+            }else{
+                Alamofire.request(headLine["url"]!).responseImage { response in
+                    debugPrint(response)
+                    debugPrint(response.result)
+                    
+                    if let image = response.result.value {
+                        print("image downloaded: \(image)")
+                        cell.headImage.image = image
+                    }
                 }
             }
+            
+            let lastElement = petitions.count - 1
+            if indexPath.row == lastElement {
+                // handle your logic here to get more items, add it to dataSource and reload tableview
+                var count = 1
+                self.loadMoreData(count: String(count))
+                count += 1
+            }
+            
+            return cell
         }
         
-        let lastElement = petitions.count - 1
-        if indexPath.row == lastElement {
-            // handle your logic here to get more items, add it to dataSource and reload tableview
-            var count = 1
-            self.loadMoreData(count: String(count))
-            count += 1
-        }
-  
-        return cell
+       
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

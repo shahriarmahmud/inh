@@ -57,6 +57,16 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         talestNewsTable.dataSource = self
         talestNewsTable.delegate = self
         
+        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+        if(!currentThmeme.isEmpty){
+            if(currentThmeme == "light"){
+                headerView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            }else{
+                headerView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+            }
+        }else{
+            self.headerView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+        }
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -77,6 +87,19 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(TopStoriesViewController.didTap))
         topBanner.addGestureRecognizer(recognizer)
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+        if(!currentThmeme.isEmpty){
+            if(currentThmeme == "light"){
+                headerView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            }else{
+                headerView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+            }
+        }else{
+            self.headerView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+        }
     }
     
     func refresh(sender:AnyObject) {
@@ -189,19 +212,32 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             navigationViewController.share_url = petition["share_url"]!
             self.navigationController?.pushViewController(navigationViewController, animated: true)
         }
-//        else{
-//            let row = indexPath.row
-//            print("Row: \(row)")
-//            let petition = sectionNewsList[indexPath.row]
-//            print(petition)
-//            
-//            let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
-//            navigationViewController.ap_image = petition["ap_image"]!
-//            navigationViewController.mobile_news_url = petition["mobile_news_url"]!
-//            navigationViewController.share_url = petition["share_url"]!
-//            self.navigationController?.pushViewController(navigationViewController, animated: true)
-//        }
+        else{
+            let row = indexPath.row
+            print("Row: \(row)")
+            let petition = sectionNewsList[indexPath.row]
+            print(petition)
+            
+            let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+            navigationViewController.ap_image = petition["ap_image"]!
+            navigationViewController.mobile_news_url = petition["mobile_news_url"]!
+            navigationViewController.share_url = petition["share_url"]!
+            self.navigationController?.pushViewController(navigationViewController, animated: true)
+        }
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath:IndexPath) -> CGFloat {
+//        
+//        if(tableView == talestNewsTable){
+//        var height:CGFloat = CGFloat()
+//        height = 76
+//        return height
+//        }else{
+//            var height:CGFloat = CGFloat()
+//            height = 720
+//            return height
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -526,10 +562,8 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
 
                 self.talestNewsTable.reloadData()
                 
-                self.talestNewsTable.frame = CGRect(x: self.talestNewsTable.frame.origin.x, y: self.talestNewsTable.frame.origin.y, width: self.talestNewsTable.frame.size.width, height: (self.talestNewsTable.rowHeight * CGFloat(self.latestNewsList.count))+60)
-                print(self.talestNewsTable.rowHeight)
-                print(self.talestNewsTable.rowHeight+60)
-                print((self.talestNewsTable.rowHeight * CGFloat(self.latestNewsList.count))+60)
+                self.talestNewsTable.frame = CGRect(x: self.talestNewsTable.frame.origin.x, y: self.talestNewsTable.frame.origin.y, width: self.talestNewsTable.frame.size.width, height: (self.talestNewsTable.rowHeight * CGFloat(self.latestNewsList.count)))
+                
 //                scrollView.contentSize = CGSize(width: view.frame.size.width, height: visaTransactionTable.frame.origin.y + visaTransactionTable.frame.size.height)
                 
                 
