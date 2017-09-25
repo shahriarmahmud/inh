@@ -10,6 +10,7 @@ import UIKit
 
 class SearchTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var videoImage: UIImageView!
     @IBOutlet weak var headImage: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!

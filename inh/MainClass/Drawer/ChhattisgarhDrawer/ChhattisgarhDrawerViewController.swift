@@ -120,6 +120,12 @@ class ChhattisgarhDrawerViewController: BaseViewController , UITableViewDelegate
                 }
             }
             
+            if(petition["art_has_video"]=="1"){
+                cell.videosImage_title.isHidden = false
+            }else{
+                cell.videosImage_title.isHidden = true
+            }
+            
             cell.headTitleLabel.text = petition["art_title"]!
             return cell
         }
@@ -142,6 +148,12 @@ class ChhattisgarhDrawerViewController: BaseViewController , UITableViewDelegate
                 cell.timeLabel.text = ""
             }else{
                 cell.timeLabel.text = petition["X_hours_ago"]!
+            }
+            
+            if(petition["art_has_video"]=="1"){
+                cell.videoImage.isHidden = false
+            }else{
+                cell.videoImage.isHidden = true
             }
             
             

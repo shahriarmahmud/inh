@@ -165,6 +165,12 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
                 }
             }
             
+            if(petition["art_has_video"]=="1"){
+                cell.videosImage_title.isHidden = false
+            }else{
+                cell.videosImage_title.isHidden = true
+            }
+            
             cell.headTitleLabel.text = petition["art_title"]!
             return cell
         }
@@ -181,6 +187,12 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
                 cell.titleLabel.text = ""
             }else{
                 cell.titleLabel.text = petition["art_title"]!
+            }
+            
+            if(petition["art_has_video"]=="1"){
+                cell.videoImage.isHidden = false
+            }else{
+                cell.videoImage.isHidden = true
             }
             
             if(petition["X_hours_ago"]?.isEmpty)!{

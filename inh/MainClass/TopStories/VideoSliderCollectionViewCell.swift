@@ -9,7 +9,8 @@
 import UIKit
 
 class VideoSliderCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var videoImage: UIImageView!
     
+    @IBOutlet weak var videoImage_video: UIImageView!
+    @IBOutlet weak var videoImage: UIImageView!
     @IBOutlet weak var videoTitleLabel: UILabel!
 }

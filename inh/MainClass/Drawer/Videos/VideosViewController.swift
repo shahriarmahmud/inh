@@ -132,13 +132,13 @@ class VideosViewController: BaseViewController , UITableViewDelegate, UITableVie
                 }
             }
             
-            let lastElement = petitions.count - 1
-            if indexPath.row == lastElement {
-                // handle your logic here to get more items, add it to dataSource and reload tableview
-                var count = 1
-                self.loadMoreData(count: String(count))
-                count += 1
-            }
+//            let lastElement = petitions.count - 1
+//            if indexPath.row == lastElement {
+//                // handle your logic here to get more items, add it to dataSource and reload tableview
+//                var count = 1
+//                self.loadMoreData(count: String(count))
+//                count += 1
+//            }
             
             return cell
         }

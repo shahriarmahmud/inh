@@ -10,6 +10,7 @@ import UIKit
 
 class LatestTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var videoImage: UIImageView!
     @IBOutlet weak var headerImage: UIImageView!
 
     @IBOutlet weak var timeLabel: UILabel!

@@ -15,50 +15,29 @@ class SectionNewsTableViewCell: UITableViewCell {
     @IBOutlet weak var titleImage: UIImageView!
     
     @IBOutlet weak var titleLabel: UILabel!
-    
-    @IBOutlet weak var headerButton: UIButton!
 
-    @IBOutlet weak var wholeView: UIView!
     @IBOutlet weak var SectionTitleLabel: UILabel!
-    @IBOutlet var authorLabelHeight: NSLayoutConstraint!
+
     
     var SELF:UIViewController? = nil
+    
+    var appImage = ""
+    var mobileNewsUrl = ""
+    var shareUrl = ""
     
     //1st
     @IBOutlet weak var postingTimeLabel: UILabel!
     @IBOutlet weak var thumbnailLabel: UILabel!
     @IBOutlet weak var thumbnailImage: UIImageView!
+
     
-    //2nd
-    @IBOutlet weak var postingTime2ndLabel: UILabel!
-    @IBOutlet weak var thumbnail2ndLabel: UILabel!
-    @IBOutlet weak var thumbnail2ndImage: UIImageView!
-    
-    //3rd
-    @IBOutlet weak var postingTime3rdLabel: UILabel!
-    @IBOutlet weak var thumbnail3rdLabel: UILabel!
-    @IBOutlet weak var thumbnail3rdImage: UIImageView!
-    
-    //4th
-    @IBOutlet weak var postingTime4thLabel: UILabel!
-    @IBOutlet weak var thumbnail4thLabel: UILabel!
-    @IBOutlet weak var thumbnail4thImage: UIImageView!
-    
-    //5th
-    @IBOutlet weak var postingTime5thLabel: UILabel!
-    @IBOutlet weak var thumbnail5thLabel: UILabel!
-    @IBOutlet weak var thumbnail5thImage: UIImageView!
-    
+    @IBOutlet weak var videoImage_body: UIImageView!
+    @IBOutlet weak var videoImage: UIImageView!
     @IBOutlet weak var videoSection: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     var videoSliderList = [[String: String]]()
-    
-    
-    
-//    @IBAction func headerButton(_ sender: Any) {
-//        print("gfhgjfhgjfhjg")
-//    }
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -68,6 +47,20 @@ class SectionNewsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    func forHeaderValue(Ap_image:String,Mobile_news_url:String,Share_url:String,ui:UIViewController){
+        appImage = Ap_image
+        mobileNewsUrl = Mobile_news_url
+        shareUrl = Share_url
+        SELF = ui
+    }
+    
+    @IBAction func headerButtonClick(_ sender: Any) {
+        let navigationViewController = SELF?.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+        navigationViewController.ap_image = appImage
+        navigationViewController.mobile_news_url = mobileNewsUrl
+        navigationViewController.share_url = shareUrl
+        SELF?.navigationController?.pushViewController(navigationViewController, animated: true)
+    }
     func passValue(VideoSliderList:[[String: String]]){
         videoSliderList = VideoSliderList
     }
@@ -88,20 +81,11 @@ extension SectionNewsTableViewCell : UICollectionViewDataSource {
         let row = indexPath.row
         print("Row: \(row)")
         let videoSlider = videoSliderList[row]
-//                    print(meetingArray[row] as! String)
+       let navigationViewController = SELF?.storyboard?.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
         
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let destination = storyboard.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
-        destination.videoId = videoSlider["vblog_youtube"]!
-        SELF?.navigationController?.pushViewController(destination, animated: true)
-        //self.pushViewController(destination, animated: true)
-        
-//        let navigationViewController = self.instantiateViewController(withIdentifier: "VideoViewController") as! VideoViewController
-//        let photoStory = videoSliderList[row]
-//        navigationViewController.albumId = photoStory["palbum_id"]!
-//        
-//        self.parent?.navigationController?.pushViewController(navigationViewController, animated: true)
+        navigationViewController.videoId = videoSlider["vblog_youtube"]!
+        SELF?.navigationController?.pushViewController(navigationViewController, animated: true)
+
     }
     
     
@@ -124,7 +108,12 @@ extension SectionNewsTableViewCell : UICollectionViewDataSource {
                 
                 if let image = response.result.value {
                     print("image downloaded: \(image)")
-                    cell.videoImage.image = image
+                    let size = CGSize(width: cell.videoImage.frame.size.width, height: cell.videoImage.frame.size.height)
+                    
+                    // Scale image to fit within specified size while maintaining aspect ratio
+                    let aspectScaledToFitImage = image.af_imageAspectScaled(toFit: size)
+
+                    cell.videoImage.image = aspectScaledToFitImage
                 }
             }
         }
@@ -133,14 +122,14 @@ extension SectionNewsTableViewCell : UICollectionViewDataSource {
     
 }
 
-//extension SectionNewsTableViewCell : UICollectionViewDelegateFlowLayout {
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let itemsPerRow:CGFloat = 1
-//        let hardCodedPadding:CGFloat = 0
-//        let itemWidth = (collectionView.bounds.width / itemsPerRow) - hardCodedPadding
-//        let itemHeight = collectionView.bounds.height - (2 * hardCodedPadding)
-//        return CGSize(width: itemWidth, height: itemHeight)
-//    }
-//    
-//}
+extension SectionNewsTableViewCell : UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemsPerRow:CGFloat = 1
+        let hardCodedPadding:CGFloat = 0
+        let itemWidth = (collectionView.bounds.width / itemsPerRow) - hardCodedPadding
+        let itemHeight = collectionView.bounds.height - (2 * hardCodedPadding)
+        return CGSize(width: itemWidth, height: itemHeight)
+    }
+    
+}

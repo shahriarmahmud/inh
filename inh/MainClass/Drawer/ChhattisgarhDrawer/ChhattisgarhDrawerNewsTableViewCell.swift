@@ -16,6 +16,9 @@ class ChhattisgarhDrawerNewsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleHeadImage: UIImageView!
     @IBOutlet weak var headTitleLabel: UILabel!
+    
+    @IBOutlet weak var videoImage: UIImageView!
+    @IBOutlet weak var videosImage_title: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

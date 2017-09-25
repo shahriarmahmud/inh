@@ -107,6 +107,12 @@ class SportsViewController: BaseViewController , UITableViewDelegate, UITableVie
                 }
             }
             
+            if(petition["art_has_video"]=="1"){
+                cell.videosImage_title.isHidden = false
+            }else{
+                cell.videosImage_title.isHidden = true
+            }
+            
             cell.headTitleLabel.text = petition["art_title"]!
             return cell
         }
@@ -131,6 +137,12 @@ class SportsViewController: BaseViewController , UITableViewDelegate, UITableVie
                 cell.timeLabel.text = petition["X_hours_ago"]!
             }
             
+            if(petition["art_has_video"]=="1"){
+                cell.videoImage.isHidden = false
+            }else{
+                cell.videoImage.isHidden = true
+            }
+            
             
             if(petition["ap_thumb_image"]?.isEmpty)!{
                 cell.headImage.image = nil
@@ -141,9 +153,11 @@ class SportsViewController: BaseViewController , UITableViewDelegate, UITableVie
                     
                     if let image = response.result.value {
                         print("image downloaded: \(image)")
-                        cell.headImage.image = image
+                        let size = CGSize(width: 100.0, height: 100.0)
+                        cell.headImage.image = image//.af_imageAspectScaled(toFit: size)
                     }
                 }
+                
             }
             
             let lastElement = petitions.count - 1

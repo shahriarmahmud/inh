@@ -104,6 +104,12 @@ class SearchViewController: BaseViewController , UITableViewDelegate, UITableVie
             cell.timeLabel.text = petition["X_hours_ago"]!
         }
         
+        if(petition["art_has_video"]=="1"){
+            cell.videoImage.isHidden = false
+        }else{
+            cell.videoImage.isHidden = true
+        }
+        
         
         if(petition["ap_thumb_image"]?.isEmpty)!{
             cell.headImage.image = nil

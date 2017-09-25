@@ -13,7 +13,7 @@ import AlamofireImage
 import SwiftyJSON
 import SVProgressHUD
 
-class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource{
+class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UIGestureRecognizerDelegate{
     
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
@@ -29,6 +29,9 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
     var petitions = [[String: String]]()
     var imageUrlList = [[String: String]]()
     var downloadImageUrlList = [AlamofireSource]()
+
+    var globalArray = [[String: Any]]()
+
     
     //latest news
     @IBOutlet weak var talestNewsTable: UITableView!
@@ -46,8 +49,9 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
     //sectionNewsData
     @IBOutlet weak var sectionNewsTable: UITableView!
     
-    var sectionNewsList = [[String: String]]()
-    
+//    var sectionNewsList = [[String: String]]()
+    var sectionNewsList: [Int: [[String: String]]] = [:]
+
     //video Slider
     var videoSliderList = [[String: String]]()
 
@@ -56,6 +60,9 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         self.automaticallyAdjustsScrollViewInsets = false
         talestNewsTable.dataSource = self
         talestNewsTable.delegate = self
+        
+        sectionNewsTable.delegate = self
+        sectionNewsTable.delegate = self
         
         let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
         if(!currentThmeme.isEmpty){
@@ -75,6 +82,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
 //        headerView.addSubview(refreshControl)
         
         GEtServerDate()
+        
         //latestNews
         GetLatestNewsData()
         
@@ -83,6 +91,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         
         //sectionData
         GetSectionData()
+        
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(TopStoriesViewController.didTap))
         topBanner.addGestureRecognizer(recognizer)
@@ -112,10 +121,6 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
     }
     
     func didTap() {
-//        let fullScreenController = topBanner.presentFullScreenController(from: self)
-//        // set the activity indicator for full screen controller (skipping the line will show no activity indicator)
-//        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
-        
         let petition = petitions[topBanner.currentPage]
         
         let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
@@ -191,13 +196,24 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(tableView == talestNewsTable){
+        
+        if(tableView == talestNewsTable)
+        {
+            print(latestNewsList.count)
             return latestNewsList.count
-        }else{
-            return sectionList.count
+        }
+        else
+        {
+            if(section==1){
+                return 7
+            }else{
+               return 6
+            }
+            
+            //}
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -215,30 +231,108 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         else{
             let row = indexPath.row
             print("Row: \(row)")
-            let petition = sectionNewsList[indexPath.row]
-            print(petition)
             
-            let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
-            navigationViewController.ap_image = petition["ap_image"]!
-            navigationViewController.mobile_news_url = petition["mobile_news_url"]!
-            navigationViewController.share_url = petition["share_url"]!
-            self.navigationController?.pushViewController(navigationViewController, animated: true)
+            if(indexPath.section==1 && indexPath.row==6)
+            {
+                let cell:SectionNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_video", for: indexPath) as! SectionNewsTableViewCell
+                
+                cell.collectionView(cell.collectionView, didSelectItemAt: indexPath)
+            }
+            else
+            {
+                if(globalArray.count==6){
+                    
+                    print(globalArray)
+                    let listData = globalArray[indexPath.section]
+                    print(listData)
+                    
+                    let data  =  JSON(listData["rowValue"] ?? "")
+                    let sectionData = data.arrayValue
+
+                        print(sectionData)
+                        print(sectionData[row]["art_title"])
+
+                        let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+                        navigationViewController.ap_image = sectionData[row]["ap_image"].stringValue
+                        navigationViewController.mobile_news_url = sectionData[row]["mobile_news_url"].stringValue
+                        navigationViewController.share_url = sectionData[row]["share_url"].stringValue
+                        self.navigationController?.pushViewController(navigationViewController, animated: true)
+                }
+            }
+            
+
+            
+        }
+    }
+
+    
+    func numberOfSections(in tableView: UITableView) -> Int
+    {
+        if(tableView==sectionNewsTable){
+            return 6
+        }else{
+           return 1
+        }
+    }
+
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if(tableView == sectionNewsTable)
+        {
+            print(globalArray)
+            let header = tableView.dequeueReusableCell(withIdentifier: "cell_header") as! SectionNewsTableViewCell
+         
+            
+            if(globalArray.count==6){
+                print(globalArray.count)
+                print(section)
+
+                print(globalArray)
+                let listData = globalArray[section]
+                let HeadArray = listData["headValue"]
+                print(HeadArray ?? "")
+                
+
+                
+                header.SectionTitleLabel.text = HeadArray as? String
+
+            }
+            return header
+            
+        }
+        else
+        {
+            return nil
         }
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath:IndexPath) -> CGFloat {
-//        
-//        if(tableView == talestNewsTable){
-//        var height:CGFloat = CGFloat()
-//        height = 76
-//        return height
-//        }else{
-//            var height:CGFloat = CGFloat()
-//            height = 720
-//            return height
-//        }
-//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if(tableView == sectionNewsTable){
+            return 36
+        }else{
+            return 1
+        }
+    }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if(tableView == sectionNewsTable){
+            if(indexPath.row==0){
+                return 280
+            }
+            else if(indexPath.section==1 && indexPath.row==6){
+               return 250
+            }else{
+                return 92
+            }
+            
+        }else{
+            return 76
+        }
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if(tableView == talestNewsTable){
@@ -262,10 +356,10 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             }
             
             
-            if(latestNews["ap_thumb_image"]?.isEmpty)!{
+            if(latestNews["ap_image"]?.isEmpty)!{
                 cell.headerImage.image = nil
             }else{
-                Alamofire.request(latestNews["ap_thumb_image"]!).responseImage { response in
+                Alamofire.request(latestNews["ap_image"]!).responseImage { response in
                     debugPrint(response)
                     debugPrint(response.result)
                     
@@ -275,256 +369,221 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                     }
                 }
             }
-            return cell
-        }else{
-            let cell:SectionNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SectionNewsTableViewCell
             
-            let sectionData = sectionList[indexPath.row]
-            print(sectionData)
-            
-            cell.videoSection.isHidden=true
-            cell.collectionView.isHidden=true
-            cell.authorLabelHeight.constant = -275 //Hide
-            
-            if(indexPath.row==1){
-                cell.videoSection.isHidden=false
-                cell.collectionView.isHidden=false
-                
-                cell.authorLabelHeight.constant = 0; //Show
-                
-
-                Alamofire.request(RequestString.videoSlider, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
-                    switch responce.result{
-                    case.success(let data):
-                        
-                        let Response = JSON(data)
-                        print("TopStories",Response)
-                        print(RequestString.videoSlider)
-                        
-                        self.sectionNewsList.removeAll()
-                        for result in Response.arrayValue {
-                            let vblog_id = result["vblog_id"].stringValue
-                            let vblog_title = result["vblog_title"].stringValue
-                            let player = result["player"].stringValue
-                            
-                            let thumb = result["thumb"].stringValue
-                            let vblog_youtube = result["vblog_youtube"].stringValue
-                            
-                            let obj = ["vblog_id": vblog_id, "vblog_title": vblog_title, "player": player, "thumb": thumb, "vblog_youtube": vblog_youtube]
-                            self.videoSliderList.append(obj)
-                            
-                            cell.passValue(VideoSliderList: self.videoSliderList)
-                            cell.initializeView(ui: self)
-                            cell.collectionView.reloadData()
-                        }
-                    case.failure(let error):
-                        print("failed\(error)")
-                    }
-                    
-                    
-                }
+            if(latestNews["art_has_video"]!=="1"){
+               cell.videoImage.isHidden = false
+            }else{
+                cell.videoImage.isHidden = true
             }
             
-            Alamofire.request(RequestString.topSection+sectionData["category_id"]!, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
-                switch responce.result{
-                case.success(let data):
-                    
-                    let Response = JSON(data)
-                    print(Response)
-                    print(RequestString.topSection+sectionData["category_id"]!)
-                    
-                    self.sectionNewsList.removeAll()
-                    for result in Response.arrayValue {
-                        let share_url = result["share_url"].stringValue
-                        let mobile_news_url = result["mobile_news_url"].stringValue
-                        let art_id = result["art_id"].stringValue
-                        
-                        let art_title = result["art_title"].stringValue
-                        let category_name = result["category_name"].stringValue
-                        let art_has_video = result["art_has_video"].stringValue
-                        let ap_image = result["ap_image"].stringValue
-                        
-                        let ap_thumb_image = result["ap_thumb_image"].stringValue
-                        let art_created_on = result["art_created_on"].stringValue
-                        let X_hours_ago = result["X_hours_ago"].stringValue
-                        
-                        let obj = ["share_url": share_url, "mobile_news_url": mobile_news_url, "art_id": art_id, "art_title": art_title, "category_name": category_name, "art_has_video": art_has_video, "ap_image": ap_image, "ap_thumb_image": ap_thumb_image, "art_created_on": art_created_on, "X_hours_ago": X_hours_ago]
-                        self.sectionNewsList.append(obj)
-                    }
-                   
-                    print(self.sectionNewsList)
-                    
-                    self.sectionNewsTable.frame = CGRect(x: self.sectionNewsTable.frame.origin.x, y: self.sectionNewsTable.frame.origin.y, width: self.sectionNewsTable.frame.size.width, height: (self.sectionNewsTable.rowHeight * CGFloat(self.sectionNewsList.count))+60)
-                    
-                    self.scrollview.contentSize = CGSize(width: self.scrollview.frame.size.width, height: self.sectionNewsTable.frame.origin.y + self.sectionNewsTable.frame.size.height)
-                    
-                    if(self.sectionNewsList[0]["art_title"]?.isEmpty)!{
-                        cell.titleLabel.text = ""
-                    }else{
-                        cell.titleLabel.text = self.sectionNewsList[0]["art_title"]!
-                    }
-                    
-                    if(self.sectionNewsList[0]["ap_thumb_image"]?.isEmpty)!{
-                        cell.titleImage.image = nil
-                    }else{
-                        Alamofire.request(self.sectionNewsList[0]["ap_thumb_image"]!).responseImage { response in
-                            debugPrint(response)
-                            debugPrint(response.result)
-                            
-                            if let image = response.result.value {
-                                print("image downloaded: \(image)")
-                                cell.titleImage.image = image
-                            }
-                        }
-                    }
-                    
-                    if(sectionData["category_name"]?.isEmpty)!{
-                        cell.SectionTitleLabel.text = ""
-                    }else{
-                        cell.SectionTitleLabel.text = sectionData["category_name"]!
-                    }
-
-                    //1st
-                    if(self.sectionNewsList[1]["X_hours_ago"]?.isEmpty)!{
-                        cell.postingTimeLabel.text = ""
-                    }else{
-                        cell.postingTimeLabel.text = self.sectionNewsList[1]["X_hours_ago"]!
-                    }
-                    
-                    if(self.sectionNewsList[1]["art_title"]?.isEmpty)!{
-                        cell.thumbnailLabel.text = ""
-                    }else{
-                        cell.thumbnailLabel.text = self.sectionNewsList[1]["art_title"]!
-                    }
-                    
-                    if(self.sectionNewsList[1]["ap_thumb_image"]?.isEmpty)!{
-                        cell.thumbnailImage.image = nil
-                    }else{
-                        Alamofire.request(self.sectionNewsList[1]["ap_thumb_image"]!).responseImage { response in
-                            debugPrint(response)
-                            debugPrint(response.result)
-                            
-                            if let image = response.result.value {
-                                print("image downloaded: \(image)")
-                                cell.thumbnailImage.image = image
-                            }
-                        }
-                    }
-
-                    //2nd
-                    if(self.sectionNewsList[2]["X_hours_ago"]?.isEmpty)!{
-                        cell.postingTime2ndLabel.text = ""
-                    }else{
-                        cell.postingTime2ndLabel.text = self.sectionNewsList[2]["X_hours_ago"]!
-                    }
-                    
-                    if(self.sectionNewsList[2]["art_title"]?.isEmpty)!{
-                        cell.thumbnail2ndLabel.text = ""
-                    }else{
-                        cell.thumbnail2ndLabel.text = self.sectionNewsList[2]["art_title"]!
-                    }
-                    
-                    if(self.sectionNewsList[2]["ap_thumb_image"]?.isEmpty)!{
-                        cell.thumbnail2ndImage.image = nil
-                    }else{
-                        Alamofire.request(self.sectionNewsList[2]["ap_thumb_image"]!).responseImage { response in
-                            debugPrint(response)
-                            debugPrint(response.result)
-                            
-                            if let image = response.result.value {
-                                print("image downloaded: \(image)")
-                                cell.thumbnail2ndImage.image = image
-                            }
-                        }
-                    }
-                    
-                    //3rd
-                    if(self.sectionNewsList[3]["X_hours_ago"]?.isEmpty)!{
-                        cell.postingTime3rdLabel.text = ""
-                    }else{
-                        cell.postingTime3rdLabel.text = self.sectionNewsList[3]["X_hours_ago"]!
-                    }
-                    
-                    if(self.sectionNewsList[3]["art_title"]?.isEmpty)!{
-                        cell.thumbnail3rdLabel.text = ""
-                    }else{
-                        cell.thumbnail3rdLabel.text = self.sectionNewsList[3]["art_title"]!
-                    }
-                    
-                    if(self.sectionNewsList[3]["ap_thumb_image"]?.isEmpty)!{
-                        cell.thumbnail3rdImage.image = nil
-                    }else{
-                        Alamofire.request(self.sectionNewsList[3]["ap_thumb_image"]!).responseImage { response in
-                            debugPrint(response)
-                            debugPrint(response.result)
-                            
-                            if let image = response.result.value {
-                                print("image downloaded: \(image)")
-                                cell.thumbnail3rdImage.image = image
-                            }
-                        }
-                    }
-                    
-                    //4th
-                    if(self.sectionNewsList[4]["X_hours_ago"]?.isEmpty)!{
-                        cell.postingTime4thLabel.text = ""
-                    }else{
-                        cell.postingTime4thLabel.text = self.sectionNewsList[4]["X_hours_ago"]!
-                    }
-                    
-                    if(self.sectionNewsList[4]["art_title"]?.isEmpty)!{
-                        cell.thumbnail4thLabel.text = ""
-                    }else{
-                        cell.thumbnail4thLabel.text = self.sectionNewsList[4]["art_title"]!
-                    }
-                    
-                    if(self.sectionNewsList[4]["ap_thumb_image"]?.isEmpty)!{
-                        cell.thumbnail4thImage.image = nil
-                    }else{
-                        Alamofire.request(self.sectionNewsList[4]["ap_thumb_image"]!).responseImage { response in
-                            debugPrint(response)
-                            debugPrint(response.result)
-                            
-                            if let image = response.result.value {
-                                print("image downloaded: \(image)")
-                                cell.thumbnail4thImage.image = image
-                            }
-                        }
-                    }
-                    
-                    //5th
-                    if(self.sectionNewsList[5]["X_hours_ago"]?.isEmpty)!{
-                        cell.postingTime5thLabel.text = ""
-                    }else{
-                        cell.postingTime5thLabel.text = self.sectionNewsList[5]["X_hours_ago"]!
-                    }
-                    
-                    if(self.sectionNewsList[5]["art_title"]?.isEmpty)!{
-                        cell.thumbnail5thLabel.text = ""
-                    }else{
-                        cell.thumbnail5thLabel.text = self.sectionNewsList[5]["art_title"]!
-                    }
-                    
-                    if(self.sectionNewsList[5]["ap_thumb_image"]?.isEmpty)!{
-                        cell.thumbnail5thImage.image = nil
-                    }else{
-                        Alamofire.request(self.sectionNewsList[5]["ap_thumb_image"]!).responseImage { response in
-                            debugPrint(response)
-                            debugPrint(response.result)
-                            
-                            if let image = response.result.value {
-                                print("image downloaded: \(image)")
-                                cell.thumbnail5thImage.image = image
-                            }
-                        }
-                    }
-                    
-                case.failure(let error):
-                    print("failed\(error)")
-                }
-            }
             
             return cell
+        }
+        else
+        {
+            let row = indexPath.row
+            print(row)
+            if(indexPath.section==1){
+                
+                let cell:SectionNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_body", for: indexPath) as! SectionNewsTableViewCell
+                
+                
+                if(globalArray.count==6){
+                    print(globalArray.count)
+                    print(row)
+                    
+                    print(globalArray)
+                    let listData = globalArray[indexPath.section]
+                    print(listData)
+                    
+                    let data  =  JSON(listData["rowValue"] ?? "")
+                    let sectionData = data.arrayValue
+                    
+                    if(sectionData.count==6){
+                        
+                        if(row==6){
+                            
+                            let cell:SectionNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_video", for: indexPath) as! SectionNewsTableViewCell
+                            
+                            
+                            cell.videoSection.isHidden=false
+                            cell.collectionView.isHidden=false
+
+                            Alamofire.request(RequestString.videoSlider, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
+                                switch responce.result{
+                                case.success(let data):
+                                    
+                                    let Response = JSON(data)
+                                    print("TopStories",Response)
+                                    print(RequestString.videoSlider)
+                                    
+                                    
+                                    for result in Response.arrayValue {
+                                        let vblog_id = result["vblog_id"].stringValue
+                                        let vblog_title = result["vblog_title"].stringValue
+                                        let player = result["player"].stringValue
+                                        
+                                        let thumb = result["thumb"].stringValue
+                                        let vblog_youtube = result["vblog_youtube"].stringValue
+                                        
+                                        let obj = ["vblog_id": vblog_id, "vblog_title": vblog_title, "player": player, "thumb": thumb, "vblog_youtube": vblog_youtube]
+                                        self.videoSliderList.append(obj)
+                                        
+                                        cell.passValue(VideoSliderList: self.videoSliderList)
+                                        cell.initializeView(ui: self)
+                                        cell.collectionView.reloadData()
+                                    }
+                                case.failure(let error):
+                                    print("failed\(error)")
+                                }
+                            }
+                        }
+                        else if(row==0){
+                            
+                         let cell  = tableView.dequeueReusableCell(withIdentifier: "cell_title", for: indexPath) as! SectionNewsTableViewCell
+                            
+                            if(sectionData[row]["art_has_video"]=="1"){
+                                cell.videoImage.isHidden = false
+                            }else{
+                                cell.videoImage.isHidden = true
+                            }
+
+                            
+                            Alamofire.request((sectionData[row]["ap_image"].stringValue)).responseImage { response in
+                                debugPrint(response)
+                                debugPrint(response.result)
+                                
+                                if let image = response.result.value {
+                                    print("image downloaded: \(image)")
+                                    cell.titleImage.image = image
+                                }
+                            }
+                            
+                            cell.titleLabel.text = sectionData[row]["art_title"].stringValue
+                        }
+                        else
+                        {
+                            print(row)
+                            print(sectionData)
+                            print(sectionData.count)
+                            print(sectionData[row]["X_hours_ago"])
+                            
+                            if(sectionData[row]["art_has_video"]=="1"){
+                                cell.videoImage_body.isHidden = false
+                            }else{
+                                cell.videoImage_body.isHidden = true
+                            }
+
+                            
+                            cell.postingTimeLabel.text = sectionData[row]["X_hours_ago"].stringValue
+                            cell.thumbnailLabel.text = sectionData[row]["art_title"].stringValue
+                            Alamofire.request(sectionData[row]["ap_image"].stringValue).responseImage { response in
+                                debugPrint(response)
+                                debugPrint(response.result)
+                                
+                                if let image = response.result.value {
+                                    print("image downloaded: \(image)")
+                                    cell.thumbnailImage.image = image
+                                }
+                            }
+                        }
+
+                    }
+                }
+                
+                
+                return cell
+            }
+            
+            else if(row == 0)
+            {
+                let cell:SectionNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_title", for: indexPath) as! SectionNewsTableViewCell
+                
+                if(globalArray.count==6){
+                    print(globalArray.count)
+                    
+                    
+                    print(globalArray)
+                    let listData = globalArray[indexPath.section]
+                    let HeadArray = listData["headValue"]
+                    print(HeadArray ?? "")
+                
+                                let data  =  JSON(listData["rowValue"] ?? "")
+                                let sectionData = data.arrayValue
+                
+                                print(sectionData[row]["art_title"])
+                    
+                    if(sectionData[row]["art_has_video"]=="1"){
+                        cell.videoImage.isHidden = false
+                    }else{
+                        cell.videoImage.isHidden = true
+                    }
+
+    
+                
+                                Alamofire.request((sectionData[row]["ap_image"].stringValue)).responseImage { response in
+                                    debugPrint(response)
+                                    debugPrint(response.result)
+                
+                                    if let image = response.result.value {
+                                        print("image downloaded: \(image)")
+                                        cell.titleImage.image = image
+                                    }
+                                }
+                                
+                                cell.titleLabel.text = sectionData[row]["art_title"].stringValue
+                }
+            
+            
+                return cell
+            }
+            
+            else
+            {
+                let cell:SectionNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_body", for: indexPath) as! SectionNewsTableViewCell
+
+            if(globalArray.count==6){
+            print(globalArray.count)
+            print(row)
+            
+            print(globalArray)
+            let listData = globalArray[indexPath.section]
+            print(listData)
+            
+            let data  =  JSON(listData["rowValue"] ?? "")
+            let sectionData = data.arrayValue
+            
+                if(sectionData.count==6){
+                    
+                    
+                    
+                    print(sectionData)
+                    print(sectionData[row]["art_title"])
+                    
+                    if(sectionData[row]["art_has_video"]=="1"){
+                        cell.videoImage_body.isHidden = false
+                    }else{
+                        cell.videoImage_body.isHidden = true
+                    }
+
+
+                    cell.postingTimeLabel.text = sectionData[row]["X_hours_ago"].stringValue
+                    cell.thumbnailLabel.text = sectionData[row]["art_title"].stringValue
+                    Alamofire.request(sectionData[row]["ap_image"].stringValue).responseImage { response in
+                        debugPrint(response)
+                        debugPrint(response.result)
+                        
+                        if let image = response.result.value {
+                            print("image downloaded: \(image)")
+                            cell.thumbnailImage.image = image
+                        }
+                    }
+                }
+                }
+                
+        
+                return cell
+            }
         }
     }
     
@@ -606,13 +665,18 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             
             cell.photoStoriesLabel.text = photoStory["palbum_title"]
             
-            Alamofire.request(photoStory["pai_image"]!).responseImage { response in
+            Alamofire.request(photoStory["pai_image_original"]!).responseImage { response in
                 debugPrint(response)
                 debugPrint(response.result)
                 
                 if let image = response.result.value {
                     print("image downloaded: \(image)")
-                    cell.photoStoriesImage.image = image
+                    let size = CGSize(width: cell.photoStoriesImage.frame.size.width, height: cell.photoStoriesImage.frame.size.height)
+                    
+                    // Scale image to fit within specified size while maintaining aspect ratio
+                    let aspectScaledToFitImage = image.af_imageAspectScaled(toFit: size)
+
+                    cell.photoStoriesImage.image = aspectScaledToFitImage
                 }
             }
         }
@@ -637,9 +701,9 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                 for result in Response.arrayValue {
                     let palbum_id = result["palbum_id"].stringValue
                     let palbum_title = result["palbum_title"].stringValue
-                    let pai_image = result["pai_image"].stringValue
+                    let pai_image_original = result["pai_image_original"].stringValue
                     
-                    let obj = ["palbum_id": palbum_id, "palbum_title": palbum_title, "pai_image": pai_image]
+                    let obj = ["palbum_id": palbum_id, "palbum_title": palbum_title, "pai_image_original": pai_image_original]
                     self.photoStories.append(obj)
                 }
                 
@@ -681,13 +745,48 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                     let obj = ["category_name": category_name, "category_id": category_id]
                     self.sectionList.append(obj)
                 }
-                
-                self.sectionNewsTable.reloadData()
 
+                print(self.sectionList)
+                print(self.sectionList.count)
+                
+                    for i in 0 ..< self.sectionList.count
+                    {
+                        
+                        Alamofire.request(RequestString.topSection+self.sectionList[i]["category_id"]!, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
+                        switch responce.result{
+                        case.success(let data):
+                            
+                            let Response = JSON(data)
+                            print(Response)
+                            print(RequestString.topSection+self.sectionList[i]["category_id"]!)
+                            
+                            let dictionary = ["headValue" : self.sectionList[i]["category_name"] ?? "","rowValue" :data] as [String : Any]
+                            
+                            print(dictionary)
+                            self.globalArray.append(dictionary)
+                            
+                            if(i==5)
+                            {
+                                print(self.globalArray)
+                                self.sectionNewsTable.reloadData()
+                            }
+                            self.scrollview.contentSize = CGSize(width: self.scrollview.frame.size.width, height: self.sectionNewsTable.frame.origin.y + self.sectionNewsTable.frame.size.height)
+                            
+                            self.sectionNewsTable.frame = CGRect(x: self.sectionNewsTable.frame.origin.x, y: self.sectionNewsTable.frame.origin.y, width: self.sectionNewsTable.frame.size.width, height: self.sectionNewsTable.rowHeight * 36)
+                            
+                        case.failure(let error):
+                            print("failed\(error)")
+                            }
+                        }
+                        
+                    }
+ 
+                
             case.failure(let error):
                 print("failed\(error)")
             }
         }
+        
+        
     }
-
 }
