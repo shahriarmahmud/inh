@@ -174,6 +174,18 @@ struct AppUtility {
     
 }
 
+struct Style{
+
+    // MARK: ToDo Table Section Headers
+    static var sectionHeaderTitleFont = UIFont(name: "Helvetica-Bold", size: 20)
+    static var sectionHeaderTitleColor = UIColor.white
+    static var sectionHeaderBackgroundColor = UIColor.black
+    static var sectionHeaderBackgroundColorHighlighted = UIColor.gray
+    static var sectionHeaderAlpha: CGFloat = 1.0
+
+}
+
+
 extension Double {
     /// Rounds the double to decimal places value
     func roundTo(places:Int) -> Double {
