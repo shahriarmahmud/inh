@@ -32,18 +32,18 @@ class OnClickViewController: UIViewController , UIWebViewDelegate {
         webView.scrollView.bounces = false
         webView.scalesPageToFit = true
         webView.delegate = self
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-            }else{
-                parentview.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-            }
-        }else{
-            self.parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }else{
+//                parentview.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//            }
+//        }else{
+//            self.parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//        }
         
-        shareButton.layer.cornerRadius = 30
+        shareButton.layer.cornerRadius = shareButton.frame.size.height/2
         shareButton.clipsToBounds = true
         
         Alamofire.request(ap_image).responseImage { response in
@@ -62,18 +62,18 @@ class OnClickViewController: UIViewController , UIWebViewDelegate {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-            }else{
-                parentview.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-            }
-        }else{
-            self.parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }else{
+//                parentview.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//            }
+//        }else{
+//            self.parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//        }
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

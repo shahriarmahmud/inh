@@ -16,6 +16,7 @@ class SectionNewsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
 
+    @IBOutlet weak var sectionTableView: UIView!
     @IBOutlet weak var SectionTitleLabel: UILabel!
 
     
@@ -37,6 +38,7 @@ class SectionNewsTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var videoSliderList = [[String: String]]()
+    var currentThmeme = ""
 
     
     override func awakeFromNib() {
@@ -63,6 +65,7 @@ class SectionNewsTableViewCell: UITableViewCell {
     }
     func passValue(VideoSliderList:[[String: String]]){
         videoSliderList = VideoSliderList
+//        currentThmeme = CurrentThmeme
     }
     
     func initializeView(ui:UIViewController){
@@ -101,6 +104,16 @@ extension SectionNewsTableViewCell : UICollectionViewDataSource {
             print("ghum",videoSlider)
             
             cell.videoTitleLabel.text = videoSlider["vblog_title"]
+            
+//            if(!currentThmeme.isEmpty){
+//                if(currentThmeme == "light"){
+//                    cell.videoTitleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//                }else{
+//                    cell.videoTitleLabel.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//                }
+//            }else{
+//                cell.videoTitleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//            }
             
             Alamofire.request(videoSlider["thumb"]!).responseImage { response in
                 debugPrint(response)

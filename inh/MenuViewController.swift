@@ -41,6 +41,19 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        print(currentThmeme)
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                tblMenuOptions.backgroundColor = UIColor(red: (250/255.0), green: (250/255.0), blue: (250/255.0), alpha: 1)
+//            }else{
+//                tblMenuOptions.backgroundColor = UIColor(red: (51/255.0), green: (51/255.0), blue: (51/255.0), alpha: 1)
+//            }
+//        }else{
+//            tblMenuOptions.backgroundColor = UIColor(red: (250/255.0), green: (250/255.0), blue: (250/255.0), alpha: 1)
+//        }
+        
         tblMenuOptions.tableFooterView = UIView()
         // Do any additional setup after loading the view.
     }

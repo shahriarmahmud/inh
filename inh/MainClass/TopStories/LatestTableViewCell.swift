@@ -10,6 +10,7 @@ import UIKit
 
 class LatestTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var customSeparator: UIView!
     @IBOutlet weak var videoImage: UIImageView!
     @IBOutlet weak var headerImage: UIImageView!
 

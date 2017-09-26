@@ -39,6 +39,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
     var latestNewsList = [[String: String]]()
     
     //photostories
+    @IBOutlet weak var photoStorieView: UIView!
     @IBOutlet weak var photoStoriesCollection: UICollectionView!
     
     var photoStories = [[String: String]]()
@@ -54,6 +55,8 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
 
     //video Slider
     var videoSliderList = [[String: String]]()
+    
+//    var currentThmeme = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,22 +67,25 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         sectionNewsTable.delegate = self
         sectionNewsTable.delegate = self
         
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                headerView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-            }else{
-                headerView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-            }
-        }else{
-            self.headerView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
+//        currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                headerView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//                photoStorieView.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
+//            }else{
+//                headerView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//                photoStorieView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//            }
+//        }else{
+//            self.headerView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            photoStorieView.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
+//        }
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: Selector(("refresh:")), for: UIControlEvents.valueChanged)
-        talestNewsTable.addSubview(refreshControl) // not required when using UITableViewController
-//        headerView.addSubview(refreshControl)
+    //    topBanner.addSubview(refreshControl) // not required when using UITableViewController
+     //   headerView.addSubview(refreshControl)
         
         GEtServerDate()
         
@@ -98,20 +104,20 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                headerView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-            }else{
-                headerView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-            }
-        }else{
-            self.headerView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                headerView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }else{
+//                headerView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//            }
+//        }else{
+//            self.headerView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//        }
+//    }
     
-    func refresh(sender:AnyObject) {
+    func refresh(_ sender:AnyObject) {
         // Code to refresh table view
         GEtServerDate()
         GetLatestNewsData()
@@ -170,6 +176,8 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                 let titleText = self.petitions[0]
                 self.titleLabel.text=titleText["art_title"]
                 
+//                self.changeTextColor(currentThmeme: self.currentThmeme, titleLabel: self.titleLabel)
+                
                 self.topBanner.backgroundColor = UIColor.white
                 self.topBanner.slideshowInterval = 999999999999999
                 self.topBanner.contentScaleMode = UIViewContentMode.scaleAspectFill
@@ -212,6 +220,32 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             
             //}
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if(tableView == talestNewsTable){
+        
+        //Get the height required for the TableView to show all cells
+        if indexPath.row == (tableView.indexPathsForVisibleRows?.last! as! NSIndexPath).row {
+            //End of loading all Visible cells
+            let height = tableView.contentSize.height
+            
+            
+            self.photoStorieView.frame = CGRect(x: 0, y: self.talestNewsTable.frame.origin.y+height, width: self.photoStorieView.frame.size.width, height: self.photoStorieView.frame.size.height)
+            
+            let header_height : CGFloat = self.photoStorieView.frame.size.height //190,36
+            print(header_height)
+            
+            self.photoStoriesCollection.frame = CGRect(x: 0, y: self.photoStorieView.frame.origin.y+header_height, width: self.photoStoriesCollection.frame.size.width, height: self.photoStoriesCollection.frame.size.height)
+            
+            
+            self.sectionNewsTable.frame = CGRect(x: 0, y: self.photoStoriesCollection.frame.origin.y+self.photoStoriesCollection.frame.size.height, width: self.photoStoriesCollection.frame.size.width, height: self.photoStoriesCollection.frame.size.height)
+            //If cell's are more than 10 or so that it could not fit on the tableView's visible area then you have to go for other way to check for last cell loaded
+            }
+        
+        }
+    
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -296,6 +330,8 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
 
                 
                 header.SectionTitleLabel.text = HeadArray as? String
+                
+//                changeSectionTextColor(currentThmeme: currentThmeme, sectionView: header.sectionTableView, sectionText: header.SectionTitleLabel)
 
             }
             return header
@@ -349,6 +385,27 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             }
             
             
+            
+//            if(!currentThmeme.isEmpty){
+//                if(currentThmeme == "light"){
+//                    cell.customSeparator.backgroundColor = UIColor(red: (236/255.0), green: (236/255.0), blue: (236/255.0), alpha: 1)
+//                    cell.titleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//                    cell.timeLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//                    talestNewsTable.separatorColor = UIColor(red: (236/255.0), green: (236/255.0), blue: (236/255.0), alpha: 1)
+//                }else{
+//                    cell.customSeparator.backgroundColor = UIColor(red: (24/255.0), green: (24/255.0), blue: (24/255.0), alpha: 1)
+//                    cell.titleLabel.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//                    cell.timeLabel.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//                    talestNewsTable.separatorColor = UIColor(red: (24/255.0), green: (24/255.0), blue: (24/255.0), alpha: 1)
+//                }
+//            }else{
+//                cell.customSeparator.backgroundColor = UIColor(red: (236/255.0), green: (236/255.0), blue: (236/255.0), alpha: 1)
+//                cell.titleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//                cell.timeLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//                talestNewsTable.separatorColor = UIColor(red: (236/255.0), green: (236/255.0), blue: (236/255.0), alpha: 1)
+//            }
+            
+            
             if(latestNews["X_hours_ago"]?.isEmpty)!{
                 cell.timeLabel.text = ""
             }else{
@@ -383,6 +440,9 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         {
             let row = indexPath.row
             print(row)
+            
+//            let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+
             if(indexPath.section==1){
                 
                 let cell:SectionNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_body", for: indexPath) as! SectionNewsTableViewCell
@@ -408,6 +468,18 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                             
                             cell.videoSection.isHidden=false
                             cell.collectionView.isHidden=false
+                            
+                            cell.collectionView.frame = CGRect(x: 0, y: cell.videoSection.frame.origin.y+cell.videoSection.frame.size.height, width: cell.collectionView.frame.size.width, height: cell.collectionView.frame.size.height)
+                            
+//                            if(!currentThmeme.isEmpty){
+//                                if(currentThmeme == "light"){
+//                                    cell.videoSection.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
+//                                }else{
+//                                    cell.videoSection.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//                                }
+//                            }else{
+//                                cell.videoSection.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
+//                            }
 
                             Alamofire.request(RequestString.videoSlider, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
                                 switch responce.result{
@@ -460,6 +532,8 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                             }
                             
                             cell.titleLabel.text = sectionData[row]["art_title"].stringValue
+                            
+//                            changeTextColor(currentThmeme: currentThmeme, titleLabel: cell.titleLabel)
                         }
                         else
                         {
@@ -474,6 +548,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                                 cell.videoImage_body.isHidden = true
                             }
 
+//                            changeTextColor(currentThmeme: currentThmeme, titleLabel: cell.thumbnailLabel,time: cell.postingTimeLabel)
                             
                             cell.postingTimeLabel.text = sectionData[row]["X_hours_ago"].stringValue
                             cell.thumbnailLabel.text = sectionData[row]["art_title"].stringValue
@@ -532,6 +607,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                                 }
                                 
                                 cell.titleLabel.text = sectionData[row]["art_title"].stringValue
+//                    changeTextColor(currentThmeme: currentThmeme, titleLabel: cell.titleLabel)
                 }
             
             
@@ -578,6 +654,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                             cell.thumbnailImage.image = image
                         }
                     }
+//                    changeTextColor(currentThmeme: currentThmeme, titleLabel: cell.thumbnailLabel,time: cell.postingTimeLabel)
                 }
                 }
                 
@@ -623,6 +700,18 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                 
                 self.talestNewsTable.frame = CGRect(x: self.talestNewsTable.frame.origin.x, y: self.talestNewsTable.frame.origin.y, width: self.talestNewsTable.frame.size.width, height: (self.talestNewsTable.rowHeight * CGFloat(self.latestNewsList.count)))
                 
+                
+                var tableViewHeight: CGFloat {
+                    self.talestNewsTable.layoutIfNeeded()
+                    
+                    return self.talestNewsTable.contentSize.height
+                }
+            
+                
+               
+                
+                
+                
 //                scrollView.contentSize = CGSize(width: view.frame.size.width, height: visaTransactionTable.frame.origin.y + visaTransactionTable.frame.size.height)
                 
                 
@@ -664,6 +753,20 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             print("ghum",photoStory)
             
             cell.photoStoriesLabel.text = photoStory["palbum_title"]
+ 
+//            let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//            if(!currentThmeme.isEmpty){
+//                if(currentThmeme == "light"){
+//                    cell.photoStoryView.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
+//                    cell.photoStoriesLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//                }else{
+//                    cell.photoStoryView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//                    cell.photoStoriesLabel.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//                }
+//            }else{
+//                cell.photoStoryView.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
+//                cell.photoStoriesLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//            }
             
             Alamofire.request(photoStory["pai_image_original"]!).responseImage { response in
                 debugPrint(response)
@@ -773,7 +876,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                             self.scrollview.contentSize = CGSize(width: self.scrollview.frame.size.width, height: self.sectionNewsTable.frame.origin.y + self.sectionNewsTable.frame.size.height)
                             
                             self.sectionNewsTable.frame = CGRect(x: self.sectionNewsTable.frame.origin.x, y: self.sectionNewsTable.frame.origin.y, width: self.sectionNewsTable.frame.size.width, height: self.sectionNewsTable.rowHeight * 36)
-                            
+ 
                         case.failure(let error):
                             print("failed\(error)")
                             }
@@ -786,7 +889,50 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                 print("failed\(error)")
             }
         }
-        
-        
     }
+    
+    
+//    func changeTextColor(currentThmeme:String,titleLabel:UILabel){
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                titleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//            }else{
+//                titleLabel.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }
+//        }else{
+//            titleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//        }
+//    }
+//    
+//    func changeTextColor(currentThmeme:String,titleLabel:UILabel,time:UILabel){
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                titleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//                time.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//            }else{
+//                titleLabel.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//                time.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }
+//        }else{
+//            titleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//            time.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
+//        }
+//    }
+//    
+//    func changeSectionTextColor(currentThmeme:String,sectionView:UIView,sectionText:UILabel){
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                sectionText.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//                sectionView.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
+//            }else{
+//                sectionText.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//                sectionView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//            }
+//        }else{
+//            sectionText.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            sectionView.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
+//        }
+//    }
+    
+    
 }

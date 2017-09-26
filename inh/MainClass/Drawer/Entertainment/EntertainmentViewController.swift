@@ -29,16 +29,16 @@ class EntertainmentViewController: BaseViewController , UITableViewDelegate, UIT
         newsTable.dataSource = self
         newsTable.delegate = self
         
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-            }else{
-                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-            }
-        }else{
-            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }else{
+//                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//            }
+//        }else{
+//            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//        }
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -47,21 +47,21 @@ class EntertainmentViewController: BaseViewController , UITableViewDelegate, UIT
         GEtServerDate()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        print(currentThmeme)
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-            }else{
-                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-            }
-        }else{
-            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        print(currentThmeme)
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }else{
+//                newsTable.backgroundColor = UIColor(red: (51/255.0), green: (51/255.0), blue: (51/255.0), alpha: 1)
+//            }
+//        }else{
+//            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//        }
+//    }
     
-    func refresh(sender:AnyObject) {
+    func refresh(_ sender:AnyObject) {
         // Code to refresh table view
         GEtServerDate()
         self.refreshControl.endRefreshing()

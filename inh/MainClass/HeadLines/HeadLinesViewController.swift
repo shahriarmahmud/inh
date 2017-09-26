@@ -28,16 +28,21 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-            }else{
-                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-            }
-        }else{
-            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
+//        UIApplication.shared.statusBarOrientation = .portrait
+//        var angle: Float = .pi / 2
+//        //rotate 180°, or 1 π radians
+//        view.layer.transform = CATransform3DMakeRotation(CGFloat(angle), 0, 0.0, 1.0)
+        
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }else{
+//                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//            }
+//        }else{
+//            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//        }
         
         newsTable.dataSource = self
         newsTable.delegate = self
@@ -49,20 +54,20 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
         GEtReportDate()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-            }else{
-                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-            }
-        }else{
-            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }else{
+//                newsTable.backgroundColor = UIColor(red: (51/255.0), green: (51/255.0), blue: (51/255.0), alpha: 1)
+//            }
+//        }else{
+//            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//        }
+//    }
     
-    func refresh(sender:AnyObject) {
+    func refresh(_ sender:AnyObject) {
         // Code to refresh table view
         GEtReportDate()
         self.refreshControl.endRefreshing()

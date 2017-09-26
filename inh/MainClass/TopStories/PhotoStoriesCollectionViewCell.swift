@@ -11,5 +11,6 @@ import UIKit
 class PhotoStoriesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var photoStoriesImage: UIImageView!
     
+    @IBOutlet weak var photoStoryView: UIView!
     @IBOutlet weak var photoStoriesLabel: UILabel!
 }

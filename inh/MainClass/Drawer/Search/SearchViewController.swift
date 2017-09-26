@@ -30,35 +30,35 @@ class SearchViewController: BaseViewController , UITableViewDelegate, UITableVie
         newsTable.dataSource = self
         newsTable.delegate = self
         
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        print(currentThmeme)
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-            }else{
-                parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-            }
-        }else{
-            self.parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        print(currentThmeme)
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }else{
+//                parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//            }
+//        }else{
+//            self.parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//        }
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SearchViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SearchViewController.dismissKeyboard))
+//        view.addGestureRecognizer(tap)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        print(currentThmeme)
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-            }else{
-                parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-            }
-        }else{
-            self.parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        print(currentThmeme)
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }else{
+//                parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//            }
+//        }else{
+//            self.parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//        }
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -69,8 +69,6 @@ class SearchViewController: BaseViewController , UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
         let row = indexPath.row
         print("Row: \(row)")
         let petition = petitions[indexPath.row]
@@ -80,7 +78,6 @@ class SearchViewController: BaseViewController , UITableViewDelegate, UITableVie
         navigationViewController.mobile_news_url = petition["mobile_news_url"]!
         navigationViewController.share_url = petition["share_url"]!
         self.navigationController?.pushViewController(navigationViewController, animated: true)
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

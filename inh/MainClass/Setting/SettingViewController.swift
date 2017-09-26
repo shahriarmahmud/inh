@@ -33,15 +33,15 @@ class SettingViewController: UIViewController , MFMailComposeViewControllerDeleg
         if(!currentnotification.isEmpty){
             if(currentnotification == "on"){
                 OneSignal.setSubscription(true)
-                themeChangeSeage.selectedSegmentIndex = 0
+                themeChangeSeage.selectedSegmentIndex = 1
                 // turn off the current selection
-                themeChangeSeage.selectedSegmentIndex = UISegmentedControlNoSegment;
+//                themeChangeSeage.selectedSegmentIndex = UISegmentedControlNoSegment;
                 themeChangeSeage.sendActions(for: UIControlEvents.valueChanged)
             }else{
                 OneSignal.setSubscription(false)
                 themeChangeSeage.selectedSegmentIndex = 0
                 // turn off the current selection
-                themeChangeSeage.selectedSegmentIndex = UISegmentedControlNoSegment;
+//                themeChangeSeage.selectedSegmentIndex = UISegmentedControlNoSegment;
                 themeChangeSeage.sendActions(for: UIControlEvents.valueChanged)
             }
         }else{
@@ -49,20 +49,20 @@ class SettingViewController: UIViewController , MFMailComposeViewControllerDeleg
             themeChangeSeage.selectedSegmentIndex = 0
         }
         
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-                themeChangeSeage.selectedSegmentIndex = 0
-            }else{
-                parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-                themeChangeSeage.selectedSegmentIndex = 1
-            }
-        }else{
-            self.parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//                themeChangeSeage.selectedSegmentIndex = 0
+//            }else{
+//                parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//                themeChangeSeage.selectedSegmentIndex = 1
+//            }
+//        }else{
+//            self.parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//        }
         
-        self.scrollview.contentSize = CGSize(width: self.scrollview.frame.size.width, height: 900)
+        self.scrollview.contentSize = CGSize(width: self.scrollview.frame.size.width, height: 700)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -209,7 +209,7 @@ class SettingViewController: UIViewController , MFMailComposeViewControllerDeleg
         allertDialogWithHandeler(title: "", message: "This will clear all cache data.Continue ?")
     }
     @IBAction func rateUs(_ sender: Any) {
-        let googleURL = NSURL(string: "https://mobile.twitter.com/inhnewsindia")! as URL
+        let googleURL = NSURL(string: "https://m.inhnews.in")! as URL
         UIApplication.shared.open(googleURL, options: [:], completionHandler: nil)
     }
     @IBAction func share(_ sender: Any) {
@@ -227,17 +227,42 @@ class SettingViewController: UIViewController , MFMailComposeViewControllerDeleg
     }
     @IBAction func sendFeedBack(_ sender: Any) {
         print(MFMailComposeViewController.canSendMail())
-        if(MFMailComposeViewController.canSendMail()){
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setSubject("Query From INH")
-            mail.setMessageBody(mailBody, isHTML: true)
-            mail.setToRecipients(["Info@inhnews.in"])
-            present(mail, animated: true, completion: nil)
-        }else{
-            alertDialog.alertDialoge(title: "Alert", message: "You have no mail apps to send the mail", uiViewController: self)
+        
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
         }
+        
+//        if(MFMailComposeViewController.canSendMail()){
+//            let mail = MFMailComposeViewController()
+//            mail.mailComposeDelegate = self
+//            mail.setSubject("Query From INH")
+//            mail.setMessageBody(mailBody, isHTML: true)
+//            mail.setToRecipients(["Info@inhnews.in"])
+//            present(mail, animated: true, completion: nil)
+//        }else{
+//            alertDialog.alertDialoge(title: "Alert", message: "You have no mail apps to send the mail", uiViewController: self)
+//        }
     }
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+        
+        mailComposerVC.setToRecipients(["Info@inhnews.in"])
+        mailComposerVC.setSubject("Query From INH")
+        mailComposerVC.setMessageBody(mailBody, isHTML: false)
+        
+        return mailComposerVC
+    }
+    
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+    
     @IBAction func privacyPolicy(_ sender: Any) {
         let googleURL = NSURL(string: "https://m.inhnews.in")! as URL
         UIApplication.shared.open(googleURL, options: [:], completionHandler: nil)

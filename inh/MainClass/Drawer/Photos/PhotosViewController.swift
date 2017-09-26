@@ -32,16 +32,16 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
         newsTable.dataSource = self
         newsTable.delegate = self
         
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-            }else{
-                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-            }
-        }else{
-            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }else{
+//                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+//            }
+//        }else{
+//            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//        }
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -50,20 +50,20 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
         GEtServerDate()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-        if(!currentThmeme.isEmpty){
-            if(currentThmeme == "light"){
-                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-            }else{
-                newsTable.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-            }
-        }else{
-            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-        }
-    }
-    
-    func refresh(sender:AnyObject) {
+//    override func viewWillAppear(_ animated: Bool) {
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//            }else{
+//                newsTable.backgroundColor = UIColor(red: (51/255.0), green: (51/255.0), blue: (51/255.0), alpha: 1)
+//            }
+//        }else{
+//            self.newsTable.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+//        }
+//    }
+//    
+    func refresh(_ sender:AnyObject) {
         // Code to refresh table view
         GEtServerDate()
         self.refreshControl.endRefreshing()
@@ -98,7 +98,7 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
             print(photoStory)
             
             
-            Alamofire.request(photoStory["pai_image"]!).responseImage { response in
+            Alamofire.request(photoStory["pai_image_original"]!).responseImage { response in
                 debugPrint(response)
                 debugPrint(response.result)
                 
@@ -125,10 +125,10 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
                 cell.titleLabel.text = photoStory["palbum_title"]!
             }
             
-            if(photoStory["pai_image"]?.isEmpty)!{
+            if(photoStory["pai_image_original"]?.isEmpty)!{
                 cell.headImage.image = nil
             }else{
-                Alamofire.request(photoStory["pai_image"]!).responseImage { response in
+                Alamofire.request(photoStory["pai_image_original"]!).responseImage { response in
                     debugPrint(response)
                     debugPrint(response.result)
                     
@@ -176,8 +176,9 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
                     let palbum_id = result["palbum_id"].stringValue
                     let palbum_title = result["palbum_title"].stringValue
                     let pai_image = result["pai_image"].stringValue
+                    let pai_image_original = result["pai_image_original"].stringValue
                     
-                    let obj = ["palbum_id": palbum_id, "palbum_title": palbum_title, "pai_image": pai_image]
+                    let obj = ["palbum_id": palbum_id, "palbum_title": palbum_title, "pai_image": pai_image,"pai_image_original": pai_image_original]
                     self.photoStories.append(obj)
                 }
                 
@@ -208,8 +209,9 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
                     let palbum_id = result["palbum_id"].stringValue
                     let palbum_title = result["palbum_title"].stringValue
                     let pai_image = result["pai_image"].stringValue
+                    let pai_image_original = result["pai_image_original"].stringValue
                     
-                    let obj = ["palbum_id": palbum_id, "palbum_title": palbum_title, "pai_image": pai_image]
+                    let obj = ["palbum_id": palbum_id, "palbum_title": palbum_title, "pai_image": pai_image, "pai_image_original": pai_image_original]
                     self.photoStories.append(obj)
                 }
 

@@ -27,6 +27,20 @@ class DashBoardViewController: DrawerController {
         
         // Segmented Control customization
         segmentedPager.segmentedControl.selectionIndicatorLocation = .down
+        
+        
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        print(currentThmeme)
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                segmentedPager.segmentedControl.backgroundColor = UIColor(red: (33/255.0), green: (45/255.0), blue: (77/255.0), alpha: 1)
+//            }else{
+//                segmentedPager.segmentedControl.backgroundColor = UIColor(red: (51/255.0), green: (51/255.0), blue: (51/255.0), alpha: 1)
+//            }
+//        }else{
+//            segmentedPager.segmentedControl.backgroundColor = UIColor(red: (33/255.0), green: (45/255.0), blue: (77/255.0), alpha: 1)
+//        }
+
         segmentedPager.segmentedControl.backgroundColor = UIColor(red: (33/255.0), green: (45/255.0), blue: (77/255.0), alpha: 1)
         segmentedPager.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.gray,NSFontAttributeName : UIFont.systemFont(ofSize: 13)]
         segmentedPager.segmentedControl.selectedTitleTextAttributes = [NSForegroundColorAttributeName : UIColor.white,NSFontAttributeName : UIFont.systemFont(ofSize: 13) ]
@@ -34,6 +48,20 @@ class DashBoardViewController: DrawerController {
         segmentedPager.segmentedControl.selectionIndicatorColor = .red
         segmentedPager.segmentedControl.selectionIndicatorHeight=2
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+//        print(currentThmeme)
+//        if(!currentThmeme.isEmpty){
+//            if(currentThmeme == "light"){
+//                segmentedPager.segmentedControl.backgroundColor = UIColor(red: (33/255.0), green: (45/255.0), blue: (77/255.0), alpha: 1)
+//            }else{
+//                segmentedPager.segmentedControl.backgroundColor = UIColor(red: (51/255.0), green: (51/255.0), blue: (51/255.0), alpha: 1)
+//            }
+//        }else{
+//            segmentedPager.segmentedControl.backgroundColor = UIColor(red: (33/255.0), green: (45/255.0), blue: (77/255.0), alpha: 1)
+//        }
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
