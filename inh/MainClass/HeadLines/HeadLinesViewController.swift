@@ -107,8 +107,37 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
                 
                 if let image = response.result.value {
                     print("image downloaded: \(image)")
-                    cellHeader.headLineImage.image = image
-                }
+
+                    let size = CGSize(width: cellHeader.headLineImage.frame.size.width, height: cellHeader.headLineImage.frame.size.height)
+                    
+                    // Scale image to fit within specified size while maintaining aspect ratio
+                    
+                    let scaledImage = image.af_imageScaled(to: size)
+                    
+                    // Scale image to fit within specified size while maintaining aspect ratio
+                    let aspectScaledToFitImage = image.af_imageAspectScaled(toFit: size)
+                    
+                    // Scale image to fill specified size while maintaining aspect ratio
+                    let aspectScaledToFillImage = image.af_imageAspectScaled(toFill: size)
+                    
+                    
+//                    cellHeader.headLineImage.contentMode = UIViewContentMode.scaleAspectFill
+                    cellHeader.headLineImage.clipsToBounds = true
+//
+//                    cellHeader.headLineImage.image = image
+
+                    
+                    cellHeader.headLineImage.image = scaledImage
+                    
+//                    let cropRegion = CGRect(x: 50, y: 200, width: 100, height: 100)
+//                    //                        var image = UIImage(named: "beach.jpg")
+//                    let subImage = image.cgImage?.cropping(to: cropRegion)
+//                    let croppedImage = UIImage(cgImage: subImage!)
+//                    let newView = UIImageView(image: croppedImage)
+                    
+//                    cellHeader.headLineImage = newView
+                    
+                 }
             }
             
             cellHeader.HeadLineTitle.text = headLine["title"]!
@@ -135,7 +164,35 @@ class HeadLinesViewController: BaseViewController , UITableViewDelegate, UITable
                     
                     if let image = response.result.value {
                         print("image downloaded: \(image)")
-                        cell.headImage.image = image
+                        
+                        let size = CGSize(width: cell.headImage.frame.size.width, height: cell.headImage.frame.size.height)
+                        
+                        // Scale image to fit within specified size while maintaining aspect ratio
+                        
+                        
+                        
+                        
+                        let scaledImage = image.af_imageScaled(to: size)
+                        
+                        // Scale image to fit within specified size while maintaining aspect ratio
+                        let aspectScaledToFitImage = image.af_imageAspectScaled(toFit: size)
+                        
+                        // Scale image to fill specified size while maintaining aspect ratio
+                        let aspectScaledToFillImage = image.af_imageAspectScaled(toFill: size)
+                         cell.headImage.clipsToBounds = true
+                        cell.headImage.image = scaledImage
+                        
+                        
+//                        cell.headImage.contentMode = UIViewContentMode.scaleAspectFill
+//                        cell.headImage.clipsToBounds = true
+                        
+//                        let cropRegion = CGRect(x: 50, y: 200, width: 100, height: 100)
+////                        var image = UIImage(named: "beach.jpg")
+//                        let subImage = image.cgImage?.cropping(to: cropRegion)
+//                        let croppedImage = UIImage(cgImage: subImage!)
+//                        let newView = UIImageView(image: croppedImage)
+//                        
+//                        cell.headImage = newView
                     }
                 }
             }

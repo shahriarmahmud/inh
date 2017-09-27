@@ -28,7 +28,7 @@ class DrawerController: MXSegmentedPagerController, SlideMenuDelegate{
         case 0:
             print("Home\n", terminator: "")
             
-            self.openViewControllerBasedOnIdentifier("Home")
+            self.openViewControllerBasedOnIdentifier("TopStoriesViewController")
             
             break
         case 1:

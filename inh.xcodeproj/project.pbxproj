@@ -64,6 +64,7 @@
 		E35108301F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351082F1F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift */; };
 		E35108321F67F0980041B0B8 /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108311F67F0980041B0B8 /* DrawerController.swift */; };
 		E35108341F67F2910041B0B8 /* HeadLinesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108331F67F2910041B0B8 /* HeadLinesTableViewCell.swift */; };
+		E365A7F91F7BB377001B0367 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E365A7F81F7BB377001B0367 /* CardView.swift */; };
 		E369A2EA1F726FDA004C892C /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E369A2E91F726FDA004C892C /* SearchTableViewCell.swift */; };
 		E369A2EC1F727675004C892C /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E369A2EB1F727675004C892C /* PhotosTableViewCell.swift */; };
 		E369A2F01F727EE1004C892C /* VideosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E369A2EF1F727EE1004C892C /* VideosTableViewCell.swift */; };
@@ -183,6 +184,7 @@
 		E351082F1F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChhattisgarhDrawerViewController.swift; path = MainClass/Drawer/ChhattisgarhDrawer/ChhattisgarhDrawerViewController.swift; sourceTree = "<group>"; };
 		E35108311F67F0980041B0B8 /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrawerController.swift; path = MainClass/Base/DrawerController.swift; sourceTree = "<group>"; };
 		E35108331F67F2910041B0B8 /* HeadLinesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeadLinesTableViewCell.swift; path = MainClass/HeadLines/HeadLinesTableViewCell.swift; sourceTree = "<group>"; };
+		E365A7F81F7BB377001B0367 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardView.swift; path = HelperClass/CardView/CardView.swift; sourceTree = "<group>"; };
 		E369A2E91F726FDA004C892C /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTableViewCell.swift; path = MainClass/Drawer/Search/SearchTableViewCell.swift; sourceTree = "<group>"; };
 		E369A2EB1F727675004C892C /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotosTableViewCell.swift; path = MainClass/Drawer/Photos/PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		E369A2EF1F727EE1004C892C /* VideosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideosTableViewCell.swift; path = MainClass/Drawer/Videos/VideosTableViewCell.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 		E3365E881F67BF9D00324368 /* HelperClass */ = {
 			isa = PBXGroup;
 			children = (
+				E365A7F71F7BB33E001B0367 /* CardView */,
 				E35107B61F67D7B10041B0B8 /* AlertDialog */,
 				E35107B91F67D7B10041B0B8 /* BackgroundGradient */,
 				E35107BB1F67D7B10041B0B8 /* Date&TimePicker */,
@@ -1092,6 +1095,14 @@
 			name = Sports;
 			sourceTree = "<group>";
 		};
+		E365A7F71F7BB33E001B0367 /* CardView */ = {
+			isa = PBXGroup;
+			children = (
+				E365A7F81F7BB377001B0367 /* CardView.swift */,
+			);
+			name = CardView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1444,6 +1455,7 @@
 				E35108061F67E44E0041B0B8 /* TopStoriesViewController.swift in Sources */,
 				E3365E8A1F67BFD800324368 /* MenuViewController.swift in Sources */,
 				E35108191F67E59F0041B0B8 /* ChhattisgarhiNewsViewController.swift in Sources */,
+				E365A7F91F7BB377001B0367 /* CardView.swift in Sources */,
 				E300C2F91F66B3930002C04A /* AppDelegate.swift in Sources */,
 				E35107FD1F67D7B10041B0B8 /* AlertDialogViewController.swift in Sources */,
 				E35107FE1F67D7B10041B0B8 /* CustomAlert.swift in Sources */,

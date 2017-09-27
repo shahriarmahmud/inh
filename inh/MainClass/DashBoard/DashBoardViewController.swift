@@ -90,15 +90,19 @@ class DashBoardViewController: DrawerController {
     }
     
     @IBAction func facebook(_ sender: Any) {
-        var googleURL:NSURL? = nil
-        if UIApplication.shared.canOpenURL(URL(string: "fb://profile/inhnewsindia")!) {
-            googleURL = NSURL(string: "fb://profile/inhnewsindia")
-            UIApplication.shared.open(googleURL! as URL, options: [:], completionHandler: nil)
-        }
-        else {
-            googleURL = NSURL(string: "http://www.facebook.com/inhnewsindia")
-            UIApplication.shared.open(googleURL! as URL, options: [:], completionHandler: nil)
-        }
+//        var googleURL:NSURL? = nil
+//        if UIApplication.shared.canOpenURL(URL(string: "fb://profile/inhnewsindia")!) {
+//            googleURL = NSURL(string: "fb://profile/inhnewsindia")
+//            UIApplication.shared.open(googleURL! as URL, options: [:], completionHandler: nil)
+//        }
+//        else {
+//            googleURL = NSURL(string: "http://www.facebook.com/inhnewsindia")
+//            UIApplication.shared.open(googleURL! as URL, options: [:], completionHandler: nil)
+//        }
+//        
+        
+        let googleURL = NSURL(string: "http://www.facebook.com/inhnewsindia")! as URL
+        UIApplication.shared.open(googleURL, options: [:], completionHandler: nil)
 //        
 //        let googleURL = NSURL(string: "https://m.facebook.com/inhnewsindia")! as URL
 //        UIApplication.shared.open(googleURL, options: [:], completionHandler: nil)

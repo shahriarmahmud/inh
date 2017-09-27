@@ -65,7 +65,7 @@ class RequestString
     
     public static var video : String = "https://www.googleapis.com/youtube/v3/search?&order=date&part=snippet&channelId=UCQFX8tqgED6hQQSKxJ8DuNg&maxResults=25&key=AIzaSyDwCTUVQj8DlNc3LW1tbSNblyqbqZCr2-I"
     
-    public static var videoLodeMore : String = "https://www.googleapis.com/youtube/v3/search?&order=date&part=snippet&channelId=UCQFX8tqgED6hQQSKxJ8DuNg&maxResults=25&key==AIzaSyDwCTUVQj8DlNc3LW1tbSNblyqbqZCr2-I&pageToken="
+    public static var videoLodeMore : String = "https://www.googleapis.com/youtube/v3/search?&order=date&part=snippet&channelId=UCQFX8tqgED6hQQSKxJ8DuNg&maxResults=25&key=AIzaSyDwCTUVQj8DlNc3LW1tbSNblyqbqZCr2-I&pageToken="
     
     
     public static var drawerSports : String = BaseURL + "section.php?section=sports"

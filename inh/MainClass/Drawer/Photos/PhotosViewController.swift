@@ -104,7 +104,24 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
                 
                 if let image = response.result.value {
                     print("image downloaded: \(image)")
-                    cellHeader.titleHeadImage.image = image
+                    
+                    
+                    let size = CGSize(width: cellHeader.titleHeadImage.frame.size.width, height: cellHeader.titleHeadImage.frame.size.height)
+                    
+                    // Scale image to fit within specified size while maintaining aspect ratio
+                    
+                    let scaledImage = image.af_imageScaled(to: size)
+                    
+                    // Scale image to fit within specified size while maintaining aspect ratio
+                    let aspectScaledToFitImage = image.af_imageAspectScaled(toFit: size)
+                    
+                    // Scale image to fill specified size while maintaining aspect ratio
+                    let aspectScaledToFillImage = image.af_imageAspectScaled(toFill: size)
+
+                    cellHeader.titleHeadImage.clipsToBounds = true
+ 
+                    cellHeader.titleHeadImage.image = scaledImage
+
                 }
             }
             
@@ -134,7 +151,20 @@ class PhotosViewController: BaseViewController , UITableViewDelegate, UITableVie
                     
                     if let image = response.result.value {
                         print("image downloaded: \(image)")
-                        cell.headImage.image = image
+                        
+                        
+                        let size = CGSize(width: cell.headImage.frame.size.width, height: cell.headImage.frame.size.height)
+
+                        let scaledImage = image.af_imageScaled(to: size)
+                        
+                        // Scale image to fit within specified size while maintaining aspect ratio
+                        let aspectScaledToFitImage = image.af_imageAspectScaled(toFit: size)
+                        
+                        // Scale image to fill specified size while maintaining aspect ratio
+                        let aspectScaledToFillImage = image.af_imageAspectScaled(toFill: size)
+                        cell.headImage.clipsToBounds = true
+                        cell.headImage.image = scaledImage
+
                     }
                 }
             }

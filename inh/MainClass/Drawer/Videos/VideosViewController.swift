@@ -20,6 +20,8 @@ class VideosViewController: BaseViewController , UITableViewDelegate, UITableVie
     
     var petitions = [[String: String]]()
     var count = 1
+    var nextPageToken = ""
+    var previosPageToken = ""
     
     var utilityViewController = UtilityViewController()
     var alertDialogViewController = AlertDialogViewController()
@@ -176,7 +178,7 @@ class VideosViewController: BaseViewController , UITableViewDelegate, UITableVie
     func loadMoreData(count:String){
         SVProgressHUD.show()
         
-        Alamofire.request(RequestString.videoLodeMore+count, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
+        Alamofire.request(RequestString.videoLodeMore+nextPageToken, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
             switch responce.result{
             case.success(let data):
                 SVProgressHUD.dismiss()
@@ -186,9 +188,12 @@ class VideosViewController: BaseViewController , UITableViewDelegate, UITableVie
                 print(json["items"][0]["snippet"]["thumbnails"]["medium"]["url"].stringValue)
                 print(json["items"])
                 print("Head Lines",json)
-                print("Head Lines",RequestString.videoLodeMore+count)
+                print("Head Lines",RequestString.videoLodeMore+self.nextPageToken)
                 
-                
+                self.nextPageToken = json["nextPageToken"].stringValue
+                self.previosPageToken = json["prevPageToken"].stringValue
+                print(self.nextPageToken)
+                print(self.previosPageToken)
                 
                 
                 for result in json["items"].arrayValue {
@@ -225,6 +230,9 @@ class VideosViewController: BaseViewController , UITableViewDelegate, UITableVie
                 print(json["items"])
                 print("Head Lines",json)
                 print("Head Lines",RequestString.video)
+                
+                self.nextPageToken = json["nextPageToken"].stringValue
+                print(self.nextPageToken)
 
                 for result in json["items"].arrayValue {
                     let title = result["snippet"]["title"].stringValue

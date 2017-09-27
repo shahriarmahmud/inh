@@ -154,7 +154,7 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
             let petition = petitions[indexPath.row]
             print(indexPath.row)
             print(petition)
-            
+
             Alamofire.request(petition["ap_image"]!).responseImage { response in
                 debugPrint(response)
                 debugPrint(response.result)

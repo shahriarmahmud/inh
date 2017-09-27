@@ -18,6 +18,8 @@ class PhotoGalleryViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var topBanner: ImageSlideshow!
     
+    @IBOutlet weak var photoDescription: UILabel!
+    
     var petitions = [[String: String]]()
     var imageUrlList = [[String: String]]()
     var downloadImageUrlList = [AlamofireSource]()
@@ -69,24 +71,37 @@ class PhotoGalleryViewController: UIViewController {
                 
                 let titleText = self.petitions[0]
                 self.titleLabel.text=titleText["pai_caption"]
+                if(titleText["pai_description"]?.isEmpty)!{
+                    self.photoDescription.text = ""
+                }else{
+                    self.photoDescription.text = titleText["pai_description"]
+                }
                 
-                self.topBanner.backgroundColor = UIColor.white
+                self.topBanner.backgroundColor = UIColor.black
                 self.topBanner.slideshowInterval = 5.0
                 self.topBanner.pageControlPosition = PageControlPosition.underScrollView
                 self.topBanner.pageControl.currentPageIndicatorTintColor = UIColor.lightGray
                 self.topBanner.pageControl.pageIndicatorTintColor = UIColor.black
-                self.topBanner.contentScaleMode = UIViewContentMode.scaleAspectFill
+                self.topBanner.contentScaleMode = UIViewContentMode.scaleAspectFit
                 
                 self.topBanner.activityIndicator = DefaultActivityIndicator()
                 self.topBanner.currentPageChanged = { page in
                     let titleText = self.petitions[page]
                     self.titleLabel.text=titleText["pai_caption"]
+                    if(titleText["pai_description"]?.isEmpty)!{
+                        self.photoDescription.text = ""
+                    }else{
+                        self.photoDescription.text = titleText["pai_description"]
+                    }
                 }
                 for imageUrl in self.imageUrlList {
                     self.downloadImageUrlList.append(AlamofireSource(urlString:  imageUrl["pai_image"]!)!)
                 }
                 
                 self.topBanner.setImageInputs(self.downloadImageUrlList)
+                
+                
+                
                 
             case.failure(let error):
                 print("failed\(error)")

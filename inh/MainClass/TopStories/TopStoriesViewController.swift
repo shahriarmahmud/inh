@@ -13,7 +13,7 @@ import AlamofireImage
 import SwiftyJSON
 import SVProgressHUD
 
-class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UIGestureRecognizerDelegate{
+class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UIGestureRecognizerDelegate,UICollectionViewDelegateFlowLayout{
     
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
@@ -739,6 +739,15 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         let photoStory = photoStories[row]
         navigationViewController.albumId = photoStory["palbum_id"]!
         self.navigationController?.pushViewController(navigationViewController, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let width = 100
+        
+        
+        return CGSize(width: collectionView.bounds.size.width, height: collectionView.bounds.size.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
