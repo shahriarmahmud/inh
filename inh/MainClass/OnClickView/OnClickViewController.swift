@@ -43,8 +43,8 @@ class OnClickViewController: UIViewController , UIWebViewDelegate {
 //            self.parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
 //        }
         
-        shareButton.layer.cornerRadius = shareButton.frame.size.height/2
-        shareButton.clipsToBounds = true
+//        shareButton.layer.cornerRadius = shareButton.frame.size.height/2
+//        shareButton.clipsToBounds = true
         
         Alamofire.request(ap_image).responseImage { response in
             debugPrint(response)
@@ -56,9 +56,12 @@ class OnClickViewController: UIViewController , UIWebViewDelegate {
             }
         }
         
+        webView.allowsInlineMediaPlayback = true
+        webView.mediaPlaybackRequiresUserAction=true
+//        webView.loadHTMLString("<iframe width=\"\(webView.frame.width)\" height=\"\(webView.frame.height)\" src=\"https://www.youtube.com/watch?v=0taMTQsL6ww\" frameborder=\"0\" allowfullscreen></iframe>", baseURL: nil)
+
+        
         webView.loadRequest(URLRequest(url: URL(string: mobile_news_url)!))
-        
-        
         
     }
     
@@ -83,6 +86,8 @@ class OnClickViewController: UIViewController , UIWebViewDelegate {
         
         SVProgressHUD.show()
     }
+    
+    
     
     
     func webViewDidFinishLoad(_ webView: UIWebView) {

@@ -180,7 +180,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                 
                 self.topBanner.backgroundColor = UIColor.white
                 self.topBanner.slideshowInterval = 999999999999999
-                self.topBanner.contentScaleMode = UIViewContentMode.scaleAspectFill
+                self.topBanner.contentScaleMode = UIViewContentMode.scaleAspectFit
                 
                 self.topBanner.currentPageChanged = { page in
                     let titleText = self.petitions[page]

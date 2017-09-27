@@ -164,7 +164,7 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
                     cell.titleHeadImage.image = image
                 }
             }
-            
+            print(petition["art_has_video"])
             if(petition["art_has_video"]=="1"){
                 cell.videosImage_title.isHidden = false
             }else{
