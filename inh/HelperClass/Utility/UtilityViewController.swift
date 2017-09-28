@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class UtilityViewController: UIViewController {
    
@@ -151,6 +152,21 @@ class UtilityViewController: UIViewController {
         }
         return true
  
+    }
+    
+    func imageLoder(url:String,imageView:UIImageView){
+        let url = URL(string: url)!
+        let placeholderImage = UIImage(named: "placeholder")!
+        
+        let filter = AspectScaledToFillSizeFilter(
+            size: imageView.frame.size
+        )
+        
+        imageView.af_setImage(
+            withURL: url,
+            placeholderImage: placeholderImage,
+            filter: filter
+        )
     }
     
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import AlamofireImage
 import SwiftyJSON
 import SVProgressHUD
 
@@ -91,15 +92,17 @@ class InhSpecialViewController: BaseViewController , UITableViewDelegate, UITabl
             
             let headLine = petitions[indexPath.row]
             
-            Alamofire.request(headLine["url"]!).responseImage { response in
-                debugPrint(response)
-                debugPrint(response.result)
-                
-                if let image = response.result.value {
-                    print("image downloaded: \(image)")
-                    cellHeader.headLineImage.image = image
-                }
-            }
+//            Alamofire.request(headLine["url"]!).responseImage { response in
+//                debugPrint(response)
+//                debugPrint(response.result)
+//                
+//                if let image = response.result.value {
+//                    print("image downloaded: \(image)")
+//                    cellHeader.headLineImage.image = image
+//                }
+//            }
+            
+            self.imageLoder(url: headLine["url"]!, imageView: cellHeader.headLineImage)
             
             cellHeader.HeadLineTitle.text = headLine["title"]!
             
@@ -118,16 +121,18 @@ class InhSpecialViewController: BaseViewController , UITableViewDelegate, UITabl
             
             if(headLine["url"]?.isEmpty)!{
                 cell.headImage.image = nil
-            }else{
-                Alamofire.request(headLine["url"]!).responseImage { response in
-                    debugPrint(response)
-                    debugPrint(response.result)
-                    
-                    if let image = response.result.value {
-                        print("image downloaded: \(image)")
-                        cell.headImage.image = image
-                    }
-                }
+            }
+            else{
+                self.imageLoder(url: headLine["url"]!, imageView: cell.headImage)
+//                Alamofire.request(headLine["url"]!).responseImage { response in
+//                    debugPrint(response)
+//                    debugPrint(response.result)
+//                    
+//                    if let image = response.result.value {
+//                        print("image downloaded: \(image)")
+//                        cell.headImage.image = image
+//                    }
+//                }
             }
             
             //        let lastElement = petitions.count - 1
@@ -252,6 +257,21 @@ class InhSpecialViewController: BaseViewController , UITableViewDelegate, UITabl
             }
         }
         return nil
+    }
+    
+    func imageLoder(url:String,imageView:UIImageView){
+        let url = URL(string: url)!
+        let placeholderImage = UIImage(named: "placeholder")!
+        
+        let filter = AspectScaledToFillSizeFilter(
+            size: imageView.frame.size
+        )
+        
+        imageView.af_setImage(
+            withURL: url,
+            placeholderImage: placeholderImage,
+            filter: filter
+        )
     }
     
 }

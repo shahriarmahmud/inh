@@ -180,7 +180,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                 
                 self.topBanner.backgroundColor = UIColor.white
                 self.topBanner.slideshowInterval = 999999999999999
-                self.topBanner.contentScaleMode = UIViewContentMode.scaleAspectFit
+                self.topBanner.contentScaleMode = UIViewContentMode.scaleAspectFill
                 
                 self.topBanner.currentPageChanged = { page in
                     let titleText = self.petitions[page]
@@ -416,15 +416,19 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             if(latestNews["ap_image"]?.isEmpty)!{
                 cell.headerImage.image = nil
             }else{
-                Alamofire.request(latestNews["ap_image"]!).responseImage { response in
-                    debugPrint(response)
-                    debugPrint(response.result)
-                    
-                    if let image = response.result.value {
-                        print("image downloaded: \(image)")
-                        cell.headerImage.image = image
-                    }
-                }
+//                Alamofire.request(latestNews["ap_image"]!).responseImage { response in
+//                    debugPrint(response)
+//                    debugPrint(response.result)
+//                    
+//                    if let image = response.result.value {
+//                        print("image downloaded: \(image)")
+//                        cell.headerImage.image = image
+//                    }
+//                }
+                
+                imageLoder(url: latestNews["ap_image"]!, imageView: cell.headerImage)
+        //  imageLoder(url: <#String#>, imageView: <#UIImageView#>)
+                
             }
             
             if(latestNews["art_has_video"]!=="1"){
@@ -521,15 +525,17 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                             }
 
                             
-                            Alamofire.request((sectionData[row]["ap_image"].stringValue)).responseImage { response in
-                                debugPrint(response)
-                                debugPrint(response.result)
-                                
-                                if let image = response.result.value {
-                                    print("image downloaded: \(image)")
-                                    cell.titleImage.image = image
-                                }
-                            }
+//                            Alamofire.request((sectionData[row]["ap_image"].stringValue)).responseImage { response in
+//                                debugPrint(response)
+//                                debugPrint(response.result)
+//                                
+//                                if let image = response.result.value {
+//                                    print("image downloaded: \(image)")
+//                                    cell.titleImage.image = image
+//                                }
+//                            }
+                            
+                            imageLoder(url: sectionData[row]["ap_image"].stringValue, imageView: cell.titleImage)
                             
                             cell.titleLabel.text = sectionData[row]["art_title"].stringValue
                             
@@ -552,15 +558,18 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                             
                             cell.postingTimeLabel.text = sectionData[row]["X_hours_ago"].stringValue
                             cell.thumbnailLabel.text = sectionData[row]["art_title"].stringValue
-                            Alamofire.request(sectionData[row]["ap_image"].stringValue).responseImage { response in
-                                debugPrint(response)
-                                debugPrint(response.result)
-                                
-                                if let image = response.result.value {
-                                    print("image downloaded: \(image)")
-                                    cell.thumbnailImage.image = image
-                                }
-                            }
+//                            Alamofire.request(sectionData[row]["ap_image"].stringValue).responseImage { response in
+//                                debugPrint(response)
+//                                debugPrint(response.result)
+//                                
+//                                if let image = response.result.value {
+//                                    print("image downloaded: \(image)")
+//                                    cell.thumbnailImage.image = image
+//                                }
+//                            }
+                            
+                            self.imageLoder(url: sectionData[row]["ap_image"].stringValue, imageView: cell.thumbnailImage)
+                            
                         }
 
                     }
@@ -594,18 +603,21 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                         cell.videoImage.isHidden = true
                     }
 
+                    self.imageLoder(url: sectionData[row]["ap_image"].stringValue, imageView: cell.titleImage)
     
                 
-                                Alamofire.request((sectionData[row]["ap_image"].stringValue)).responseImage { response in
-                                    debugPrint(response)
-                                    debugPrint(response.result)
-                
-                                    if let image = response.result.value {
-                                        print("image downloaded: \(image)")
-                                        cell.titleImage.image = image
-                                    }
-                                }
-                                
+//                                Alamofire.request((sectionData[row]["ap_image"].stringValue)).responseImage { response in
+//                                    debugPrint(response)
+//                                    debugPrint(response.result)
+//                
+//                                    if let image = response.result.value {
+//                                        print("image downloaded: \(image)")
+//                                        cell.titleImage.image = image
+//                                        
+//                                        
+//                                    }
+//                                }
+                    
                                 cell.titleLabel.text = sectionData[row]["art_title"].stringValue
 //                    changeTextColor(currentThmeme: currentThmeme, titleLabel: cell.titleLabel)
                 }
@@ -645,15 +657,19 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
 
                     cell.postingTimeLabel.text = sectionData[row]["X_hours_ago"].stringValue
                     cell.thumbnailLabel.text = sectionData[row]["art_title"].stringValue
-                    Alamofire.request(sectionData[row]["ap_image"].stringValue).responseImage { response in
-                        debugPrint(response)
-                        debugPrint(response.result)
-                        
-                        if let image = response.result.value {
-                            print("image downloaded: \(image)")
-                            cell.thumbnailImage.image = image
-                        }
-                    }
+//                    Alamofire.request(sectionData[row]["ap_image"].stringValue).responseImage { response in
+//                        debugPrint(response)
+//                        debugPrint(response.result)
+//                        
+//                        if let image = response.result.value {
+//                            print("image downloaded: \(image)")
+//                            cell.thumbnailImage.image = image
+//                            
+//                            
+//                        }
+//                    }
+                    
+                    self.imageLoder(url: sectionData[row]["ap_image"].stringValue, imageView: cell.thumbnailImage)
 //                    changeTextColor(currentThmeme: currentThmeme, titleLabel: cell.thumbnailLabel,time: cell.postingTimeLabel)
                 }
                 }
@@ -837,12 +853,12 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
     //////////////////////////////////   Section News /////////////////////////////
     
     func GetSectionData(){
-        SVProgressHUD.show()
+        
         
         Alamofire.request(RequestString.section, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
             switch responce.result{
             case.success(let data):
-                SVProgressHUD.dismiss()
+//                SVProgressHUD.dismiss()
                 self.refreshControl.endRefreshing()
                 
                 let Response = JSON(data)
@@ -863,7 +879,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                 
                     for i in 0 ..< self.sectionList.count
                     {
-                        
+                        SVProgressHUD.show()
                         Alamofire.request(RequestString.topSection+self.sectionList[i]["category_id"]!, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
                         switch responce.result{
                         case.success(let data):
@@ -879,6 +895,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                             
                             if(i==5)
                             {
+                                SVProgressHUD.dismiss()
                                 print(self.globalArray)
                                 self.sectionNewsTable.reloadData()
                             }
@@ -943,5 +960,20 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
 //        }
 //    }
     
+    
+    func imageLoder(url:String,imageView:UIImageView){
+        let url = URL(string: url)!
+        let placeholderImage = UIImage(named: "placeholder")!
+        
+        let filter = AspectScaledToFillSizeFilter(
+            size: imageView.frame.size
+        )
+        
+        imageView.af_setImage(
+            withURL: url,
+            placeholderImage: placeholderImage,
+            filter: filter
+        )
+    }
     
 }

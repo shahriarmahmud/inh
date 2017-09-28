@@ -97,15 +97,17 @@ class IndiaNewsViewController: BaseViewController , UITableViewDelegate, UITable
             print(indexPath.row)
             print(petition)
             
-            Alamofire.request(petition["ap_image"]!).responseImage { response in
-                debugPrint(response)
-                debugPrint(response.result)
-                
-                if let image = response.result.value {
-                    print("image downloaded: \(image)")
-                    cell.titleHeadImage.image = image
-                }
-            }
+            utilityViewController.imageLoder(url: petition["ap_image"]!, imageView: cell.titleHeadImage)
+            
+//            Alamofire.request(petition["ap_image"]!).responseImage { response in
+//                debugPrint(response)
+//                debugPrint(response.result)
+//                
+//                if let image = response.result.value {
+//                    print("image downloaded: \(image)")
+//                    cell.titleHeadImage.image = image
+//                }
+//            }
             
             if(petition["art_has_video"]=="1"){
                 cell.videosImage_title.isHidden = false
@@ -147,15 +149,17 @@ class IndiaNewsViewController: BaseViewController , UITableViewDelegate, UITable
             if(petition["ap_thumb_image"]?.isEmpty)!{
                 cell.headImage.image = nil
             }else{
-                Alamofire.request(petition["ap_thumb_image"]!).responseImage { response in
-                    debugPrint(response)
-                    debugPrint(response.result)
-                    
-                    if let image = response.result.value {
-                        print("image downloaded: \(image)")
-                        cell.headImage.image = image
-                    }
-                }
+                
+                utilityViewController.imageLoder(url: petition["ap_thumb_image"]!, imageView: cell.headImage)
+//                Alamofire.request(petition["ap_thumb_image"]!).responseImage { response in
+//                    debugPrint(response)
+//                    debugPrint(response.result)
+//                    
+//                    if let image = response.result.value {
+//                        print("image downloaded: \(image)")
+//                        cell.headImage.image = image
+//                    }
+//                }
             }
             
             let lastElement = petitions.count - 1

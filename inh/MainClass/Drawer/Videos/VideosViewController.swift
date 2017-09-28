@@ -94,15 +94,17 @@ class VideosViewController: BaseViewController , UITableViewDelegate, UITableVie
             
              let headLine = petitions[indexPath.row]
             
-            Alamofire.request(headLine["url"]!).responseImage { response in
-                debugPrint(response)
-                debugPrint(response.result)
-                
-                if let image = response.result.value {
-                    print("image downloaded: \(image)")
-                    cellHeader.headLineImage.image = image
-                }
-            }
+//            Alamofire.request(headLine["url"]!).responseImage { response in
+//                debugPrint(response)
+//                debugPrint(response.result)
+//                
+//                if let image = response.result.value {
+//                    print("image downloaded: \(image)")
+//                    cellHeader.headLineImage.image = image
+//                }
+//            }
+            
+            utilityViewController.imageLoder(url: headLine["url"]!, imageView: cellHeader.headLineImage)
             
             cellHeader.HeadLineTitle.text = headLine["title"]!
             
@@ -123,15 +125,17 @@ class VideosViewController: BaseViewController , UITableViewDelegate, UITableVie
             if(headLine["url"]?.isEmpty)!{
                 cell.headImage.image = nil
             }else{
-                Alamofire.request(headLine["url"]!).responseImage { response in
-                    debugPrint(response)
-                    debugPrint(response.result)
-                    
-                    if let image = response.result.value {
-                        print("image downloaded: \(image)")
-                        cell.headImage.image = image
-                    }
-                }
+                
+                utilityViewController.imageLoder(url: headLine["url"]!, imageView: cell.headImage)
+//                Alamofire.request(headLine["url"]!).responseImage { response in
+//                    debugPrint(response)
+//                    debugPrint(response.result)
+//                    
+//                    if let image = response.result.value {
+//                        print("image downloaded: \(image)")
+//                        cell.headImage.image = image
+//                    }
+//                }
             }
             
 //            let lastElement = petitions.count - 1
