@@ -65,6 +65,8 @@ class SectionNewsTableViewCell: UITableViewCell {
     }
     func passValue(VideoSliderList:[[String: String]]){
         videoSliderList = VideoSliderList
+        print(videoSliderList.count)
+        print(videoSliderList)
 //        currentThmeme = CurrentThmeme
     }
     

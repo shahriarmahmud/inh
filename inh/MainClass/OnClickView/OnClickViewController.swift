@@ -5,18 +5,19 @@
 //  Created by Priom on 9/16/17.
 //  Copyright © 2017 BizTech. All rights reserved.
 //
-
+import WebKit
 import UIKit
 import AlamofireImage
 import Alamofire
 import SVProgressHUD
+import SwiftyJSON
 
-class OnClickViewController: UIViewController , UIWebViewDelegate {
+class OnClickViewController: UIViewController , WKNavigationDelegate {
     
     @IBOutlet weak var scrollview: UIScrollView!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet var parentview: UIView!
-    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var titaleImage: UIImageView!
     
     var share_url = ""
@@ -30,22 +31,9 @@ class OnClickViewController: UIViewController , UIWebViewDelegate {
         super.viewDidLoad()
         webView.scrollView.isScrollEnabled = false
         webView.scrollView.bounces = false
-        webView.scalesPageToFit = true
-        webView.delegate = self
-//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-//        if(!currentThmeme.isEmpty){
-//            if(currentThmeme == "light"){
-//                parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//            }else{
-//                parentview.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-//            }
-//        }else{
-//            self.parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//        }
-        
-//        shareButton.layer.cornerRadius = shareButton.frame.size.height/2
-//        shareButton.clipsToBounds = true
-        
+//        webView.scalesPageToFit = true
+//        webView.delegate = self
+
         Alamofire.request(ap_image).responseImage { response in
             debugPrint(response)
             debugPrint(response.result)
@@ -55,57 +43,82 @@ class OnClickViewController: UIViewController , UIWebViewDelegate {
                 self.titaleImage.image = image
             }
         }
+        SVProgressHUD.show()
+        webView.load(URLRequest(url: URL(string: mobile_news_url)!))
+        webView.navigationDelegate = self
+        webView.allowsBackForwardNavigationGestures = true
         
-        webView.allowsInlineMediaPlayback = true
-        webView.mediaPlaybackRequiresUserAction=true
-//        webView.loadHTMLString("<iframe width=\"\(webView.frame.width)\" height=\"\(webView.frame.height)\" src=\"https://www.youtube.com/watch?v=0taMTQsL6ww\" frameborder=\"0\" allowfullscreen></iframe>", baseURL: nil)
+//        webView.allowsInlineMediaPlayback = true
+//        webView.mediaPlaybackRequiresUserAction=true
 
-        
-        webView.loadRequest(URLRequest(url: URL(string: mobile_news_url)!))
+//        webView.loadRequest(URLRequest(url: URL(string: mobile_news_url)!))
         
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-//        if(!currentThmeme.isEmpty){
-//            if(currentThmeme == "light"){
-//                parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//            }else{
-//                parentview.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-//            }
-//        }else{
-//            self.parentview.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//        }
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func webViewDidStartLoad(_ webView: UIWebView) {
-        
-        SVProgressHUD.show()
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        print(webView.url?.absoluteString)
     }
     
-    
-    
-    
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         SVProgressHUD.dismiss()
+
+//        var frame: CGRect = webView.frame
+//        let heightStrig: String? = webView.stringByEvaluatingJavaScript(from: "(document.height !== undefined) ? document.height : document.body.offsetHeight;")
+//        let height = Float(heightStrig!) ?? 0.0 + 10.0
+//        frame.size.height = CGFloat(height)
+//        webView.frame = frame
         
-        var frame: CGRect = webView.frame
-        var heightStrig: String? = webView.stringByEvaluatingJavaScript(from: "(document.height !== undefined) ? document.height : document.body.offsetHeight;")
-        var height = Float(heightStrig!) ?? 0.0 + 10.0
-        frame.size.height = CGFloat(height)
-        webView.frame = frame
+        let javascriptString = "" +
+            "var body = document.body;" +
+            "var html = document.documentElement;" +
+            "Math.max(" +
+            "   body.scrollHeight," +
+            "   body.offsetHeight," +
+            "   html.clientHeight," +
+            "   html.offsetHeight" +
+        ");"
         
+        webView.evaluateJavaScript(javascriptString) { (result, error) in
+            if error == nil {
+                if let result = result, let height = JSON(result).int {
+                    print(CGFloat(height))
+//                    self.htmlContentHeight = CGFloat(height)
+//                    self.resetContentCell()
+                }
+            }
+        }
+        
+        print(heightStrig)
+
         self.scrollview.contentSize = CGSize(width: self.scrollview.frame.size.width, height: self.webView.frame.size.height+300)
+
     }
     
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        alertDialogViewController.alertDialoge(title: "Alert", message: "Internet Problem, Please Try Again", uiViewController: self)
-    }
+//    func webViewDidStartLoad(_ webView: UIWebView) {
+//
+//        SVProgressHUD.show()
+//    }
+//
+//    func webViewDidFinishLoad(_ webView: UIWebView) {
+//
+//        SVProgressHUD.dismiss()
+//
+//        var frame: CGRect = webView.frame
+//        let heightStrig: String? = webView.stringByEvaluatingJavaScript(from: "(document.height !== undefined) ? document.height : document.body.offsetHeight;")
+//        let height = Float(heightStrig!) ?? 0.0 + 10.0
+//        frame.size.height = CGFloat(height)
+//        webView.frame = frame
+//
+//        self.scrollview.contentSize = CGSize(width: self.scrollview.frame.size.width, height: self.webView.frame.size.height+300)
+//    }
+//
+//    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+////        alertDialogViewController.alertDialoge(title: "Alert", message: "Internet Problem, Please Try Again", uiViewController: self)
+//    }
 
     @IBAction func shareButton(_ sender: Any) {
         //Set the default sharing message.

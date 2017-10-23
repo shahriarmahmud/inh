@@ -19,6 +19,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return self.orientationLock
     }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
+        print("url \(url)")
+        print("url host :\(url.host!)")
+        print("url path :\(url.path)")
+        
+        
+        let urlPath : String = url.path as String!
+        let urlHost : String = url.host as String!
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if(urlHost != "swiftdeveloperblog.com")
+        {
+            print("Host is not correct")
+            return false
+        }
+        
+        if(urlPath == "/inner"){
+            
+            let innerPage: OnClickViewController = mainStoryboard.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+            self.window?.rootViewController = innerPage
+        } else if (urlPath == "/about"){
+            
+        }
+        self.window?.makeKeyAndVisible()
+        return true
+    }
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
