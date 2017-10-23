@@ -81,9 +81,8 @@ class InhNewsViewController: BaseViewController , UITableViewDelegate, UITableVi
         let petition = petitions[indexPath.row]
         
         let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
-        navigationViewController.ap_image = petition["ap_image"]!
+        navigationViewController.type = "1"
         navigationViewController.mobile_news_url = petition["mobile_news_url"]!
-        navigationViewController.share_url = petition["share_url"]!
         self.navigationController?.pushViewController(navigationViewController, animated: true)
         
     }

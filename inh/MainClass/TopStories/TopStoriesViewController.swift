@@ -130,9 +130,8 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         let petition = petitions[topBanner.currentPage]
         
         let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
-        navigationViewController.ap_image = petition["ap_image"]!
+        navigationViewController.type = "1" 
         navigationViewController.mobile_news_url = petition["mobile_news_url"]!
-        navigationViewController.share_url = petition["share_url"]!
         self.navigationController?.pushViewController(navigationViewController, animated: true)
     }
 
@@ -257,9 +256,8 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             let petition = latestNewsList[indexPath.row]
             
             let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
-            navigationViewController.ap_image = petition["ap_image"]!
+            navigationViewController.type = "1"
             navigationViewController.mobile_news_url = petition["mobile_news_url"]!
-            navigationViewController.share_url = petition["share_url"]!
             self.navigationController?.pushViewController(navigationViewController, animated: true)
         }
         else{
@@ -287,9 +285,8 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                         print(sectionData[row]["art_title"])
 
                         let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
-                        navigationViewController.ap_image = sectionData[row]["ap_image"].stringValue
+                        navigationViewController.type = "1"
                         navigationViewController.mobile_news_url = sectionData[row]["mobile_news_url"].stringValue
-                        navigationViewController.share_url = sectionData[row]["share_url"].stringValue
                         self.navigationController?.pushViewController(navigationViewController, animated: true)
                 }
             }

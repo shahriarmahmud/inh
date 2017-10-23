@@ -10,8 +10,6 @@ import Foundation
 
 class RequestString
 {
-    
-    
     public static var contentType : String = "application/json"
     public static var developerId : String = "webmoneyAPI"
     
@@ -23,7 +21,6 @@ class RequestString
     private  struct Routes {
         static let Api = "/v2/"
     }
-    
     private  static let Domain = Domains.Dev
     private  static let BaseURL = Domain + Routes.Api
     
@@ -92,4 +89,7 @@ class RequestString
     public static var FundTransferRequestForOTP : String = BaseURL + "FundTransferAnonymousRequestForOTP"
     
     public static var search : String = BaseURL + "?search="
+    
+    public static var detailsPage : String = BaseURL + "?single="
+   
 }
