@@ -384,28 +384,6 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                 cell.titleLabel.text = latestNews["art_title"]!
             }
             
-            
-            
-//            if(!currentThmeme.isEmpty){
-//                if(currentThmeme == "light"){
-//                    cell.customSeparator.backgroundColor = UIColor(red: (236/255.0), green: (236/255.0), blue: (236/255.0), alpha: 1)
-//                    cell.titleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
-//                    cell.timeLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
-//                    talestNewsTable.separatorColor = UIColor(red: (236/255.0), green: (236/255.0), blue: (236/255.0), alpha: 1)
-//                }else{
-//                    cell.customSeparator.backgroundColor = UIColor(red: (24/255.0), green: (24/255.0), blue: (24/255.0), alpha: 1)
-//                    cell.titleLabel.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//                    cell.timeLabel.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//                    talestNewsTable.separatorColor = UIColor(red: (24/255.0), green: (24/255.0), blue: (24/255.0), alpha: 1)
-//                }
-//            }else{
-//                cell.customSeparator.backgroundColor = UIColor(red: (236/255.0), green: (236/255.0), blue: (236/255.0), alpha: 1)
-//                cell.titleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
-//                cell.timeLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
-//                talestNewsTable.separatorColor = UIColor(red: (236/255.0), green: (236/255.0), blue: (236/255.0), alpha: 1)
-//            }
-            
-            
             if(latestNews["X_hours_ago"]?.isEmpty)!{
                 cell.timeLabel.text = ""
             }else{
@@ -416,19 +394,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
             if(latestNews["ap_image"]?.isEmpty)!{
                 cell.headerImage.image = nil
             }else{
-//                Alamofire.request(latestNews["ap_image"]!).responseImage { response in
-//                    debugPrint(response)
-//                    debugPrint(response.result)
-//                    
-//                    if let image = response.result.value {
-//                        print("image downloaded: \(image)")
-//                        cell.headerImage.image = image
-//                    }
-//                }
-                
                 imageLoder(url: latestNews["ap_image"]!, imageView: cell.headerImage)
-        //  imageLoder(url: <#String#>, imageView: <#UIImageView#>)
-                
             }
             
             if(latestNews["art_has_video"]!=="1"){
@@ -444,12 +410,10 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
         {
             let row = indexPath.row
             print(row)
-            
-//            let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
 
             if(indexPath.section==1){
                 
-                let cell:SectionNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_body", for: indexPath) as! SectionNewsTableViewCell
+                let cell:SectionNewsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell_body") as! SectionNewsTableViewCell
                 
                 
                 if(globalArray.count==6){
@@ -474,17 +438,6 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                             cell.collectionView.isHidden=false
                             
                             cell.collectionView.frame = CGRect(x: 0, y: cell.videoSection.frame.origin.y+cell.videoSection.frame.size.height, width: cell.collectionView.frame.size.width, height: cell.collectionView.frame.size.height)
-                            
-//                            if(!currentThmeme.isEmpty){
-//                                if(currentThmeme == "light"){
-//                                    cell.videoSection.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
-//                                }else{
-//                                    cell.videoSection.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-//                                }
-//                            }else{
-//                                cell.videoSection.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
-//                            }
-
                             Alamofire.request(RequestString.videoSlider, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
                                 switch responce.result{
                                 case.success(let data):
@@ -523,23 +476,9 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                             }else{
                                 cell.videoImage.isHidden = true
                             }
-
-                            
-//                            Alamofire.request((sectionData[row]["ap_image"].stringValue)).responseImage { response in
-//                                debugPrint(response)
-//                                debugPrint(response.result)
-//                                
-//                                if let image = response.result.value {
-//                                    print("image downloaded: \(image)")
-//                                    cell.titleImage.image = image
-//                                }
-//                            }
-                            
                             imageLoder(url: sectionData[row]["ap_image"].stringValue, imageView: cell.titleImage)
                             
                             cell.titleLabel.text = sectionData[row]["art_title"].stringValue
-                            
-//                            changeTextColor(currentThmeme: currentThmeme, titleLabel: cell.titleLabel)
                         }
                         else
                         {
@@ -553,21 +492,9 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                             }else{
                                 cell.videoImage_body.isHidden = true
                             }
-
-//                            changeTextColor(currentThmeme: currentThmeme, titleLabel: cell.thumbnailLabel,time: cell.postingTimeLabel)
                             
                             cell.postingTimeLabel.text = sectionData[row]["X_hours_ago"].stringValue
                             cell.thumbnailLabel.text = sectionData[row]["art_title"].stringValue
-//                            Alamofire.request(sectionData[row]["ap_image"].stringValue).responseImage { response in
-//                                debugPrint(response)
-//                                debugPrint(response.result)
-//                                
-//                                if let image = response.result.value {
-//                                    print("image downloaded: \(image)")
-//                                    cell.thumbnailImage.image = image
-//                                }
-//                            }
-                            
                             self.imageLoder(url: sectionData[row]["ap_image"].stringValue, imageView: cell.thumbnailImage)
                             
                         }
@@ -604,22 +531,8 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                     }
 
                     self.imageLoder(url: sectionData[row]["ap_image"].stringValue, imageView: cell.titleImage)
-    
-                
-//                                Alamofire.request((sectionData[row]["ap_image"].stringValue)).responseImage { response in
-//                                    debugPrint(response)
-//                                    debugPrint(response.result)
-//                
-//                                    if let image = response.result.value {
-//                                        print("image downloaded: \(image)")
-//                                        cell.titleImage.image = image
-//                                        
-//                                        
-//                                    }
-//                                }
                     
                                 cell.titleLabel.text = sectionData[row]["art_title"].stringValue
-//                    changeTextColor(currentThmeme: currentThmeme, titleLabel: cell.titleLabel)
                 }
             
             
@@ -854,7 +767,7 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
     
     func GetSectionData(){
         
-        
+        SVProgressHUD.show()
         Alamofire.request(RequestString.section, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
             switch responce.result{
             case.success(let data):
@@ -877,90 +790,47 @@ class TopStoriesViewController: BaseViewController , UITableViewDelegate, UITabl
                 print(self.sectionList)
                 print(self.sectionList.count)
                 
+                if(self.sectionList.count==6){
                     for i in 0 ..< self.sectionList.count
                     {
-                        SVProgressHUD.show()
+                       
                         Alamofire.request(RequestString.topSection+self.sectionList[i]["category_id"]!, method: .get, encoding: JSONEncoding.default).responseJSON { responce in
-                        switch responce.result{
-                        case.success(let data):
-                            
-                            let Response = JSON(data)
-                            print(Response)
-                            print(RequestString.topSection+self.sectionList[i]["category_id"]!)
-                            
-                            let dictionary = ["headValue" : self.sectionList[i]["category_name"] ?? "","rowValue" :data] as [String : Any]
-                            
-                            print(dictionary)
-                            self.globalArray.append(dictionary)
-                            
-                            if(i==5)
-                            {
-                                SVProgressHUD.dismiss()
-                                print(self.globalArray)
-                                self.sectionNewsTable.reloadData()
-                            }
-                            self.scrollview.contentSize = CGSize(width: self.scrollview.frame.size.width, height: self.sectionNewsTable.frame.origin.y + self.sectionNewsTable.frame.size.height)
-                            
-                            self.sectionNewsTable.frame = CGRect(x: self.sectionNewsTable.frame.origin.x, y: self.sectionNewsTable.frame.origin.y, width: self.sectionNewsTable.frame.size.width, height: self.sectionNewsTable.rowHeight * 36)
- 
-                        case.failure(let error):
-                            print("failed\(error)")
+                            switch responce.result{
+                            case.success(let data):
+                                
+                                let Response = JSON(data)
+                                print(Response)
+                                print(RequestString.topSection+self.sectionList[i]["category_id"]!)
+                                
+                                let dictionary = ["headValue" : self.sectionList[i]["category_name"] ?? "","rowValue" :data] as [String : Any]
+                                
+                                print(dictionary)
+                                self.globalArray.append(dictionary)
+                                
+                                if(i==5)
+                                {
+                                    SVProgressHUD.dismiss()
+                                    print(self.globalArray)
+                                    self.sectionNewsTable.reloadData()
+                                }
+                                self.scrollview.contentSize = CGSize(width: self.scrollview.frame.size.width, height: self.sectionNewsTable.frame.origin.y + self.sectionNewsTable.frame.size.height)
+                                
+                                self.sectionNewsTable.frame = CGRect(x: self.sectionNewsTable.frame.origin.x, y: self.sectionNewsTable.frame.origin.y, width: self.sectionNewsTable.frame.size.width, height: self.sectionNewsTable.rowHeight * 36)
+                                
+                            case.failure(let error):
+                                print("failed\(error)")
                             }
                         }
                         
                     }
- 
-                
+                }
+
             case.failure(let error):
                 print("failed\(error)")
             }
         }
     }
-    
-    
-//    func changeTextColor(currentThmeme:String,titleLabel:UILabel){
-//        if(!currentThmeme.isEmpty){
-//            if(currentThmeme == "light"){
-//                titleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
-//            }else{
-//                titleLabel.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//            }
-//        }else{
-//            titleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
-//        }
-//    }
-//    
-//    func changeTextColor(currentThmeme:String,titleLabel:UILabel,time:UILabel){
-//        if(!currentThmeme.isEmpty){
-//            if(currentThmeme == "light"){
-//                titleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
-//                time.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
-//            }else{
-//                titleLabel.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//                time.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//            }
-//        }else{
-//            titleLabel.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
-//            time.textColor = UIColor(red: (0), green: (0), blue: (0), alpha: 1)
-//        }
-//    }
-//    
-//    func changeSectionTextColor(currentThmeme:String,sectionView:UIView,sectionText:UILabel){
-//        if(!currentThmeme.isEmpty){
-//            if(currentThmeme == "light"){
-//                sectionText.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//                sectionView.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
-//            }else{
-//                sectionText.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//                sectionView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-//            }
-//        }else{
-//            sectionText.textColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//            sectionView.backgroundColor = UIColor(red: (17/255.0), green: (33/255.0), blue: (76/255.0), alpha: 1)
-//        }
-//    }
-    
-    
+
     func imageLoder(url:String,imageView:UIImageView){
         let url = URL(string: url)!
         let placeholderImage = UIImage(named: "placeholder")!
