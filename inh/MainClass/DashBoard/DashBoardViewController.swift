@@ -17,7 +17,7 @@ class DashBoardViewController: DrawerController {
         super.viewDidLoad()
         addSlideMenuButton()
         
-        segmentedPager.backgroundColor = .white
+        segmentedPager.backgroundColor = UIColor(red: (33/255.0), green: (150/255.0), blue: (245/255.0), alpha: 1)
         
         // Parallax Header
         segmentedPager.parallaxHeader.view = headView
@@ -41,9 +41,9 @@ class DashBoardViewController: DrawerController {
 //            segmentedPager.segmentedControl.backgroundColor = UIColor(red: (33/255.0), green: (45/255.0), blue: (77/255.0), alpha: 1)
 //        }
 
-        segmentedPager.segmentedControl.backgroundColor = UIColor(red: (33/255.0), green: (45/255.0), blue: (77/255.0), alpha: 1)
-        segmentedPager.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.gray,NSFontAttributeName : UIFont.systemFont(ofSize: 13)]
-        segmentedPager.segmentedControl.selectedTitleTextAttributes = [NSForegroundColorAttributeName : UIColor.white,NSFontAttributeName : UIFont.systemFont(ofSize: 13) ]
+        segmentedPager.segmentedControl.backgroundColor = UIColor(red: (21/255.0), green: (38/255.0), blue: (55/255.0), alpha: 1)
+        segmentedPager.segmentedControl.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: (33/255.0), green: (150/255.0), blue: (245/255.0), alpha: 1),NSFontAttributeName : UIFont.systemFont(ofSize: 13)]
+        segmentedPager.segmentedControl.selectedTitleTextAttributes = [NSForegroundColorAttributeName : UIColor(red: (33/255.0), green: (150/255.0), blue: (245/255.0), alpha: 1),NSFontAttributeName : UIFont.systemFont(ofSize: 13) ]
         segmentedPager.segmentedControl.selectionStyle = .fullWidthStripe
         segmentedPager.segmentedControl.selectionIndicatorColor = .red
         segmentedPager.segmentedControl.selectionIndicatorHeight=2

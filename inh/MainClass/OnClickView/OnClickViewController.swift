@@ -92,7 +92,7 @@ class OnClickViewController: UIViewController , WKNavigationDelegate {
             }
         }
         
-        print(heightStrig)
+//        print(heightStrig)
 
         self.scrollview.contentSize = CGSize(width: self.scrollview.frame.size.width, height: self.webView.frame.size.height+300)
 

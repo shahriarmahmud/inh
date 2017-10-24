@@ -42,6 +42,8 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
 //        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
 //        print(currentThmeme)
 //        if(!currentThmeme.isEmpty){
@@ -56,6 +58,10 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         tblMenuOptions.tableFooterView = UIView()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        btnMenu.backgroundColor = UIColor(red: (233/255.0), green: (30/255.0), blue: (99/255.0), alpha: 1)
     }
     
     override func didReceiveMemoryWarning() {
@@ -105,7 +111,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.view.frame = CGRect(x: -UIScreen.main.bounds.size.width, y: 0, width: UIScreen.main.bounds.size.width,height: UIScreen.main.bounds.size.height)
             self.view.layoutIfNeeded()
-            self.view.backgroundColor = UIColor.clear
+            self.view.backgroundColor = UIColor(red: (233/255.0), green: (30/255.0), blue: (99/255.0), alpha: 1)
         }, completion: { (finished) -> Void in
             self.view.removeFromSuperview()
             self.removeFromParentViewController()
