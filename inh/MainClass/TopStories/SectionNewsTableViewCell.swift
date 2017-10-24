@@ -58,9 +58,8 @@ class SectionNewsTableViewCell: UITableViewCell {
     
     @IBAction func headerButtonClick(_ sender: Any) {
         let navigationViewController = SELF?.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
-        navigationViewController.ap_image = appImage
+        navigationViewController.type = "1"
         navigationViewController.mobile_news_url = mobileNewsUrl
-        navigationViewController.share_url = shareUrl
         SELF?.navigationController?.pushViewController(navigationViewController, animated: true)
     }
     func passValue(VideoSliderList:[[String: String]]){
