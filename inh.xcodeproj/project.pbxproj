@@ -23,6 +23,7 @@
 		CA5582971F6ED5E400A58519 /* InhNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582961F6ED5E400A58519 /* InhNewsTableViewCell.swift */; };
 		CA5582991F6ED61500A58519 /* InhNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582981F6ED61500A58519 /* InhNewsViewController.swift */; };
 		CA55829C1F6EF6E300A58519 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA55829B1F6EF6E300A58519 /* VideoViewController.swift */; };
+		CA626BA61FA3BBE3003EC0C3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA626BA51FA3BBE3003EC0C3 /* WebViewController.swift */; };
 		CA783EFE1F697F8B00520FE2 /* SectionNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA783EFD1F697F8B00520FE2 /* SectionNewsTableViewCell.swift */; };
 		CA9014DD1F6C20C80027C87F /* VideoSliderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9014DC1F6C20C80027C87F /* VideoSliderCollectionViewCell.swift */; };
 		CABFBBA81F6D47CD009C5F31 /* OnClickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABFBBA71F6D47CD009C5F31 /* OnClickViewController.swift */; };
@@ -135,6 +136,7 @@
 		CA5582961F6ED5E400A58519 /* InhNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InhNewsTableViewCell.swift; path = MainClass/Drawer/InhNews/InhNewsTableViewCell.swift; sourceTree = "<group>"; };
 		CA5582981F6ED61500A58519 /* InhNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InhNewsViewController.swift; path = MainClass/Drawer/InhNews/InhNewsViewController.swift; sourceTree = "<group>"; };
 		CA55829B1F6EF6E300A58519 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoViewController.swift; path = MainClass/Video/VideoViewController.swift; sourceTree = "<group>"; };
+		CA626BA51FA3BBE3003EC0C3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = MainClass/Webview/WebViewController.swift; sourceTree = "<group>"; };
 		CA783EFD1F697F8B00520FE2 /* SectionNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionNewsTableViewCell.swift; path = MainClass/TopStories/SectionNewsTableViewCell.swift; sourceTree = "<group>"; };
 		CA9014DC1F6C20C80027C87F /* VideoSliderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoSliderCollectionViewCell.swift; path = MainClass/TopStories/VideoSliderCollectionViewCell.swift; sourceTree = "<group>"; };
 		CABFBBA71F6D47CD009C5F31 /* OnClickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnClickViewController.swift; path = MainClass/OnClickView/OnClickViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +271,14 @@
 			name = Video;
 			sourceTree = "<group>";
 		};
+		CA626BA41FA3BBA3003EC0C3 /* Webview */ = {
+			isa = PBXGroup;
+			children = (
+				CA626BA51FA3BBE3003EC0C3 /* WebViewController.swift */,
+			);
+			name = Webview;
+			sourceTree = "<group>";
+		};
 		CABFBBA61F6D478B009C5F31 /* OnClickView */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +390,7 @@
 		E3365E861F67BF7500324368 /* MainClass */ = {
 			isa = PBXGroup;
 			children = (
+				CA626BA41FA3BBA3003EC0C3 /* Webview */,
 				CAF0403C1F75637700EEB456 /* Setting */,
 				CA55829A1F6EF6C000A58519 /* Video */,
 				CABFBBA91F6D56DE009C5F31 /* PhotoGallery */,
@@ -1412,6 +1423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA5582971F6ED5E400A58519 /* InhNewsTableViewCell.swift in Sources */,
+				CA626BA61FA3BBE3003EC0C3 /* WebViewController.swift in Sources */,
 				E35108231F67E69E0041B0B8 /* IndiaNewsViewController.swift in Sources */,
 				E35108301F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift in Sources */,
 				CAF0403E1F7563A000EEB456 /* SettingViewController.swift in Sources */,
