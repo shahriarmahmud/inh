@@ -21,16 +21,52 @@ class WebViewController: UIViewController , WKNavigationDelegate {
         super.viewDidLoad()
 
         SVProgressHUD.show()
-        self.webView.load(URLRequest(url: URL(string: "https://m.inhnews.in")!))
-        self.webView.navigationDelegate = self
-        self.webView.allowsBackForwardNavigationGestures = true
+        webView.load(URLRequest(url: URL(string: "https://m.inhnews.in")!))
+        webView.navigationDelegate = self
+        webView.allowsBackForwardNavigationGestures = true
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        if(!(webView.url?.absoluteString.isEmpty)!){
+            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
+                let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+               self.navigationController?.present(navigationViewController, animated: true, completion: nil)//(navigationViewController, animated: true)
+            }
+        }
+    }
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         SVProgressHUD.dismiss()
+        
+        print(webView.url?.absoluteString)
+        if(!(webView.url?.absoluteString.isEmpty)!){
+            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
+                let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+                self.navigationController?.present(navigationViewController, animated: true, completion: nil)//(navigationViewController, animated: true)
+            }
+        }
     }
+    
+    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+        if(!(webView.url?.absoluteString.isEmpty)!){
+            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
+                let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+                self.navigationController?.pushViewController(navigationViewController, animated: true)
+            }
+        }
+
+    }
+    
+//    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+//        if(!(webView.url?.absoluteString.isEmpty)!){
+//            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
+//                let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+//                self.navigationController?.pushViewController(navigationViewController, animated: true)
+//            }
+//        }
+//    }
 }

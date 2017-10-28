@@ -17,7 +17,7 @@
         <!--Setting View Controller-->
         <scene sceneID="Pxv-NM-3vf">
             <objects>
-                <viewController id="OLC-ph-mqS" customClass="SettingViewController" customModule="inh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="SettingViewController" storyboardIdentifier="SettingViewController" id="OLC-ph-mqS" customClass="SettingViewController" customModule="inh" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ozL-pL-FD4"/>
                         <viewControllerLayoutGuide type="bottom" id="LT3-D3-Nlk"/>
@@ -811,6 +811,7 @@
                     </view>
                     <connections>
                         <outlet property="webView" destination="XsG-hS-QoJ" id="t8B-Qu-tcs"/>
+                        <segue destination="OLC-ph-mqS" kind="show" id="GUc-A2-aUz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q03-HW-68C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2933,4 +2934,7 @@
         <image name="white_logo" width="873" height="393"/>
         <image name="youtube" width="21" height="21"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="GUc-A2-aUz"/>
+    </inferredMetricsTieBreakers>
 </document>

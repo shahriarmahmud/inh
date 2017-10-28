@@ -64,9 +64,6 @@ class OnClickViewController: UIViewController , WKNavigationDelegate {
             navigationViewController.mobile_news_url = (webView.url?.absoluteString)!
             self.navigationController?.pushViewController(navigationViewController, animated: true)
         }
-        
-        
-
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
