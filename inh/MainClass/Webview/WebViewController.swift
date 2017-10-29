@@ -43,11 +43,18 @@ class WebViewController: UIViewController , WKNavigationDelegate {
         SVProgressHUD.dismiss()
         
         print(webView.url?.absoluteString)
+//        if(!(webView.url?.absoluteString.isEmpty)!){
+//            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
+//                let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+//                self.navigationController?.present(navigationViewController, animated: true, completion: nil)//(navigationViewController, animated: true)
+//            }
+//        }
+        
         if(!(webView.url?.absoluteString.isEmpty)!){
-            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
-                let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
-                self.navigationController?.present(navigationViewController, animated: true, completion: nil)//(navigationViewController, animated: true)
-            }
+            let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+            navigationViewController.type = "2"
+            navigationViewController.mobile_news_url = (webView.url?.absoluteString)!
+            self.navigationController?.pushViewController(navigationViewController, animated: true)
         }
     }
     

@@ -32,23 +32,23 @@ class OnClickViewController: UIViewController , WKNavigationDelegate {
         
         webView.scrollView.isScrollEnabled = false
         webView.scrollView.bounces = false
-        if(!mobile_news_url.isEmpty){
-            if(type == "1"){
-                let id = mobile_news_url.components(separatedBy: "=").last
-                print(id)
-                GEtServerDate(id: id!)
-            }else if (type == "2"){
-                let id = String(self.mobile_news_url.characters.suffix(4))//.components(separatedBy: "/").last
-                print(id)
-                self.GEtServerDate(id: id)
-            }else{
+//        if(!mobile_news_url.isEmpty){
+//            if(type == "1"){
+//                let id = mobile_news_url.components(separatedBy: "=").last
+//                print(id)
+//                GEtServerDate(id: id!)
+//            }else if (type == "2"){
+//                let id = String(self.mobile_news_url.characters.suffix(4))//.components(separatedBy: "/").last
+//                print(id)
+//                self.GEtServerDate(id: id)
+//            }else{
                 SVProgressHUD.show()
-                self.webView.load(URLRequest(url: URL(string: mobile_news_url)!))
+                self.webView.load(URLRequest(url: URL(string: "https://m.inhnews.in")!))
                 self.webView.navigationDelegate = self
                 self.webView.allowsBackForwardNavigationGestures = true
-            }
-        }
-        
+//            }
+//        }
+//
 
     }
 
@@ -58,16 +58,31 @@ class OnClickViewController: UIViewController , WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
         print(webView.url?.absoluteString)
+        
         if(!(webView.url?.absoluteString.isEmpty)!){
-            let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
-            navigationViewController.type = "2"
-            navigationViewController.mobile_news_url = (webView.url?.absoluteString)!
-            self.navigationController?.pushViewController(navigationViewController, animated: true)
+            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
+                let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+                self.navigationController?.pushViewController(navigationViewController, animated: true)
+            }
         }
+//        if(!(webView.url?.absoluteString.isEmpty)!){
+//            let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
+//            navigationViewController.type = "2"
+//            navigationViewController.mobile_news_url = (webView.url?.absoluteString)!
+//            self.navigationController?.pushViewController(navigationViewController, animated: true)
+//        }
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         SVProgressHUD.dismiss()
+        print(webView.url?.absoluteString)
+        if(!(webView.url?.absoluteString.isEmpty)!){
+//            if(webView.url?.absoluteString == "https://m.inhnews.in/entertainment/news/settings"){
+                let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+            print(navigationViewController); self.navigationController?.pushViewController(navigationViewController, animated: true)
+//            }
+        }
+        
         let javascriptString = "" +
             "var body = document.body;" +
             "var html = document.documentElement;" +
