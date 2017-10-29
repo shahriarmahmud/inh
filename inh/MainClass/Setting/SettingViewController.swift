@@ -16,9 +16,29 @@ class SettingViewController: UIViewController , MFMailComposeViewControllerDeleg
     @IBOutlet var parentView: UIView!
     @IBOutlet weak var versionText: UILabel!
     @IBOutlet weak var scrollview: UIScrollView!
-//    @IBOutlet var themeView: UIView!
+    @IBOutlet var themeView: UIView!
+    @IBOutlet weak var themeChangeSeage: UISegmentedControl!
     
-//    @IBOutlet weak var themeChangeSeage: UISegmentedControl!
+    
+    
+    
+    @IBOutlet weak var notificationLabel: UILabel!
+    @IBOutlet weak var notificationSubLabel: UILabel!
+    @IBOutlet weak var themeLabel: UILabel!
+    @IBOutlet weak var themeSubLabel: UILabel!
+    @IBOutlet weak var clearAppCachLabel: UILabel!
+    @IBOutlet weak var clearAppCachSubLabel: UILabel!
+    @IBOutlet weak var rateUsLabel: UILabel!
+    @IBOutlet weak var shareThisAppLabel: UILabel!
+    @IBOutlet weak var sendTheFeedBackLabel: UILabel!
+    @IBOutlet weak var aboutInhLabel: UILabel!
+    @IBOutlet weak var privacyPolicyLabel: UILabel!
+    @IBOutlet weak var termsOfUseLabel: UILabel!
+    @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var versionSubLabel: UILabel!
+    
+    
+    
     var tempView: UIView!
     var viewtag = 0
     
@@ -28,6 +48,7 @@ class SettingViewController: UIViewController , MFMailComposeViewControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = false
         
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             print(version)
@@ -39,38 +60,29 @@ class SettingViewController: UIViewController , MFMailComposeViewControllerDeleg
             if(currentnotification == "on"){
                 OneSignal.setSubscription(true)
                 settingSeague.selectedSegmentIndex = 0
-                // turn off the current selection
-//                themeChangeSeage.selectedSegmentIndex = UISegmentedControlNoSegment;
-//                themeChangeSeage.sendActions(for: UIControlEvents.valueChanged)
+//                 turn off the current selection
+                themeChangeSeage.selectedSegmentIndex = UISegmentedControlNoSegment;
+                themeChangeSeage.sendActions(for: UIControlEvents.valueChanged)
             }else{
                 OneSignal.setSubscription(false)
                 settingSeague.selectedSegmentIndex = 1
                 // turn off the current selection
-//                themeChangeSeage.selectedSegmentIndex = UISegmentedControlNoSegment;
-//                themeChangeSeage.sendActions(for: UIControlEvents.valueChanged)
+                themeChangeSeage.selectedSegmentIndex = UISegmentedControlNoSegment;
+                themeChangeSeage.sendActions(for: UIControlEvents.valueChanged)
             }
         }else{
             OneSignal.setSubscription(true)
             settingSeague.selectedSegmentIndex = 0
         }
         
-//        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
-//        if(!currentThmeme.isEmpty){
-//            if(currentThmeme == "light"){
-//                parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//                themeChangeSeage.selectedSegmentIndex = 0
-//            }else{
-//                parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-//                themeChangeSeage.selectedSegmentIndex = 1
-//            }
-//        }else{
-//            self.parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//        }
+        
+        checkingTheme()
         
         self.scrollview.contentSize = CGSize(width: self.scrollview.frame.size.width, height: 700)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
         let currentnotification = UserDefaults.standard.string(forKey: "notification") ?? ""
         print(currentnotification)
         if(!currentnotification.isEmpty){
@@ -79,18 +91,72 @@ class SettingViewController: UIViewController , MFMailComposeViewControllerDeleg
                 settingSeague.selectedSegmentIndex = 0
                 // turn off the current selection
                 settingSeague.selectedSegmentIndex = UISegmentedControlNoSegment;
-//                themeChangeSeage.sendActions(for: UIControlEvents.valueChanged)
+                themeChangeSeage.sendActions(for: UIControlEvents.valueChanged)
             }else{
                 OneSignal.setSubscription(false)
                 settingSeague.selectedSegmentIndex = 1
                 // turn off the current selection
-//                themeChangeSeage.selectedSegmentIndex = UISegmentedControlNoSegment;
-//                themeChangeSeage.sendActions(for: UIControlEvents.valueChanged)
+                themeChangeSeage.selectedSegmentIndex = UISegmentedControlNoSegment;
+                themeChangeSeage.sendActions(for: UIControlEvents.valueChanged)
             }
         }else{
             OneSignal.setSubscription(true)
             settingSeague.selectedSegmentIndex = 0
         }
+        checkingTheme()
+    }
+    
+    func checkingTheme(){
+        let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+        if(!currentThmeme.isEmpty){
+            if(currentThmeme == "Lite"){
+                parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+                textColorBlack()
+                themeChangeSeage.selectedSegmentIndex = 0
+            }else{
+                parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+                
+                textColorWhite()
+                themeChangeSeage.selectedSegmentIndex = 1
+            }
+        }else{
+            self.parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            textColorBlack()
+        }
+    }
+    
+    func textColorWhite(){
+        notificationLabel.textColor = UIColor.white
+        notificationSubLabel.textColor = UIColor.white
+        themeLabel.textColor = UIColor.white
+        themeSubLabel.textColor = UIColor.white
+        clearAppCachLabel.textColor = UIColor.white
+        clearAppCachSubLabel.textColor = UIColor.white
+        rateUsLabel.textColor = UIColor.white
+        shareThisAppLabel.textColor = UIColor.white
+        sendTheFeedBackLabel.textColor = UIColor.white
+        aboutInhLabel.textColor = UIColor.white
+        privacyPolicyLabel.textColor = UIColor.white
+        termsOfUseLabel.textColor = UIColor.white
+        versionLabel.textColor = UIColor.white
+        versionSubLabel.textColor = UIColor.white
+    }
+    
+    func textColorBlack(){
+        notificationLabel.textColor = UIColor.black
+        notificationSubLabel.textColor = UIColor.black
+        themeLabel.textColor = UIColor.black
+        themeSubLabel.textColor = UIColor.black
+        clearAppCachLabel.textColor = UIColor.black
+        clearAppCachSubLabel.textColor = UIColor.black
+        rateUsLabel.textColor = UIColor.black
+        shareThisAppLabel.textColor = UIColor.black
+        sendTheFeedBackLabel.textColor = UIColor.black
+        aboutInhLabel.textColor = UIColor.black
+        privacyPolicyLabel.textColor = UIColor.black
+        termsOfUseLabel.textColor = UIColor.black
+        versionLabel.textColor = UIColor.black
+        versionSubLabel.textColor = UIColor.black
     }
     
     @IBAction func notificationTougle(_ sender: UISegmentedControl) {
@@ -116,90 +182,110 @@ class SettingViewController: UIViewController , MFMailComposeViewControllerDeleg
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-//    @IBAction func cancel(_ sender: Any) {
-//        let aSelector : Selector = #selector(SettingViewController.closeSubView)
-//        let tapGesture = UITapGestureRecognizer(target:self, action: aSelector)
-//        tempView.addGestureRecognizer(tapGesture)
-//    }
+    @IBAction func cancel(_ sender: Any) {
+        let aSelector : Selector = #selector(SettingViewController.closeSubView)
+        let tapGesture = UITapGestureRecognizer(target:self, action: aSelector)
+        tempView.addGestureRecognizer(tapGesture)
+    }
 
-//    @IBAction func ok(_ sender: Any) {
-//        if(themeChangeSeage.selectedSegmentIndex==0){
-//            storeVlue(color: "light")
-//            parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//            let aSelector : Selector = #selector(SettingViewController.closeSubView)
-//            let tapGesture = UITapGestureRecognizer(target:self, action: aSelector)
-//            tempView.addGestureRecognizer(tapGesture)
-//        }else{
-//            storeVlue(color: "dark")
-//            parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-//            let aSelector : Selector = #selector(SettingViewController.closeSubView)
-//            let tapGesture = UITapGestureRecognizer(target:self, action: aSelector)
-//            tempView.addGestureRecognizer(tapGesture)
-//        }
-//    }
-//    @IBAction func themeChange(_ sender: UISegmentedControl) {
-//        switch themeChangeSeage.selectedSegmentIndex
-//        {
-//        case 0:
-//            storeVlue(color: "light")
-//            parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
-//            let aSelector : Selector = #selector(SettingViewController.closeSubView)
-//            let tapGesture = UITapGestureRecognizer(target:self, action: aSelector)
-//            tempView.addGestureRecognizer(tapGesture)
-//        case 1:
-//            storeVlue(color: "dark")
-//            parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
-//            let aSelector : Selector = #selector(SettingViewController.closeSubView)
-//            let tapGesture = UITapGestureRecognizer(target:self, action: aSelector)
-//            tempView.addGestureRecognizer(tapGesture)
-//        default:
-//            break; 
-//        }
-//    }
-//
-//    @IBAction func theme(_ sender: Any) {
-//        if viewtag == 1 {
-//            UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseOut, animations: {() -> Void in
-//                self.themeView.frame = CGRect(origin: CGPoint(x: 0, y :self.view.frame.size.height), size: CGSize(width: self.view.frame.size.width, height: self.themeView.frame.size.height))
-//            }, completion: {(finished: Bool) -> Void in
-//                self.tempView.removeFromSuperview()
-//            })
-//            viewtag = 0
-//        }
-//        else
-//        {
-//            tempView = UIView(frame: CGRect(origin: CGPoint(x:0, y:0), size: CGSize(width: self.view.frame.size.width, height:self.view.frame.size.height)))
-//            
-//            tempView.backgroundColor = UIColor(white: 0, alpha: 0.3)
-//            tempView.isOpaque = false
-//            tempView.isUserInteractionEnabled = true
-//            self.view.addSubview(tempView)
-//            themeView.frame = CGRect(origin: CGPoint(x: 0, y :(self.view.frame.size.height-themeView.frame.size.height)), size: CGSize(width: self.view.frame.size.width, height: themeView.frame.size.height))
-//            
-//            let transition = CATransition()
-//            transition.duration = 0.2
-//            transition.type = kCATransitionMoveIn
-//            transition.subtype = kCATransitionFromTop
-//            themeView.layer.add(transition, forKey: kCATransition)
-//            tempView.addSubview(themeView)
-//            viewtag = 1
-//            let aSelector : Selector = #selector(SettingViewController.closeSubView)
-//            let tapGesture = UITapGestureRecognizer(target:self, action: aSelector)
-//            tempView.addGestureRecognizer(tapGesture)
-//        }
-//    }
-//    
-//    func closeSubView()
-//    {
-//        if viewtag == 1 {
-//            UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseOut, animations: {() -> Void in
-//                self.themeView.frame = CGRect(origin: CGPoint(x: 0, y :self.view.frame.size.height), size: CGSize(width: self.view.frame.size.width, height: self.themeView.frame.size.height))
-//            }, completion: {(finished: Bool) -> Void in
-//                self.tempView.removeFromSuperview()
-//            })
-//            viewtag = 0
-//        }
-//    }
+    @IBAction func ok(_ sender: Any) {
+        if(themeChangeSeage.selectedSegmentIndex==0){
+            storeVlue(color: "Lite")
+            parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            let aSelector : Selector = #selector(SettingViewController.closeSubView)
+            let tapGesture = UITapGestureRecognizer(target:self, action: aSelector)
+            tempView.addGestureRecognizer(tapGesture)
+        }else{
+            storeVlue(color: "Dark")
+            parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+            let aSelector : Selector = #selector(SettingViewController.closeSubView)
+            let tapGesture = UITapGestureRecognizer(target:self, action: aSelector)
+            tempView.addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    func setCookie(key: String, value: String) {
+        let cookieProps: [HTTPCookiePropertyKey : Any] = [
+            HTTPCookiePropertyKey.domain: URL.self,
+            HTTPCookiePropertyKey.path: "/",
+            HTTPCookiePropertyKey.name: key,
+            HTTPCookiePropertyKey.value: value,
+            HTTPCookiePropertyKey.secure: "TRUE",
+            //            HTTPCookiePropertyKey.expires: NSDate(timeIntervalSinceNow: ExpTime)
+        ]
+        
+        if let cookie = HTTPCookie(properties: cookieProps) {
+            HTTPCookieStorage.shared.setCookie(cookie)
+        }
+    }
+    
+    @IBAction func themeChange(_ sender: UISegmentedControl) {
+        switch themeChangeSeage.selectedSegmentIndex
+        {
+        case 0:
+            storeVlue(color: "Lite")
+            parentView.backgroundColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
+            textColorBlack()
+            let currentThmeme = UserDefaults.standard.string(forKey: "theme") ?? ""
+            setCookie(key: "Theme", value: currentThmeme)
+            let aSelector : Selector = #selector(SettingViewController.closeSubView)
+            let tapGesture = UITapGestureRecognizer(target:self, action: aSelector)
+            tempView.addGestureRecognizer(tapGesture)
+        case 1:
+            storeVlue(color: "Dark")
+            parentView.backgroundColor = UIColor(red: (85/255.0), green: (85/255.0), blue: (85/255.0), alpha: 1)
+            textColorWhite()
+            let aSelector : Selector = #selector(SettingViewController.closeSubView)
+            let tapGesture = UITapGestureRecognizer(target:self, action: aSelector)
+            tempView.addGestureRecognizer(tapGesture)
+        default:
+            break;
+        }
+    }
+
+    @IBAction func theme(_ sender: Any) {
+        if viewtag == 1 {
+            UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseOut, animations: {() -> Void in
+                self.themeView.frame = CGRect(origin: CGPoint(x: 0, y :self.view.frame.size.height), size: CGSize(width: self.view.frame.size.width, height: self.themeView.frame.size.height))
+            }, completion: {(finished: Bool) -> Void in
+                self.tempView.removeFromSuperview()
+            })
+            viewtag = 0
+        }
+        else
+        {
+            tempView = UIView(frame: CGRect(origin: CGPoint(x:0, y:0), size: CGSize(width: self.view.frame.size.width, height:self.view.frame.size.height)))
+            
+            tempView.backgroundColor = UIColor(white: 0, alpha: 0.3)
+            tempView.isOpaque = false
+            tempView.isUserInteractionEnabled = true
+            self.view.addSubview(tempView)
+            themeView.frame = CGRect(origin: CGPoint(x: 0, y :(self.view.frame.size.height-themeView.frame.size.height)), size: CGSize(width: self.view.frame.size.width, height: themeView.frame.size.height))
+            
+            let transition = CATransition()
+            transition.duration = 0.2
+            transition.type = kCATransitionMoveIn
+            transition.subtype = kCATransitionFromTop
+            themeView.layer.add(transition, forKey: kCATransition)
+            tempView.addSubview(themeView)
+            viewtag = 1
+            let aSelector : Selector = #selector(SettingViewController.closeSubView)
+            let tapGesture = UITapGestureRecognizer(target:self, action: aSelector)
+            tempView.addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    func closeSubView()
+    {
+        if viewtag == 1 {
+            UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseOut, animations: {() -> Void in
+                self.themeView.frame = CGRect(origin: CGPoint(x: 0, y :self.view.frame.size.height), size: CGSize(width: self.view.frame.size.width, height: self.themeView.frame.size.height))
+            }, completion: {(finished: Bool) -> Void in
+                self.tempView.removeFromSuperview()
+            })
+            viewtag = 0
+        }
+    }
     
     func storeVlue(color:String){
         UserDefaults.standard.set(color, forKey: "theme")

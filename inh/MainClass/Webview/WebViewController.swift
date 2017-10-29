@@ -30,42 +30,36 @@ class WebViewController: UIViewController , WKNavigationDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        if(!(webView.url?.absoluteString.isEmpty)!){
-            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
-                let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
-               self.navigationController?.present(navigationViewController, animated: true, completion: nil)//(navigationViewController, animated: true)
-            }
-        }
-    }
-    
+//    func setCokee(){
+//        let request = CkoHttpRequest()
+//        request.SetFromUrl("http://www.chilkatsoft.com/echoPost.asp")
+//        request.HttpVerb = "POST"
+//
+//        request.AddParam("param1", value: "value1")
+//        request.AddParam("param2", value: "value2")
+//
+//        //  To add cookies to any HTTP request sent by a Chilkat HTTP method
+//        //  that uses an HTTP request object, add the cookies to the
+//        //  request object by calling AddHeader.
+//
+//        //  Add two cookies:
+//        request.AddHeader("Cookie", value: "user=\"mary\"; city=\"Chicago\"")
+//
+//        //  Send the HTTP POST.
+//        //  (The cookies are sent as part of the HTTP header.)
+//    }
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         SVProgressHUD.dismiss()
         
-        print(webView.url?.absoluteString)
-//        if(!(webView.url?.absoluteString.isEmpty)!){
-//            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
-//                let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
-//                self.navigationController?.present(navigationViewController, animated: true, completion: nil)//(navigationViewController, animated: true)
-//            }
-//        }
-        
-        if(!(webView.url?.absoluteString.isEmpty)!){
-            let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "OnClickViewController") as! OnClickViewController
-            navigationViewController.type = "2"
-            navigationViewController.mobile_news_url = (webView.url?.absoluteString)!
-            self.navigationController?.pushViewController(navigationViewController, animated: true)
-        }
-    }
-    
-    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+       
         if(!(webView.url?.absoluteString.isEmpty)!){
             if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
+                webView.goBack()
                 let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
                 self.navigationController?.pushViewController(navigationViewController, animated: true)
             }
         }
-
     }
     
 //    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
@@ -75,5 +69,7 @@ class WebViewController: UIViewController , WKNavigationDelegate {
 //                self.navigationController?.pushViewController(navigationViewController, animated: true)
 //            }
 //        }
+//
 //    }
+//
 }
