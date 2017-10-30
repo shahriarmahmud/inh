@@ -1206,7 +1206,7 @@
 				TargetAttributes = {
 					CA489FA71F72BE5200930A91 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = K9U8JV3VLD;
+						DevelopmentTeam = K3KH8CAJZD;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.iCloud = {
@@ -1539,7 +1539,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DD6BE5DDDC3838839F75E28F /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = K9U8JV3VLD;
+				DEVELOPMENT_TEAM = K3KH8CAJZD;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.biztech.inh.OneSignalNotificationServiceExtension;
@@ -1553,7 +1553,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8D14B68D77EA2B8D82286245 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = K9U8JV3VLD;
+				DEVELOPMENT_TEAM = K3KH8CAJZD;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.biztech.inh.OneSignalNotificationServiceExtension;
