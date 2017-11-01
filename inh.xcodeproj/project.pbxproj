@@ -9,71 +9,23 @@
 /* Begin PBXBuildFile section */
 		3F9265F3F41816A9905788B9 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8923AEA2483F4D8BC8EA90 /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		49A69E84D8560A7F20F0D922 /* Pods_inh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAE6253A5EBF272866E1038 /* Pods_inh.framework */; };
+		CA0459141FA7787400486A7F /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35107FB1F67D7B10041B0B8 /* UserDefaultsManager.swift */; };
+		CA0459151FA7787400486A7F /* UtilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35107FC1F67D7B10041B0B8 /* UtilityViewController.swift */; };
+		CA0459161FA7789400486A7F /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA626BA51FA3BBE3003EC0C3 /* WebViewController.swift */; };
+		CA0459171FA7789400486A7F /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF0403D1F7563A000EEB456 /* SettingViewController.swift */; };
+		CA0459181FA7789B00486A7F /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3365E8D1F67C02200324368 /* NavigationController.swift */; };
+		CA0459191FA778E800486A7F /* AlertDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35107B71F67D7B10041B0B8 /* AlertDialogViewController.swift */; };
+		CA04591A1FA778F100486A7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E300C2F81F66B3930002C04A /* AppDelegate.swift */; };
 		CA489FAB1F72BE5300930A91 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA489FAA1F72BE5300930A91 /* NotificationService.swift */; };
-		CA489FAF1F72BE5300930A91 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CA489FA81F72BE5200930A91 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		CA5582851F6ECDC000A58519 /* FastNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582841F6ECDC000A58519 /* FastNewsTableViewCell.swift */; };
-		CA5582871F6ECE8B00A58519 /* ReportersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582861F6ECE8B00A58519 /* ReportersTableViewCell.swift */; };
-		CA5582891F6ECF7700A58519 /* InhSpecialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582881F6ECF7700A58519 /* InhSpecialTableViewCell.swift */; };
-		CA55828B1F6ED00200A58519 /* BollywoodExpressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA55828A1F6ED00200A58519 /* BollywoodExpressTableViewCell.swift */; };
-		CA55828D1F6ED04F00A58519 /* ChhattisgarhiNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA55828C1F6ED04F00A58519 /* ChhattisgarhiNewsTableViewCell.swift */; };
-		CA55828F1F6ED54C00A58519 /* LifeStyleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA55828E1F6ED54C00A58519 /* LifeStyleTableViewCell.swift */; };
-		CA5582911F6ED56A00A58519 /* EntertainmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582901F6ED56A00A58519 /* EntertainmentTableViewCell.swift */; };
-		CA5582931F6ED58400A58519 /* IndiaNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582921F6ED58400A58519 /* IndiaNewsTableViewCell.swift */; };
-		CA5582951F6ED5A400A58519 /* ChhattisgarhDrawerNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582941F6ED5A400A58519 /* ChhattisgarhDrawerNewsTableViewCell.swift */; };
-		CA5582971F6ED5E400A58519 /* InhNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582961F6ED5E400A58519 /* InhNewsTableViewCell.swift */; };
-		CA5582991F6ED61500A58519 /* InhNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5582981F6ED61500A58519 /* InhNewsViewController.swift */; };
-		CA55829C1F6EF6E300A58519 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA55829B1F6EF6E300A58519 /* VideoViewController.swift */; };
-		CA626BA61FA3BBE3003EC0C3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA626BA51FA3BBE3003EC0C3 /* WebViewController.swift */; };
-		CA783EFE1F697F8B00520FE2 /* SectionNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA783EFD1F697F8B00520FE2 /* SectionNewsTableViewCell.swift */; };
-		CA9014DD1F6C20C80027C87F /* VideoSliderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9014DC1F6C20C80027C87F /* VideoSliderCollectionViewCell.swift */; };
-		CABFBBA81F6D47CD009C5F31 /* OnClickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABFBBA71F6D47CD009C5F31 /* OnClickViewController.swift */; };
-		CABFBBAB1F6D56FC009C5F31 /* PhotoGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABFBBAA1F6D56FC009C5F31 /* PhotoGalleryViewController.swift */; };
-		CACCA86A1F6829ED008EA5A0 /* SportsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACCA8691F6829ED008EA5A0 /* SportsTableViewCell.swift */; };
-		CAF0403E1F7563A000EEB456 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF0403D1F7563A000EEB456 /* SettingViewController.swift */; };
-		E300C2F91F66B3930002C04A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E300C2F81F66B3930002C04A /* AppDelegate.swift */; };
 		E300C2FE1F66B3930002C04A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E300C2FC1F66B3930002C04A /* Main.storyboard */; };
 		E300C3001F66B3930002C04A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E300C2FF1F66B3930002C04A /* Assets.xcassets */; };
 		E300C3031F66B3930002C04A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E300C3011F66B3930002C04A /* LaunchScreen.storyboard */; };
 		E300C30E1F66B3930002C04A /* inhTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E300C30D1F66B3930002C04A /* inhTests.swift */; };
 		E300C3191F66B3930002C04A /* inhUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E300C3181F66B3930002C04A /* inhUITests.swift */; };
-		E3061ECA1F6E733A001984FD /* PhotoStoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3061EC91F6E733A001984FD /* PhotoStoriesCollectionViewCell.swift */; };
-		E33382441F70DE5B007C3A1D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33382431F70DE5B007C3A1D /* SearchViewController.swift */; };
-		E333824B1F70DED8007C3A1D /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E333824A1F70DED8007C3A1D /* PhotosViewController.swift */; };
-		E333824D1F70DEE8007C3A1D /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E333824C1F70DEE8007C3A1D /* VideosViewController.swift */; };
-		E3365E8A1F67BFD800324368 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3365E891F67BFD800324368 /* MenuViewController.swift */; };
-		E3365E8C1F67BFFD00324368 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3365E8B1F67BFFD00324368 /* BaseViewController.swift */; };
-		E3365E8E1F67C02200324368 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3365E8D1F67C02200324368 /* NavigationController.swift */; };
-		E35107B51F67CA970041B0B8 /* DashBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35107B41F67CA970041B0B8 /* DashBoardViewController.swift */; };
-		E35107FD1F67D7B10041B0B8 /* AlertDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35107B71F67D7B10041B0B8 /* AlertDialogViewController.swift */; };
-		E35107FE1F67D7B10041B0B8 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35107B81F67D7B10041B0B8 /* CustomAlert.swift */; };
-		E35107FF1F67D7B10041B0B8 /* BackgroundGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35107BA1F67D7B10041B0B8 /* BackgroundGradient.swift */; };
-		E35108001F67D7B10041B0B8 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35107F61F67D7B10041B0B8 /* DatePickerDialog.swift */; };
-		E35108011F67D7B10041B0B8 /* RequestString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35107F91F67D7B10041B0B8 /* RequestString.swift */; };
-		E35108021F67D7B10041B0B8 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35107FB1F67D7B10041B0B8 /* UserDefaultsManager.swift */; };
-		E35108031F67D7B10041B0B8 /* UtilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35107FC1F67D7B10041B0B8 /* UtilityViewController.swift */; };
-		E35108061F67E44E0041B0B8 /* TopStoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108051F67E44E0041B0B8 /* TopStoriesViewController.swift */; };
-		E351080A1F67E4AD0041B0B8 /* HeadLinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108091F67E4AD0041B0B8 /* HeadLinesViewController.swift */; };
-		E351080D1F67E4D90041B0B8 /* FastNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351080C1F67E4D90041B0B8 /* FastNewsViewController.swift */; };
-		E35108101F67E5030041B0B8 /* ReportersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351080F1F67E5030041B0B8 /* ReportersViewController.swift */; };
-		E35108131F67E5400041B0B8 /* InhSpecialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108121F67E5400041B0B8 /* InhSpecialViewController.swift */; };
-		E35108161F67E56F0041B0B8 /* BollywoodExpressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108151F67E56F0041B0B8 /* BollywoodExpressViewController.swift */; };
-		E35108191F67E59F0041B0B8 /* ChhattisgarhiNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108181F67E59F0041B0B8 /* ChhattisgarhiNewsViewController.swift */; };
-		E35108231F67E69E0041B0B8 /* IndiaNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108221F67E69E0041B0B8 /* IndiaNewsViewController.swift */; };
-		E35108261F67E6B90041B0B8 /* EntertainmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108251F67E6B90041B0B8 /* EntertainmentViewController.swift */; };
-		E35108291F67E6D60041B0B8 /* LifeStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108281F67E6D60041B0B8 /* LifeStyleViewController.swift */; };
-		E351082C1F67E6F50041B0B8 /* SportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351082B1F67E6F50041B0B8 /* SportsViewController.swift */; };
-		E35108301F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351082F1F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift */; };
-		E35108321F67F0980041B0B8 /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108311F67F0980041B0B8 /* DrawerController.swift */; };
-		E35108341F67F2910041B0B8 /* HeadLinesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35108331F67F2910041B0B8 /* HeadLinesTableViewCell.swift */; };
-		E365A7F91F7BB377001B0367 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E365A7F81F7BB377001B0367 /* CardView.swift */; };
-		E369A2EA1F726FDA004C892C /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E369A2E91F726FDA004C892C /* SearchTableViewCell.swift */; };
-		E369A2EC1F727675004C892C /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E369A2EB1F727675004C892C /* PhotosTableViewCell.swift */; };
-		E369A2F01F727EE1004C892C /* VideosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E369A2EF1F727EE1004C892C /* VideosTableViewCell.swift */; };
-		E39FFCC31F69511400ACD73D /* LatestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39FFCC21F69511400ACD73D /* LatestTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CA489FAD1F72BE5300930A91 /* PBXContainerItemProxy */ = {
+		CA0459121FA7785900486A7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E300C2ED1F66B3930002C04A /* Project object */;
 			proxyType = 1;
@@ -103,7 +55,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				CA489FAF1F72BE5300930A91 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1151,7 +1102,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				CA489FAE1F72BE5300930A91 /* PBXTargetDependency */,
+				CA0459131FA7785900486A7F /* PBXTargetDependency */,
 			);
 			name = inh;
 			productName = inh;
@@ -1422,60 +1373,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA5582971F6ED5E400A58519 /* InhNewsTableViewCell.swift in Sources */,
-				CA626BA61FA3BBE3003EC0C3 /* WebViewController.swift in Sources */,
-				E35108231F67E69E0041B0B8 /* IndiaNewsViewController.swift in Sources */,
-				E35108301F67E8460041B0B8 /* ChhattisgarhDrawerViewController.swift in Sources */,
-				CAF0403E1F7563A000EEB456 /* SettingViewController.swift in Sources */,
-				E351082C1F67E6F50041B0B8 /* SportsViewController.swift in Sources */,
-				CA55828B1F6ED00200A58519 /* BollywoodExpressTableViewCell.swift in Sources */,
-				E35108161F67E56F0041B0B8 /* BollywoodExpressViewController.swift in Sources */,
-				E351080D1F67E4D90041B0B8 /* FastNewsViewController.swift in Sources */,
-				CA5582871F6ECE8B00A58519 /* ReportersTableViewCell.swift in Sources */,
-				E3365E8C1F67BFFD00324368 /* BaseViewController.swift in Sources */,
-				CA5582931F6ED58400A58519 /* IndiaNewsTableViewCell.swift in Sources */,
-				E35108341F67F2910041B0B8 /* HeadLinesTableViewCell.swift in Sources */,
-				CA5582851F6ECDC000A58519 /* FastNewsTableViewCell.swift in Sources */,
-				E35108031F67D7B10041B0B8 /* UtilityViewController.swift in Sources */,
-				E35108101F67E5030041B0B8 /* ReportersViewController.swift in Sources */,
-				CACCA86A1F6829ED008EA5A0 /* SportsTableViewCell.swift in Sources */,
-				E35108261F67E6B90041B0B8 /* EntertainmentViewController.swift in Sources */,
-				E351080A1F67E4AD0041B0B8 /* HeadLinesViewController.swift in Sources */,
-				E35108021F67D7B10041B0B8 /* UserDefaultsManager.swift in Sources */,
-				CA55829C1F6EF6E300A58519 /* VideoViewController.swift in Sources */,
-				E369A2F01F727EE1004C892C /* VideosTableViewCell.swift in Sources */,
-				CA783EFE1F697F8B00520FE2 /* SectionNewsTableViewCell.swift in Sources */,
-				CA5582891F6ECF7700A58519 /* InhSpecialTableViewCell.swift in Sources */,
-				CA5582991F6ED61500A58519 /* InhNewsViewController.swift in Sources */,
-				E35108011F67D7B10041B0B8 /* RequestString.swift in Sources */,
-				E35108131F67E5400041B0B8 /* InhSpecialViewController.swift in Sources */,
-				CA55828F1F6ED54C00A58519 /* LifeStyleTableViewCell.swift in Sources */,
-				CABFBBAB1F6D56FC009C5F31 /* PhotoGalleryViewController.swift in Sources */,
-				CA5582911F6ED56A00A58519 /* EntertainmentTableViewCell.swift in Sources */,
-				E3061ECA1F6E733A001984FD /* PhotoStoriesCollectionViewCell.swift in Sources */,
-				E35108321F67F0980041B0B8 /* DrawerController.swift in Sources */,
-				CABFBBA81F6D47CD009C5F31 /* OnClickViewController.swift in Sources */,
-				E369A2EC1F727675004C892C /* PhotosTableViewCell.swift in Sources */,
-				E333824D1F70DEE8007C3A1D /* VideosViewController.swift in Sources */,
-				CA55828D1F6ED04F00A58519 /* ChhattisgarhiNewsTableViewCell.swift in Sources */,
-				E35107FF1F67D7B10041B0B8 /* BackgroundGradient.swift in Sources */,
-				E3365E8E1F67C02200324368 /* NavigationController.swift in Sources */,
-				E333824B1F70DED8007C3A1D /* PhotosViewController.swift in Sources */,
-				E35107B51F67CA970041B0B8 /* DashBoardViewController.swift in Sources */,
-				E39FFCC31F69511400ACD73D /* LatestTableViewCell.swift in Sources */,
-				CA9014DD1F6C20C80027C87F /* VideoSliderCollectionViewCell.swift in Sources */,
-				E33382441F70DE5B007C3A1D /* SearchViewController.swift in Sources */,
-				E35108291F67E6D60041B0B8 /* LifeStyleViewController.swift in Sources */,
-				CA5582951F6ED5A400A58519 /* ChhattisgarhDrawerNewsTableViewCell.swift in Sources */,
-				E35108061F67E44E0041B0B8 /* TopStoriesViewController.swift in Sources */,
-				E3365E8A1F67BFD800324368 /* MenuViewController.swift in Sources */,
-				E35108191F67E59F0041B0B8 /* ChhattisgarhiNewsViewController.swift in Sources */,
-				E365A7F91F7BB377001B0367 /* CardView.swift in Sources */,
-				E300C2F91F66B3930002C04A /* AppDelegate.swift in Sources */,
-				E35107FD1F67D7B10041B0B8 /* AlertDialogViewController.swift in Sources */,
-				E35107FE1F67D7B10041B0B8 /* CustomAlert.swift in Sources */,
-				E35108001F67D7B10041B0B8 /* DatePickerDialog.swift in Sources */,
-				E369A2EA1F726FDA004C892C /* SearchTableViewCell.swift in Sources */,
+				CA04591A1FA778F100486A7F /* AppDelegate.swift in Sources */,
+				CA0459191FA778E800486A7F /* AlertDialogViewController.swift in Sources */,
+				CA0459181FA7789B00486A7F /* NavigationController.swift in Sources */,
+				CA0459161FA7789400486A7F /* WebViewController.swift in Sources */,
+				CA0459171FA7789400486A7F /* SettingViewController.swift in Sources */,
+				CA0459141FA7787400486A7F /* UserDefaultsManager.swift in Sources */,
+				CA0459151FA7787400486A7F /* UtilityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1498,10 +1402,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		CA489FAE1F72BE5300930A91 /* PBXTargetDependency */ = {
+		CA0459131FA7785900486A7F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CA489FA71F72BE5200930A91 /* OneSignalNotificationServiceExtension */;
-			targetProxy = CA489FAD1F72BE5300930A91 /* PBXContainerItemProxy */;
+			targetProxy = CA0459121FA7785900486A7F /* PBXContainerItemProxy */;
 		};
 		E300C30B1F66B3930002C04A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

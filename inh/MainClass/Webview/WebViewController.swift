@@ -15,6 +15,8 @@ import SwiftyJSON
 
 class WebViewController: UIViewController , WKNavigationDelegate {
     
+    var count = 0
+    
     @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
@@ -28,6 +30,11 @@ class WebViewController: UIViewController , WKNavigationDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+         count = 0
+        self.navigationController?.navigationBar.isHidden = true
     }
     
 //    func setCokee(){
@@ -54,7 +61,8 @@ class WebViewController: UIViewController , WKNavigationDelegate {
         
        
         if(!(webView.url?.absoluteString.isEmpty)!){
-            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
+            if(webView.url?.absoluteString == "https://m.inhnews.in/settings" && count == 0){
+                count = 1
                 webView.goBack()
                 let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
                 self.navigationController?.pushViewController(navigationViewController, animated: true)
@@ -62,14 +70,20 @@ class WebViewController: UIViewController , WKNavigationDelegate {
         }
     }
     
-//    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-//        if(!(webView.url?.absoluteString.isEmpty)!){
-//            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
-//                let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
-//                self.navigationController?.pushViewController(navigationViewController, animated: true)
-//            }
-//        }
-//
-//    }
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        SVProgressHUD.show()
+    }
+    
+    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+        SVProgressHUD.show()
+        if(!(webView.url?.absoluteString.isEmpty)!){
+            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
+                webView.goBack()
+                let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+                self.navigationController?.pushViewController(navigationViewController, animated: true)
+            }
+        }
+
+    }
 //
 }
