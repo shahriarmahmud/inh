@@ -13,11 +13,106 @@ import Alamofire
 import SVProgressHUD
 import SwiftyJSON
 
-class WebViewController: UIViewController , WKNavigationDelegate {
+class WebViewController: UIViewController , WKUIDelegate, WKNavigationDelegate {
+    
+    @IBOutlet weak var navigationView: UIView!
+    @IBOutlet weak var mainView: UIView!
+    //    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var forwordButton: UIButton!
+    var webView: WKWebView!
+    var count:Int = 0
+    let webConfiguration = WKWebViewConfiguration()
+    
+//    override func loadView() {
+//        let webConfiguration = WKWebViewConfiguration()
+//       // webV.frame  = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+//        webView = WKWebView(frame: CGRect(x: 0, y: 0, width: mainView.frame.size.width, height: mainView.frame.size.height), configuration: webConfiguration)
+////        webView.frame  = CGRect(x: 0, y: 20, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+//        
+//        webView.uiDelegate = self
+//        webView.navigationDelegate = self
+//        mainView.addSubview(webView)
+////        view = webView
+//    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        SVProgressHUD.show()
+        
+        
+         webView = WKWebView(frame: CGRect(x: 0, y: 0, width: mainView.frame.size.width, height: mainView.frame.size.height), configuration: webConfiguration)
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
+        mainView.addSubview(webView)
+        
+        let myURL = URL(string: "https://m.inhnews.in")
+        let myRequest = URLRequest(url: myURL!)
+        webView.load(myRequest)
+        
+        if(webView.canGoBack){
+            navigationView.isHidden = false
+        }else{
+           navigationView.isHidden = true
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        count = 0
+        if(webView.canGoBack){
+            navigationView.isHidden = false
+        }else{
+            navigationView.isHidden = true
+        }
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    @IBAction func forwordButtonPress(_ sender: Any) {
+        webView.goForward()
+    }
+    @IBAction func backButtonPress(_ sender: Any) {
+        webView.goBack()
+    }
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        SVProgressHUD.dismiss()
+        
+        if(webView.canGoBack){
+            self.webView = WKWebView(frame: CGRect(x: 0, y: 0, width: mainView.frame.size.width, height: mainView.frame.size.height), configuration: webConfiguration)
+            navigationView.isHidden = false
+        }else{
+            navigationView.isHidden = true
+        }
+        
+        if(webView.canGoForward){
+            forwordButton.isHidden = false
+        }else{
+            forwordButton.isHidden = true
+        }
+        
+        if(!(webView.url?.absoluteString.isEmpty)!){
+            if(webView.url?.absoluteString == "https://m.inhnews.in/settings"){
+                if(count==0){
+                    count = 1
+                    webView.goBack()
+                    let navigationViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+                    self.navigationController?.pushViewController(navigationViewController, animated: true)
+                }
+            }
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        SVProgressHUD.show()
+    }
+    
+    
+}
+
+
+/*, WKNavigationDelegate {
     
     var count = 0
     
-    @IBOutlet weak var webView: WKWebView!
+//    @IBOutlet weak var webView: WKWebView!
+    var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,3 +182,4 @@ class WebViewController: UIViewController , WKNavigationDelegate {
     }
 //
 }
+ */
