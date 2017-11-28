@@ -844,6 +844,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="wqN-oj-nQ3"/>
                     <connections>
+                        <outlet property="backButton" destination="OIU-Q8-fPx" id="LJV-qr-QWa"/>
                         <outlet property="forwordButton" destination="P8Q-nh-2e1" id="vbr-T9-3Io"/>
                         <outlet property="mainView" destination="Xy1-6j-ncm" id="XSz-cy-23m"/>
                         <outlet property="navigationView" destination="iFI-9e-eBP" id="sVe-AK-0c2"/>
@@ -1165,7 +1166,7 @@
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wqH-2Y-VO6">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="321" height="39"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="321" height="40"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <nil key="textColor"/>
@@ -2855,7 +2856,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZZi-pI-tba">
-                                                    <rect key="frame" x="-4" y="-11" width="323" height="243"/>
+                                                    <rect key="frame" x="-4" y="-11" width="323" height="242"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="muw-L3-Akc">
@@ -2873,7 +2874,7 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_play" translatesAutoresizingMaskIntoConstraints="NO" id="BKt-Ju-W6E">
-                                                    <rect key="frame" x="106" y="74" width="104" height="70"/>
+                                                    <rect key="frame" x="106" y="73" width="104" height="70"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -2917,7 +2918,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2j-sy-EhN">
-                                                    <rect key="frame" x="103" y="45" width="204" height="25"/>
+                                                    <rect key="frame" x="103" y="44" width="204" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>

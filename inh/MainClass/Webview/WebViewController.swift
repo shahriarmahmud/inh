@@ -15,6 +15,7 @@ import SwiftyJSON
 
 class WebViewController: UIViewController , WKUIDelegate, WKNavigationDelegate {
     
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var navigationView: UIView!
     @IBOutlet weak var mainView: UIView!
     //    @IBOutlet weak var webView: WKWebView!
@@ -69,8 +70,12 @@ class WebViewController: UIViewController , WKUIDelegate, WKNavigationDelegate {
         webView.goForward()
     }
     @IBAction func backButtonPress(_ sender: Any) {
+        print(webView.goBack())
+        print(webView.canGoBack)
+        print(webView.canGoBack)
         webView.goBack()
     }
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         SVProgressHUD.dismiss()
         
@@ -85,6 +90,12 @@ class WebViewController: UIViewController , WKUIDelegate, WKNavigationDelegate {
             forwordButton.isHidden = false
         }else{
             forwordButton.isHidden = true
+        }
+        
+        if(!(webView.url?.absoluteString.isEmpty)!){
+            if(webView.url?.absoluteString == "https://m.inhnews.in"){
+                backButton.isHidden = true
+            }
         }
         
         if(!(webView.url?.absoluteString.isEmpty)!){
